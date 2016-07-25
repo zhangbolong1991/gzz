@@ -26,8 +26,9 @@ class MylinksController extends Controller
             'name.required' => '请输入链接名称',
             'url.required' => '请输入链接地址',
             ]);
+        // $data['status']=1;
         // 获取所有参数
-        $data=$request->only(['name','url']);
+        $data=$request->only(['name','url','status']);
         // 查询出所有数据
         $list=DB::table('mylinks')->get();
         $a=array();
@@ -84,7 +85,7 @@ class MylinksController extends Controller
             'url.required' => '请输入链接地址',
             ]);
         // 获取要修改字段
-        $data=$request->only(['name','url']);
+        $data=$request->only(['name','url','status']);
         // 查询出所有数据
         $list=DB::table('mylinks')->get();
         // 拿出需要修改数据的name

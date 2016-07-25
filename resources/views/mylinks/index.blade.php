@@ -19,6 +19,7 @@
         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 260px;" aria-label="Browser: activate to sort column ascending">链接名称</th>
         
         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 260px;" aria-label="Browser: activate to sort column ascending">链接地址</th>
+         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 260px;" aria-label="Browser: activate to sort column ascending">状态</th>
         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 140px;" aria-label="CSS grade: activate to sort column ascending">操作</th>
        </tr> 
       </thead> 
@@ -28,6 +29,12 @@
         <td class="  sorting_1">{{$row['id']}}</td> 
         <td class=" ">{{$row['name']}}</td> 
         <td class=" ">{{$row['url']}}</td> 
+        <td class=" ">@if($row['status']==1)
+                      启用
+                      @elseif($row['status']==0)
+                      禁用
+                      @endif
+        </td> 
         <td class=" "><a href="/admin/mylinks/del/{{$row['id']}}" class="btn btn-success">删除</a> <a href="/admin/mylinks/edit/{{$row['id']}}" class="btn btn-info">修改</a></td> 
        </tr>
        	@endforeach

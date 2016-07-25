@@ -1,5 +1,5 @@
 @extends('public/index')
-@section('user')
+@section('add')
 	            <div class="mws-panel grid_8">
           <div class="mws-panel-header">
                <span>用户添加</span>

@@ -1,5 +1,5 @@
 @extends('public/index')
-@section('user')
+@section('add')
 	            <div class="mws-panel grid_8">
           <div class="mws-panel-header">
                <span>添加链接</span>
@@ -38,6 +38,15 @@
                               <label class="mws-form-label">链接地址:</label>
                               <div class="mws-form-item">
                                    <input value="{{old('url')}}" type="text" name="url" class="small">
+                              </div>
+                         </div>
+                          <div class="mws-form-row">
+                              <label class="mws-form-label">状态:</label>
+                              <div class="mws-form-item">
+                                   <select name="status" id="">
+                                    <option value="1">启用</option>
+                                    <option value="2">禁用</option>
+                                   </select>
                               </div>
                          </div>
                     </div>

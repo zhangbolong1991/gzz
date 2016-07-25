@@ -1,5 +1,5 @@
 @extends('public/index')
-@section('user')
+@section('edit')
 	            <div class="mws-panel grid_8">
           <div class="mws-panel-header">
                <span>修改链接</span>
@@ -38,6 +38,20 @@
                               <label class="mws-form-label">链接地址:</label>
                               <div class="mws-form-item">
                                    <input value="{{$stu['url']}}" type="text" name="url" class="small">
+                              </div>
+                         </div>
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">状态:</label>
+                              <div class="mws-form-item">
+                                   <select name="status" id="" value="{{$stu['status']}}">
+                                   @if($stu['status']==1)
+                                     <option value="1" selected>启用</option>
+                                     <option value="0">禁用</option>
+                                    @elseif($stu['status']==0)
+                                    <option value="1">启用</option>
+                                    <option value="0" selected>禁用</option>
+                                     @endif
+                                   </select>
                               </div>
                          </div>
                     </div>

@@ -288,7 +288,7 @@
             	</div>
             	@endif
             	<!-- 添加的占位 -->
-            	@section('user')
+            	@section('add')
 
             	@show
 
