@@ -259,6 +259,13 @@
                             <li><a href="">商品列表</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="icon-file"></i>友情链接</a>
+                        <ul class="closed">
+                            <li><a href="{{url('/admin/mylinks/add')}}">添加链接</a></li>
+                            <li><a href="{{url('/admin/mylinks/index')}}">链接列表</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>         
         </div>

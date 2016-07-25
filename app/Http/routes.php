@@ -15,4 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::controller('/admin','AdminController');
+// 后台首页
+Route::get('/admin','AdminController@index');
+// 用户模块
+Route::controller('/admin/user','UserController');
+// 友情链接模块
+Route::controller('/admin/mylinks','MylinksController');

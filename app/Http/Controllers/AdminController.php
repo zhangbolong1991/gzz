@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class AdminController extends Controller
 {
     // 加载后台模板
-    public function getIndex(){
+    public function index(){
         return view('public/index');
     }
 }
