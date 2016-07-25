@@ -21,3 +21,5 @@ Route::get('/admin','AdminController@index');
 Route::controller('/admin/user','UserController');
 // 友情链接模块
 Route::controller('/admin/mylinks','MylinksController');
+//广告模块
+Route::controller('/admin/adver','AdverController');

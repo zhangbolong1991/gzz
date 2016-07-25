@@ -262,8 +262,16 @@
                     <li>
                         <a href="#"><i class="icon-file"></i>友情链接</a>
                         <ul class="closed">
-                            <li><a href="{{url('/admin/mylinks/add')}}">添加链接</a></li>
+                            <li><a href="{{url('/admin/mylinks/add')}}">链接添加</a></li>
                             <li><a href="{{url('/admin/mylinks/index')}}">链接列表</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="icon-file"></i>广告管理</a>
+                        <ul class="closed">
+                            <li><a href="{{url('/admin/adver/add')}}">广告添加</a></li>
+                            <li><a href="{{url('/admin/adver/index')}}">广告列表</a></li>
                         </ul>
                     </li>
                 </ul>
