@@ -48,8 +48,10 @@
                       @elseif($row['status']==0)
                       禁用
                       @endif
+
         </td> 
         <td class=" "><a href="/admin/user/del/{{$row['id']}}" class="btn btn-success"><i class="icon-trash"></i></a> <a href="/admin/user/edit/{{$row['id']}}" class="btn btn-info"><i class="icon-pencil"></i></a></td> 
+
        </tr>
        	@endforeach
       </tbody>

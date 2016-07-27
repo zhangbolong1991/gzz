@@ -239,24 +239,24 @@
                     <li>
                         <a href="#"><i class="icon-th-list"></i> 分类管理</a>
                         <ul class="closed">
-                            <li><a href="">分类添加</a></li>
-                            <li><a href="">分类列表</a></li>
+                            <li><a href="{{url('/admin/type/add')}}">分类添加</a></li>
+                            <li><a href="{{url('/admin/type/index')}}">分类列表</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a href="#"><i class="icon-file"></i> 文章管理</a>
                         <ul class="closed">
-                            <li><a href="">文章添加</a></li>
-                            <li><a href="">文章列表</a></li>
+                            <li><a href="{{url('/admin/articles/add')}}">文章添加</a></li>
+                            <li><a href="{{url('/admin/articles/index')}}">文章列表</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a href="#"><i class="icon-file"></i> 商品管理</a>
                         <ul class="closed">
-                            <li><a href="">商品添加</a></li>
-                            <li><a href="">商品列表</a></li>
+                            <li><a href="{{url('/admin/goods/add')}}">商品添加</a></li>
+                            <li><a href="{{url('/admin/goods/index')}}">商品列表</a></li>
                         </ul>
                     </li>
                     <li>
@@ -303,10 +303,10 @@
             	<!-- 列表的占位 -->
             	@section('index')
             	@show
-                    <!-- sss -->
-                    <!-- 修改占位 -->
-                    @section('edit')
-                    @show
+
+                <!-- 修改占位 -->
+                @section('edit')
+                @show
                 
 
                                

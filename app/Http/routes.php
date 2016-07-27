@@ -23,3 +23,6 @@ Route::controller('/admin/user','UserController');
 Route::controller('/admin/mylinks','MylinksController');
 //广告模块
 Route::controller('/admin/adver','AdverController');
+//无限分类
+Route::controller('/admin/type','TypeController');
+

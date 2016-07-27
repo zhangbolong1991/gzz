@@ -95,8 +95,7 @@ class AdverController extends Controller
         if(Db::table('advertisements')->where('id','=',$request->input('id'))->update($data)){
             return redirect('/admin/adver/index')->with('success','修改成功');
         }else{
-            $id=$request->input('id');
-            return redirect('/admin/adver/edit/'.$id)->with('error','修改失败');
+            return redirect('/admin/adver/index/')->with('error','修改失败');
         }
     }
 }
