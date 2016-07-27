@@ -49,13 +49,8 @@
                               <label class="mws-form-label">状态:</label>
                               <div class="mws-form-item">
                                    <select name="status">
-                                   @if($adver['status']=='1')
-                                   	<option value="1" selected>启用</option>
-                                   	<option value="0">禁用</option>
-                                   @elseif($adver['status']=='0')
-                                   	<option value="1" >启用</option>
-                                   	<option value="0" selected>禁用</option>
-                                   @endif
+                                   	<option value="1" @if($adver['status']=='1') selected @endif >启用</option>
+                                   	<option value="0" @if($adver['status']=='0') selected @endif >禁用</option>
                                    </select>
                               </div>
                          </div>
