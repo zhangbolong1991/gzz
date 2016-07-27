@@ -45,7 +45,7 @@
                               <div class="mws-form-item">
                                    <select name="status" id="">
                                     <option value="1">启用</option>
-                                    <option value="2">禁用</option>
+                                    <option value="0">禁用</option>
                                    </select>
                               </div>
                          </div>

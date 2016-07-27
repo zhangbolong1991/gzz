@@ -9,9 +9,11 @@
    </div> 
    <div class="mws-panel-body no-padding"> 
     <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
+     <form action="/admin/mylinks/index" method="get">
      <div class="dataTables_filter" id="DataTables_Table_1_filter">
-      <label>搜索: <input type="text" aria-controls="DataTables_Table_1" /></label>
+      <label><button class="btn btn-success">搜索</button><input type="text" aria-controls="DataTables_Table_1" name="keywords"/></label>
      </div>
+     </form>
      <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info"> 
       <thead> 
        <tr role="row">
@@ -35,7 +37,7 @@
                       禁用
                       @endif
         </td> 
-        <td class=" "><a href="/admin/mylinks/del/{{$row['id']}}" class="btn btn-success">删除</a> <a href="/admin/mylinks/edit/{{$row['id']}}" class="btn btn-info">修改</a></td> 
+        <td class=" "><a href="/admin/mylinks/del/{{$row['id']}}" class="btn btn-success"><i class="icon-trash"></i></a> <a href="/admin/mylinks/edit/{{$row['id']}}" class="btn btn-info"><i class="icon-pencil"></i></a></td> 
        </tr>
        	@endforeach
       </tbody>
@@ -43,12 +45,8 @@
      <div class="dataTables_info" id="DataTables_Table_1_info">
       Showing 1 to 10 of 57 entries
      </div>
-     <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
-      <a class="first paginate_button paginate_button_disabled" tabindex="0" id="DataTables_Table_1_first">First</a>
-      <a class="previous paginate_button paginate_button_disabled" tabindex="0" id="DataTables_Table_1_previous">Previous</a>
-      <span><a class="paginate_active" tabindex="0">1</a><a class="paginate_button" tabindex="0">2</a><a class="paginate_button" tabindex="0">3</a><a class="paginate_button" tabindex="0">4</a><a class="paginate_button" tabindex="0">5</a></span>
-      <a class="next paginate_button" tabindex="0" id="DataTables_Table_1_next">Next</a>
-      <a class="last paginate_button" tabindex="0" id="DataTables_Table_1_last">Last</a>
+     <div class="dataTables_paginate paging_full_numbers" id="pages">
+      {!!$list->appends($request)->render()!!}
      </div>
     </div> 
    </div> 

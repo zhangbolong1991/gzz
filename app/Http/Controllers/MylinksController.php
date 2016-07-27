@@ -49,11 +49,11 @@ class MylinksController extends Controller
     }
 
     // 列表
-    public function getIndex(){
+    public function getIndex(Request $request){
         // 查询出所有信息
-        $list=DB::table('mylinks')->get();
+        $list=DB::table('mylinks')->where('name','like','%'.$request->input('keywords').'%')->paginate(2);
         // 加载模板
-        return view('mylinks.index',['list'=>$list]);
+        return view('mylinks.index',['list'=>$list,'request'=>$request->all()]);
     }
 
     // 删除

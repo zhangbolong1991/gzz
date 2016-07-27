@@ -32,8 +32,8 @@ class UserController extends Controller
    		'username.alpha_dash' => '请输入正确账户,如:任意数字,字母,下划线',
    		'username.between' => '请输入5-11位任意数字,字母,下划线的账户',
    		'password.required' => '密码不能为空',
-   		'password.between' => '请输入6-11位任意字母数字下划线',
-   		'password.alpha_dash' => '请输入正确的字母数字下划线',
+   		'password.between' => '密码输入有误,请输入6-11位任意字母数字下划线',
+   		'password.alpha_dash' => '密码输入有误,不支持除数字、字母、下划线以外字符',
    		'repassword.required' => '请您确认密码',
    		'repassword.same' => '两次密码不一致,请从新输入',
    		'sex.required' => '请选择您的性别!',
@@ -67,19 +67,13 @@ class UserController extends Controller
    }
 
    	// 列表
-   	public function getIndex(){
+   	public function getIndex(Request $request){
         //查询所有的数据
-        $list=DB::table('users')->get();
+        $list=DB::table('users')->where('username','like','%'.$request->input('keywords').'%')->paginate(2);
         //加载模板
-        return view('user.index',['list'=>$list]);
+        return view('user.index',['list'=>$list,'request'=>$request->all()]);
     }
 
-    // 分页
-    public function getPage(){
-       $users = DB::table('users')->paginate(5);
-        return view('user.index', ['users' => $users]);
-      // echo "AAAAA";
-    }
    	// 执行删除
     public function getDel($id){
     	if(DB::table('users')->where('id','=',$id)->delete()){
