@@ -181,20 +181,18 @@
             <div id="mws-user-info" class="mws-inset">
             
             	<!-- User Photo -->
-            	<div id="mws-user-photo">
-                	<img src="/b/example/profile.jpg" alt="User Photo">
-                </div>
+            	
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        Hello, John Doe
+                    @if(session('username'))
+                    
+                    <h4>你好：{{session('username')}}
+                    <a href="/admin/logout">注销</a></h4>
+                    @endif
                     </div>
-                    <ul>
-                    	<li><a href="#">Profile</a></li>
-                        <li><a href="#">Change Password</a></li>
-                        <li><a href="index.html">Logout</a></li>
-                    </ul>
+                   
                 </div>
             </div>
         </div>

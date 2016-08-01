@@ -27,6 +27,12 @@
                                    <input value="{{$stu['username']}}" type="text" class="small" name="username">
                               </div>
                          </div>
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">昵称:</label>
+                              <div class="mws-form-item">
+                                   <input value="{{$stu['name']}}" type="text" class="small" name="name">
+                              </div>
+                         </div>
                          <!-- <div class="mws-form-row">
                               <label class="mws-form-label">性别:</label>
                               <div class="mws-form-item">
@@ -50,6 +56,34 @@
                               <label class="mws-form-label">邮箱:</label>
                               <div class="mws-form-item">
                                    <input value="{{$stu['email']}}" type="text" name="email" class="small">
+                              </div>
+                         </div>
+                          <div class="mws-form-row">
+                              <label class="mws-form-label">状态:</label>
+                              <div class="mws-form-item">
+                                    <select name="status" class="small">
+                                      @if($stu['status']==0)
+                                      <option value="0" selected>禁用</option>
+                                      <option value="1">普通会员</option>
+                                      <option value="2">管理员</option>
+                                      <option value="3">未激活</option>
+                                      @elseif($stu['status']==1)
+                                       <option value="0">禁用</option>
+                                      <option value="1" selected>普通会员</option>
+                                      <option value="2">管理员</option>
+                                      <option value="3">未激活</option>
+                                      @elseif($stu['status']==2)
+                                      <option value="0">禁用</option>
+                                      <option value="1">普通会员</option>
+                                      <option value="2" selected>管理员</option>
+                                      <option value="3">未激活</option>
+                                       @elseif($stu['status']==3)
+                                      <option value="0">禁用</option>
+                                      <option value="1">普通会员</option>
+                                      <option value="2">管理员</option>
+                                      <option value="3" selected>未激活</option>
+                                      @endif
+                                    </select>
                               </div>
                          </div>
                     </div>

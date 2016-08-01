@@ -6,12 +6,6 @@
           </div>
           <div class="mws-panel-body no-padding">
                <form action="/admin/mylinks/insert" method="post" class="mws-form">
-                  <!--   @if(session('error'))
-                    <div class="mws-form-message error">
-                  {{session('error')}}
-                      
-                    </div>
-                    @endif -->
                     <!-- 显示验证错误 -->
                     @if (count($errors) > 0)
                     <div class="mws-form-message error">
@@ -43,7 +37,7 @@
                           <div class="mws-form-row">
                               <label class="mws-form-label">状态:</label>
                               <div class="mws-form-item">
-                                   <select name="status" id="">
+                                   <select name="status" id="" class="small">
                                     <option value="1">启用</option>
                                     <option value="0">禁用</option>
                                    </select>
