@@ -17,10 +17,12 @@ class AdverController extends Controller
         //自动验证
         $this->validate($request,[
             'name'=>'required',
+            'picname'=>'required',
             'url'=>'required',
             ],[
             //错误信息
             'name.required'=>'名称不能为空',
+            'picname.required'=>'图片不能为空',
             'url.required'=>'链接地址不能为空',
             ]);
         // 获取上传文件类型
@@ -44,15 +46,19 @@ class AdverController extends Controller
         }
     }
 
-    public function getIndex(){
+    public function getIndex(Request $request){
         //查询所有数据
-        $list=DB::table('advertisements')->get();
+        $list=DB::table('advertisements')->where('name','like','%'.$request->input('keyword').'%')->paginate(2);
         //加载模板
-        return view('adver.index',['list'=>$list]);
+        return view('adver.index',['list'=>$list,'request'=>$request->all()]);
     }
 
     public function getDel($id){
+        $picname=DB::table('advertisements')->where('id','=',$id)->value('picname');
+        $path='uploads/'.$picname;
+        // dd($picname);
         if(DB::table('advertisements')->where('id','=',$id)->delete()){
+            @unlink($path);
             return redirect('/admin/adver/index')->with('success','删除成功');
         }else{
             return redurect('/admin/adver/index')->with('error','删除失败');
@@ -79,20 +85,22 @@ class AdverController extends Controller
         //获取所有的参数
         $data=$request->only(['name','url','status']);
         //判断图片是否修改
-        if(!empty($request->file('picname'))){
+        if($request->hasFile('picname')){
             // 获取上传文件类型
             $s=$request->file('picname')->getClientOriginalExtension();
             //随机字符串
             $name=time()+rand(1,999999999);
             $lastname=$name.'.'.$s;
-            if($request->hasFile('picname')){
-                //移动文件
-                $request->file('picname')->move('./uploads/',$lastname);
-            }
+            //移动文件
+            $request->file('picname')->move('./uploads/',$lastname);
             $data['picname']=$lastname;
+            //获取原图片路径
+            $picname=DB::table('advertisements')->where('id','=',$request->input('id'))->value('picname');
+            $path='uploads/'.$picname;
         }
         //判断
         if(Db::table('advertisements')->where('id','=',$request->input('id'))->update($data)){
+            @unlink($path);
             return redirect('/admin/adver/index')->with('success','修改成功');
         }else{
             return redirect('/admin/adver/index/')->with('error','修改失败');
