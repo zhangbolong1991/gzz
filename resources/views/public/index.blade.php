@@ -247,8 +247,8 @@
                     <li>
                         <a href="#"><i class="icon-file"></i> 文章管理</a>
                         <ul class="closed">
-                            <li><a href="{{url('/admin/articles/add')}}">文章添加</a></li>
-                            <li><a href="{{url('/admin/articles/index')}}">文章列表</a></li>
+                            <li><a href="{{url('/admin/article/add')}}">文章添加</a></li>
+                            <li><a href="{{url('/admin/article/index')}}">文章列表</a></li>
                         </ul>
                     </li>
 
@@ -257,6 +257,13 @@
                         <ul class="closed">
                             <li><a href="{{url('/admin/goods/add')}}">商品添加</a></li>
                             <li><a href="{{url('/admin/goods/index')}}">商品列表</a></li>
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="#"><i class="icon-file"></i> 订单管理</a>
+                        <ul class="closed">
+                            <li><a href="{{url('/admin/order/add')}}">订单添加</a></li>
+                            <li><a href="{{url('/admin/order/index')}}">订单列表</a></li>
                         </ul>
                     </li>
                     <li>

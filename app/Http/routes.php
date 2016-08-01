@@ -25,4 +25,7 @@ Route::controller('/admin/mylinks','MylinksController');
 Route::controller('/admin/adver','AdverController');
 //无限分类
 Route::controller('/admin/type','TypeController');
-
+//订单模块
+Route::controller('/admin/order','OrderController');
+//文章模块
+Route::controller('/admin/article','ArticleController');
