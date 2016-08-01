@@ -42,10 +42,10 @@ class UserController extends Controller
    		'email.email' => '请输入正确的邮箱',
    		]);
  	  	// 获取所有参数
-   	$data=$request->only(['username','password','sex','address','phone','email']);
+   	$data=$request->only(['username','name','password','sex','address','phone','email','status']);
    	$data['token']=str_random(50);
    	$data['password']=Hash::make($data['password']);
-   	$data['status']=1;
+   	// $data['status']=1;
    	// var_dump($data);
     // 查询出所有数据
     $a=array();
@@ -108,7 +108,7 @@ class UserController extends Controller
    			'email.email' => '请输入正确的邮箱',
     		]);
     	// 获取要修改的字段
-    	$data=$request->only(['username','address','phone','email']);
+    	$data=$request->only(['username','address','phone','email','status']);
       $a=array();
       // 查询出所有数据
         $list=DB::table('users')->get();

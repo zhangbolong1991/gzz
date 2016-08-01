@@ -6,12 +6,6 @@
           </div>
           <div class="mws-panel-body no-padding">
                <form action="/admin/user/insert" method="post" class="mws-form">
-                  <!--   @if(session('error'))
-                    <div class="mws-form-message error">
-                  {{session('error')}}
-                      
-                    </div>
-                    @endif -->
                     <!-- 显示验证错误 -->
                     @if (count($errors) > 0)
                     <div class="mws-form-message error">
@@ -34,6 +28,12 @@
                               </div>
                          </div>
                          <div class="mws-form-row">
+                              <label class="mws-form-label">昵称:</label>
+                              <div class="mws-form-item">
+                                   <input value="{{old('name')}}" type="text" class="small" name="name">
+                              </div>
+                         </div>
+                         <div class="mws-form-row">
                               <label class="mws-form-label">密码:</label>
                               <div class="mws-form-item">
                                    <input type="password" name="password" value="{{old('password')}}"class="small">
@@ -48,16 +48,9 @@
                          <div class="mws-form-row">
                               <label class="mws-form-label">性别:</label>
                               <div class="mws-form-item">
-                                @if(old('sex')=='m')
-                                <input type="radio" name="sex" checked value="m">男
-                                <input type="radio" name="sex" value="w">女  
-                                 @elseif(old('sex')=='w')
-                                <input type="radio" name="sex" value="m">男
-                                <input type="radio" name="sex" checked value="w">女 
-                                @else
-                                <input type="radio" name="sex" value="m">男
-                                <input type="radio" name="sex" value="w">女
-                                @endif 
+                                
+                                <input type="radio" name="sex" @if(old('sex')=='m') checked @endif value="m" >男                             
+                                <input type="radio" name="sex" @if(old('sex')=='w') checked @endif value="w" >女
                               </div>
                          </div>
                          <div class="mws-form-row">
@@ -76,6 +69,17 @@
                               <label class="mws-form-label">邮箱:</label>
                               <div class="mws-form-item">
                                    <input value="{{old('email')}}" type="text" name="email" class="small">
+                              </div>
+                         </div>
+                          <div class="mws-form-row">
+                              <label class="mws-form-label">状态:</label>
+                              <div class="mws-form-item">
+                                    <select name="status" class="small">
+                                      <option value="0">禁用</option>
+                                      <option value="1">普通会员</option>
+                                      <option value="2">管理员</option>
+                                      <option value="3">未激活</option>
+                                    </select>
                               </div>
                          </div>
                     </div>
