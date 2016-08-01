@@ -136,6 +136,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        // Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -194,5 +195,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
     ],
+    
     'uploadpath'=>'./uploads/'.date('Y-m-d'),
+    'app_upload'=>'./articles/'.date('Y-m-d'),
 ];

@@ -110,6 +110,7 @@
 		</div>
 	</div>
 <!-- //header -->
+
 <!-- products-breadcrumb -->
 	<div class="products-breadcrumb">
 		<div class="container">
@@ -119,6 +120,7 @@
 		</div>
 	</div>
 <!-- //products-breadcrumb -->
+
 <!-- banner -->
 	<div class="banner">
 		<div class="w3l_banner_nav_left">
