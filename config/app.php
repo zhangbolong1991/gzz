@@ -194,5 +194,5 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
     ],
-
+    'uploadpath'=>'./uploads/'.date('Y-m-d'),
 ];
