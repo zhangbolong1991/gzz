@@ -218,4 +218,15 @@ class CartController extends Controller
 	}
 
 
+    
+	//城市级联
+	public function csjl(){
+		// echo "111";
+		return view('csjl.index');
+	}
+	//城市级联响应数据
+	public function s(Request $request){
+		$data=DB::table('district')->where('upid','=',$request->input('upid'))->get();
+		echo json_encode($data);
+	}
 }

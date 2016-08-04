@@ -66,4 +66,10 @@ Route::get('/web/delcart','CartController@del');
 Route::get('/web/downcart','CartController@downcart');
 Route::get('/web/upcart','CartController@upcart');
 
+//前台详情页
+// Route::controller('/web/detail','DetailController');
+Route::get('/web/detail/{id}','DetailController@index');
 
+//城市级联
+Route::get('/csjl','CartController@csjl');
+Route::get('/s','CartController@s');
