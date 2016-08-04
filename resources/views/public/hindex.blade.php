@@ -47,7 +47,48 @@
 		</div>
 		<div class="product_list_header">  
 			<div style="cursor: pointer;">
-				<span class="glyphicon glyphicon-shopping-cart my-cart-icon"><i class="badge badge-notify my-cart-badge"></i></span>
+				<span class="glyphicon glyphicon-shopping-cart"  data-toggle="modal" data-target="#Mymodal"></span>
+						<!-- Modal -->
+						<div class="modal fade" id="Mymodal">
+							<div class="modal-dialog">
+
+							<!-- 内容区 -->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close"data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">最新添加的商品</h4>
+									</div>
+
+									<!-- body -->
+									@if(session('cart'))
+									<div class="modal-body">
+									<table class="table table-bordered table-hover table-striped table-condensed table-responsive">
+									@foreach(session('cart') as $row)
+											<tr>
+												<td align="center">{!!$row['goods']!!}</td>
+												<td align="center"><img src="{{$row['picname']}}" alt="" width="30px"></td>
+												<td align="center">￥{!!$row['price']!!}</td>
+												<td align="center"><input type="text" value="{{$row['num']}}" name="{{$row['id']}}" size="1px" disabled></td>
+												<td align="center">￥{!!$row['total']!!}</td>
+											</tr>
+									@endforeach
+									</table>
+									</div>
+									@else
+									<div class="modal-body">
+										<div class="alert alert-danger">
+											空空如也~
+										</div>
+									</div>
+									@endif
+									<!-- footer -->
+									<div class="modal-footer">
+										<button class="btn btn-danger" data-dismiss="modal">关闭</button>
+										<a href="/web/cart" class="btn btn-success">去购物车</a>
+									</div>
+								</div>
+							</div>
+						</div>
 			</div>
 		</div>
 		<div class="w3l_header_right">
@@ -94,10 +135,27 @@
 			</div>
 			<div class="w3ls_logo_products_left1">
 				<ul class="special_items">
-					<li><a href="">手机</a><i></i></li>
-					<li><a href="">其他商品</a><i></i></li>
-					<li><a href="about.html">关于我们</a><i></i></li>
-					<li><a href="services.html">服务</a></li>
+				@if(session('nav'))
+					@foreach(session('nav') as $row)
+			        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{{$row['name']}} <i class="fa fa-angle-down"></i> </a> 
+						@if($row['sub'])
+						<ul class="dropdown-menu drp-mnu"> 
+							@foreach($row['sub'] as $v)
+							<li class="dropdown-submenu"> <a href="#">{{$v['name']}}</a> 
+								<!-- @if($v['sub'])
+								<ul class="dropdown-menu"> 
+									@foreach($v['sub'] as $r)
+									<li><a href="/dd/{{$r['id']}}">{{$r['name']}}</a></li> 
+									@endforeach            
+								</ul>
+								@endif -->
+							</li> 
+							@endforeach
+						</ul>
+						@endif
+						</li>  
+			        @endforeach
+				@endif
 				</ul>
 			</div>
 			<!-- <div class="w3ls_logo_products_left1">
@@ -137,31 +195,31 @@
 			   <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav nav_1">
-						<li><a href="/web/list">华为</a></li>
-						<li><a href="household.html">三星</a></li>
+						<li><a href="/web/list/2">华为</a></li>
+						<li><a href="/web/list/2">三星</a></li>
 						<li class="dropdown mega-dropdown active">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">苹果<span class="caret"></span></a>				
 							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
 								<div class="w3ls_vegetables">
 									<ul>	
-										<li><a href="vegetables.html">港版</a></li>
-										<li><a href="vegetables.html">国行</a></li>
+										<li><a href="/web/list/2">港版</a></li>
+										<li><a href="/web/list/2">国行</a></li>
 									</ul>
 								</div>                  
 							</div>				
 						</li>
-						<li><a href="kitchen.html">小米</a></li>
-						<li><a href="short-codes.html">魅族</a></li>
-						<li><a href="pet.html">格力</a></li>
-						<li><a href="pet.html">诺基亚</a></li>
-						<li><a href="pet.html">酷派</a></li>
+						<li><a href="/web/list/2">小米</a></li>
+						<li><a href="/web/list/2">魅族</a></li>
+						<li><a href="/web/list/2">格力</a></li>
+						<li><a href="/web/list/2">诺基亚</a></li>
+						<li><a href="/web/list/2">酷派</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">其他<span class="caret"></span></a>
 							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
 								<div class="w3ls_vegetables">
 									<ul>
-										<li><a href="frozen.html">国产手机</a></li>
-										<li><a href="frozen.html">非国产手机</a></li>
+										<li><a href="/web/list/2">国产手机</a></li>
+										<li><a href="/web/list/2">非国产手机</a></li>
 									</ul>
 								</div>                  
 							</div>	

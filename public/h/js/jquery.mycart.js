@@ -185,13 +185,14 @@
         '<div class="modal-content">' +
         '<div class="modal-header">' +
         '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-        '<h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</h4>' +
+        '<h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-shopping-cart"></span> 最新添加的商品</h4>' +
         '</div>' +
         '<div class="modal-body">' +
         '<table class="table table-hover table-responsive" id="' + idCartTable + '"></table>' +
         '</div>' +
         '<div class="modal-footer">' +
-        '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+        '<button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>' +
+        '<button type="button" class="btn btn-success" data-dismiss="modal">去购物车</button>' +
 
         '</div>' +
         '</div>' +
@@ -211,10 +212,12 @@
           '<tr title="' + this.summary + '" data-id="' + this.id + '" data-price="' + this.price + '">' +
           '<td class="text-center" style="width: 30px;"><img width="30px" height="30px" src="' + this.image + '"/></td>' +
           '<td>' + this.name + '</td>' +
-          '<td title="Unit Price">$' + this.price + '</td>' +
-          '<td title="Quantity"><input type="number" min="1" style="width: 70px;" class="' + classProductQuantity + '" value="' + this.quantity + '"/></td>' +
-          '<td title="Total" class="' + classProductTotal + '">$' + total + '</td>' +
-          '<td title="Remove from Cart" class="text-center" style="width: 30px;"><a href="javascript:void(0);" class="btn btn-xs btn-danger ' + classProductRemove + '">X</a></td>' +
+          '<td title="Unit Price">￥' + this.price + '</td>' +
+          // '<td title="Quantity"><input type="number" min="1" style="width: 70px;" class="' + classProductQuantity + '" value="' + this.quantity + '"/></td>' +
+          '<td title="Quantity">' + this.quantity + '</td>' +
+          '<td title="Total" class="' + classProductTotal + '">￥' + total + '</td>' +
+          // '<td title="Remove from Cart" class="text-center" style="width: 30px;"><a href="javascript:void(0);" class="btn btn-xs btn-danger ' + classProductRemove + '">X</a></td>' +
+          '<td title=""></td>' +
           '</tr>'
         );
       });
@@ -222,26 +225,26 @@
       $cartTable.append(products.length ?
         '<tr>' +
         '<td></td>' +
-        '<td><strong>Total</strong></td>' +
+        '<td><strong>总计</strong></td>' +
         '<td></td>' +
         '<td></td>' +
         '<td><strong id="' + idGrandTotal + '">$</strong></td>' +
         '<td></td>' +
         '</tr>'
-        : '<div class="alert alert-danger" role="alert" id="' + idEmptyCartMessage + '">Your cart is empty</div>'
+        : '<div class="alert alert-danger" role="alert" id="' + idEmptyCartMessage + '">空空如也~</div>'
       );
 
       var discountPrice = options.getDiscountPrice(products, ProductManager.getTotalPrice(), ProductManager.getTotalQuantity());
       if(products.length && discountPrice !== null) {
         $cartTable.append(
-          '<tr style="color: red">' +
-          '<td></td>' +
-          '<td><strong>Total (including discount)</strong></td>' +
-          '<td></td>' +
-          '<td></td>' +
-          '<td><strong id="' + idDiscountPrice + '">$</strong></td>' +
-          '<td></td>' +
-          '</tr>'
+          // '<tr style="color: red">' +
+          // '<td></td>' +
+          // '<td><strong>Total (including discount)</strong></td>' +
+          // '<td></td>' +
+          // '<td></td>' +
+          // '<td><strong id="' + idDiscountPrice + '">$</strong></td>' +
+          // '<td></td>' +
+          // '</tr>'
         );
       }
 
@@ -259,7 +262,7 @@
       });
     }
     var showGrandTotal = function(){
-      $("#" + idGrandTotal).text("$" + ProductManager.getTotalPrice());
+      $("#" + idGrandTotal).text("￥" + ProductManager.getTotalPrice());
     }
     var showDiscountPrice = function(){
       $("#" + idDiscountPrice).text("$" + options.getDiscountPrice(ProductManager.getAllProducts(), ProductManager.getTotalPrice(), ProductManager.getTotalQuantity()));

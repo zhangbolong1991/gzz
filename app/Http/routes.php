@@ -53,3 +53,17 @@ Route::get('/send','RegisterController@send');
 //=邮箱激活
 Route::get('/jihuo','RegisterController@jihuo');
 
+//前台
+Route::get('/web/index','WebController@index');
+//列表页
+Route::get('/web/list/{id}','ListController@index');
+//购物车
+Route::get('/web/cart','CartController@index');
+//列表页添加购物车
+Route::post('/web/addcart','CartController@add');
+//购物车删除加减
+Route::get('/web/delcart','CartController@del');
+Route::get('/web/downcart','CartController@downcart');
+Route::get('/web/upcart','CartController@upcart');
+
+
