@@ -53,3 +53,12 @@ Route::get('/send','RegisterController@send');
 //=邮箱激活
 Route::get('/jihuo','RegisterController@jihuo');
 
+//前台详情页
+// Route::controller('/web/detail','DetailController');
+Route::get('/web/detail/{id}','DetailController@index');
+//加入购物车
+Route::post('/addcart','CartController@add');
+
+//城市级联
+Route::get('/csjl','CartController@csjl');
+Route::get('/s','CartController@s');

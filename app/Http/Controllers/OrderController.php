@@ -20,7 +20,7 @@ class OrderController extends Controller
         // 获取所有参数
         $data=$request->except('_token');
         // dd($data);
-        $data['uid']=1;
+        $data['uid']=5;
         $data['addtime']=date('Y-m-d H:i:s');
         $data['status']=0;
         // dd($data);
@@ -35,8 +35,9 @@ class OrderController extends Controller
     //订单列表
     public function getIndex(Request $request){
     	//查询所有的数据(并且分页)
-        $list=DB::table('orders')->join('users','orders.uid','=','users.id')
+        $list=DB::table('orders')
         ->select(DB::raw('*,users.username as uersname,orders.status as ostatus,orders.id as oid'))
+        ->join('users','orders.uid','=','users.id')
         ->where('username','like', '%'.$request->input('keywords').'%')
         ->paginate(1);
         // dd($list);
@@ -64,7 +65,7 @@ class OrderController extends Controller
     }
     //查看订单详情
     public function getDetail($id){
-        $list=DB::table('detail')->where('id','=',$id)->paginate(2);
+        $list=DB::table('detail')->where('orderid','=',$id)->paginate(2);
         return view('detail.index',['list'=>$list]);
     }
 }
