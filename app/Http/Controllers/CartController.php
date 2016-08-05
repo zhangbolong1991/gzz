@@ -87,7 +87,7 @@ class CartController extends Controller
 			if($value['id']==$id){
 				unset($s[$key]);
 				$h['nums']-=$value['num'];
-				$h['totals']-=$value['num']*$value['price'];
+				$h['totals']-=$value['total'];
 			}
 		}
 		$a=['nums'=>$h['nums'],'totals'=>$h['totals']];
@@ -114,7 +114,7 @@ class CartController extends Controller
 				if($value['id'] == $v){
 					$request->session()->forget('cart.'.$key);
 					$h['nums']-=$value['num'];
-					$h['totals']-=$value['num']*$value['price'];
+					$h['totals']-=$value['total'];
 				}
 			}
 		}
@@ -147,6 +147,7 @@ class CartController extends Controller
 				//获取新值
 				$n=$data[$key]['num'];
 				$t=$n*$data[$key]['price'];
+				$data[$key]['total']=$t;
 				$a=array();
 				$a=['num'=>$n,'total'=>$t];	
 			}
@@ -184,6 +185,7 @@ class CartController extends Controller
 				//获取新值
 				$n=$data[$key]['num'];
 				$t=$n*$data[$key]['price'];
+				$data[$key]['total']=$t;
 				$a=array();
 				$a=['num'=>$n,'total'=>$t];
 			}
