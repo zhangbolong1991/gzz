@@ -41,6 +41,7 @@ class CartController extends Controller
 				$row['goods']=$ss['goods'];
 				$row['price']=$ss['price'];
 				$row['id']=$value['id'];
+				$row['did']=$value['id']*1000;
 				$row['num']=$value['num'];
 				$row['total']=$row['price']*$row['num'];
 				$h['nums']+=$row['num'];
@@ -80,143 +81,122 @@ class CartController extends Controller
 		$id=$request->input('id');
 		//获取session数据
 		$s=session('cart');
+		$h=session('h');
 		//遍历
 		foreach($s as $key=>$value){
 			if($value['id']==$id){
 				unset($s[$key]);
+				$h['nums']-=$value['num'];
+				$h['totals']-=$value['num']*$value['price'];
 			}
 		}
+		$a=['nums'=>$h['nums'],'totals'=>$h['totals']];
+		session(['h'=>$h]);
 		//存储session数据(没有删除的session数据)
 		session(['cart'=>$s]);
+		echo json_encode($a);
 		//跳转
-		return redirect('/web/cart');
+		// return redirect('/web/cart');
 	}
 
-	// //减
-	// public function downcart(Request $request){
-	// 	//获取id
-	// 	$id=$request->input('id');
-	// 	$data=session('cart');
-	// 	$h=session('h');
-	// 	//遍历
-	// 	foreach($data as $key=>$value){
-	// 		if($value['id']==$id){
-	// 			$s=$value['num']-1;
-	// 			$data[$key]['num']=$s;
-	// 			$l=$value['total']-$value['price'];
-	// 			$data[$key]['total']=$l;
-	// 			$h['nums']-=1;
-	// 			$h['totals']-=$data[$key]['price'];
-	// 			//判断
-	// 			if($data[$key]['num']<1){
-	// 				$data[$key]['num']=1;
-	// 				$l=$value['total']+$value['price'];
-	// 				$data[$key]['total']=$l;
-	// 				$h['nums']+=1;
-	// 				$h['totals']+=$data[$key]['price'];
-	// 			}
-	// 			//获取新值
-	// 			$a=$data[$key]['num'];
-				
-	// 		}
-	// 	}
-	// 	// $request->session()->forget('cart');
-	// 	session(['cart'=>$data]);
-	// 	session(['h'=>$h]);
-	// 	// dd(session('cart'));
-	// 	echo json_encode([$a,$h['nums'],$l,$h['totals']]);
-	// 	//跳转
-	// 	// return redirect('/web/cart');
-	// }
-	// //加
-	// public function upcart(Request $request){
-	// 	//获取id
-	// 	$id=$request->input('id');
-	// 	$data=session('cart');
-	// 	$h=session('h');
-	// 	//遍历
-	// 	foreach($data as $key=>$value){
-	// 		if($value['id']==$id){
-	// 			$s=$value['num']+1;
-	// 			$data[$key]['num']=$s;
-	// 			$l=$value['total']+$value['price'];
-	// 			$data[$key]['total']=$l;
-	// 			$h['nums']+=1;
-	// 			$h['totals']-=$data[$key]['price'];
-	// 			//获取数据库的数据
-	// 			$list=DB::table('goods')->where('id','=',$id)->first();
-	// 			if($data[$key]['num']>$list['store']){
-	// 				$data[$key]['num']=$list['store'];
-	// 				$l=$value['total']-$value['price'];
-	// 				$data[$key]['total']=$l;
-	// 				$h['nums']-=1;
-	// 				$h['totals']-=$data[$key]['price'];
-	// 			}
-	// 			//获取新值
-	// 			$a=$data[$key]['num'];
-	// 		}
-	// 	}
-	// 	// $request->session()->forget('cart');
-	// 	session(['cart'=>$data]);
-	// 	session(['h'=>$h]);
-
-	// 	echo json_encode([$a,$h['nums'],$l,$h['totals']]);
-	// 	// return redirect('/web/cart');
-	// }
+	//删除选中项
+	public function dels(Request $request){
+		//获取请求参数
+		$id=$request->input('id');
+		//获取session数据
+		$cart=session('cart');
+		$h=session('h');
+		//session数据遍历
+		foreach($cart as $key=>$value){
+			//遍历$id
+			foreach($id as $k=>$v){
+				//判断语句
+				if($value['id'] == $v){
+					$request->session()->forget('cart.'.$key);
+					$h['nums']-=$value['num'];
+					$h['totals']-=$value['num']*$value['price'];
+				}
+			}
+		}
+		$a=['nums'=>$h['nums'],'totals'=>$h['totals']];
+		session(['h'=>$h]);
+		echo json_encode($a);
+		//跳转
+		// return redirect('/web/cart');
+	}
 
 	//减
 	public function downcart(Request $request){
 		//获取id
 		$id=$request->input('id');
 		$data=session('cart');
+		$h=session('h');
 		//遍历
 		foreach($data as $key=>$value){
 			if($value['id']==$id){
 				$s=$value['num']-1;
 				$data[$key]['num']=$s;
-
+				$h['nums']-=1;
+				$h['totals']-=$data[$key]['price'];
 				//判断
 				if($data[$key]['num']<1){
 					$data[$key]['num']=1;
-
+					$h['nums']+=1;
+					$h['totals']+=$data[$key]['price'];
 				}
-				
+				//获取新值
+				$n=$data[$key]['num'];
+				$t=$n*$data[$key]['price'];
+				$a=array();
+				$a=['num'=>$n,'total'=>$t];	
 			}
+			$a['totals']=$h['totals'];
+			$a['nums']=$h['nums'];
 		}
-		
+		// $request->session()->forget('cart');
 		session(['cart'=>$data]);
+		session(['h'=>$h]);
 		// dd(session('cart'));
-		// echo json_encode([$a,$h['nums'],$l,$h['totals']]);
+		echo json_encode($a);
 		//跳转
-		return redirect('/web/cart');
+		// return redirect('/web/cart');
 	}
 	//加
 	public function upcart(Request $request){
 		//获取id
 		$id=$request->input('id');
 		$data=session('cart');
+		$h=session('h');
 		//遍历
 		foreach($data as $key=>$value){
 			if($value['id']==$id){
 				$s=$value['num']+1;
 				$data[$key]['num']=$s;
-
+				$h['nums']+=1;
+				$h['totals']+=$data[$key]['price'];
 				//获取数据库的数据
 				$list=DB::table('goods')->where('id','=',$id)->first();
 				if($data[$key]['num']>$list['store']){
 					$data[$key]['num']=$list['store'];
-
+					$h['nums']-=1;
+					$h['totals']-=$data[$key]['price'];
 				}
-
+				//获取新值
+				$n=$data[$key]['num'];
+				$t=$n*$data[$key]['price'];
+				$a=array();
+				$a=['num'=>$n,'total'=>$t];
 			}
+			$a['totals']=$h['totals'];
+			$a['nums']=$h['nums'];
 		}
 		// $request->session()->forget('cart');
 		session(['cart'=>$data]);
+		session(['h'=>$h]);
 
-		// echo json_encode([$a,$h['nums'],$l,$h['totals']]);
-		return redirect('/web/cart');
+		echo json_encode($a);
+		// return redirect('/web/cart');
 	}
-
 
     
 	//城市级联

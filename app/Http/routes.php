@@ -63,6 +63,7 @@ Route::get('/web/cart','CartController@index');
 Route::post('/web/addcart','CartController@add');
 //购物车删除加减
 Route::get('/web/delcart','CartController@del');
+Route::get('/web/dels','CartController@dels');
 Route::get('/web/downcart','CartController@downcart');
 Route::get('/web/upcart','CartController@upcart');
 

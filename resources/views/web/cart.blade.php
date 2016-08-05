@@ -10,10 +10,10 @@
 					<div style="margin:40px auto;text-align:center;" >
 						<h4>我的购物车</h4>
 					</div>
-					<table width="1000px" class="table-bordered table-hover table-striped table-condensed table-responsive" style="margin:0px auto 200px;">
+					<table width="1000px" class="table-bordered table-hover table-striped table-condensed table-responsive" style="margin:0px auto 200px;" id="tablecart">
 						@if(session('cart'))
 						<tr height="50px">
-							<td align="center"><button  onclick="fun(1)" class="btn btn-default btn-sm">全选</button></td>
+							<td align="center"><a  href="javascript:fun(1)" class="btn btn-default btn-sm">全选</a>&nbsp;&nbsp;<a href="javascript:fun(3)" class="btn btn-default btn-sm">反选</a></td>
 							<td align="center">名称</td>
 							<td align="center">图片</td>
 							<td align="center">价格</td>
@@ -21,23 +21,24 @@
 							<td align="center">总计</td>
 							<td align="center">操作</td>
 						</tr>
-						
+						<form action="" method="post">
 						@foreach($cart as $row)
 						
 							<tr>
-								<td align="center"><input type="checkbox" checked name="check" value="{{$row['id']}}"></td>
+								<td align="center"><input type="checkbox" checked name="check[]" value="{{$row['id']}}"></td>
 								<td align="center">{{$row['goods']}}</td>
 								<td align="center"><img src="{{$row['picname']}}" width="50px"></td>
 								<td align="center">￥{{$row['price']}}</td>
 								<td align="center">
-									<!-- <a href="javascript:func(1,{{$row['id']}})" class="btn btn-default btn-sm">-</a> -->
-									<a href="/web/downcart?id={{$row['id']}}" class="btn btn-default btn-sm">-</a>
-									<!-- <input type="text" value="{{$row['num']}}" name="{{$row['id']}}" size="1px" disabled> -->
-									{{$row['num']}}
-									<a href="/web/upcart?id={{$row['id']}}" class="btn btn-default btn-sm">+</a>
+									<a href="javascript:func(1,{{$row['id']}})" class="btn btn-default btn-sm">-</a>
+									<input type="text" value="{{$row['num']}}" name="{{$row['id']}}" size="1px" style="border:0;background:transparent;" disabled>
+									<a href="javascript:func(2,{{$row['id']}})" class="btn btn-default btn-sm">+</a>
 								</td>
-								<td align="center" ><input type="text" value="￥{{$row['total']}}" name="{{$row['id']}}#"  size="7px" disabled></td>
-								<td align="center"><a href="/web/delcart?id={{$row['id']}}" class="btn btn-danger">删除</a></td>					
+								<td align="center" class="total">
+								<input type="text" value="￥{{$row['total']}}" id="{{$row['id']}}" size="7px" style="border:0;background:transparent;" disabled>
+								<!-- ￥{{$row['total']}} -->
+								</td>
+								<td align="center"><a href="javascript:del({{$row['id']}})" class="btn btn-danger">删除</a></td>
 							</tr>
 						
 						@endforeach
@@ -49,14 +50,22 @@
 						@endif
 
 						@if($h)
-						<tr height="50px">
-							<td align="center"><button onclick="fun(3)" class="btn btn-default btn-sm">反选</button></td>
+						<tr height="50px" id="lasttr">
+							<td align="center"><a href="javascript:delselect()" class="btn btn-danger">删除选中</a></td>
 							<td colspan="3" align="right"></td>
-							<td align="center">{{$h['nums']}}</td>
-							<td align="center" style="color:#2e8b5f">￥{{$h['totals']}}</td>
-							<td align='center'><a href='' class="btn btn-success">去结算</a></td>
+							<td align="center">
+							<input type="text" value="{{$h['nums']}}" id="nums" size="1px" style="border:0;background:transparent;" disabled>
+							<!-- {{$h['nums']}} -->
+							</td>
+							<td align="center" style="color:#2e8b5f">
+							<input type="text" value="￥{{$h['totals']}}" id="totals" size="7px" style="border:0;background:transparent;" disabled>
+							<!-- ￥{{$h['totals']}} -->
+							</td>
+							<td align='center'><input type="submit" class="btn btn-success" value="去结算"></td>
+							{{csrf_field()}}
 						</tr>
 						@endif
+						</form>
 					</table>
 					<div class="clearfix"> </div>
 				</div>
@@ -144,107 +153,191 @@ $(document).ready(function(){
   });
   </script>
   <script type="text/javascript">
+	//全选 反选
 	function fun(b){
-		// alert(b);
 		//获取check对象集合
-		list=document.getElementsByName('check');
+		list=document.getElementsByName('check[]');
 		// alert(list);
 		//遍历
 		for(var i=0;i<list.length;i++){
 			// alert(list[i]);
 			//switch
 			switch(b){
-				//全选
 				case 1:
 				list[i].checked=true;
 				break;
-				//取反
 				case 3:
 				list[i].checked=!list[i].checked;
 				break; 
 			}
-
 		}
-
 	}
-	// function func(b,c){
-		
-	// 	//switch
-	// 	switch(b){
-	// 		//减
-	// 		case 1:
-	// 		//获取num对象集合
-	// 		list=document.getElementsByName(c);
-	// 		lista=document.getElementById(c#);
-	// 		//Ajax
-	// 		$.ajax({
-	// 			url:  '/web/downcart',//url地址
-	// 			type: 'get',//请求方式
-	// 			data:{id:c},//参数
-	// 			dataType:'json',//数据返回的类型格式
-	// 			//接收响应数据
-	// 			success:
-	// 			function(data){
-	// 				// alert(data);
-	// 				a = data[0];
-	// 				num = data[1];
-	// 				total = data[2];
-	// 				totals = data[3];
-	// 				for (var i = 0; i < list.length; i++) {
-	// 					list[i].value=a;
-	// 				};
-	// 				// alert(total);
-	// 				for (var i = 0; i < lista.length; i++) {
-	// 					lista[i].value=total;
-	// 				};
 
-
-	// 			},
-	// 			//Ajax响应失败
-	// 			error:
-	// 			function(){
-	// 				alert('Ajax响应失败');
-	// 			}
-	// 		});
-	// 		break; 
-	// 		//加
-	// 		case 2:
-	// 		//获取num对象集合
-	// 		li=document.getElementsByName(c);
-	// 		lia=document.getElementById(c#);
-	// 		//Ajax
-	// 		$.ajax({
-	// 			url:  '/web/upcart',//url地址
-	// 			type: 'get',//请求方式
-	// 			data:{id:c},//参数
-	// 			dataType:'json',//数据返回的类型格式	
-	// 			//接收响应数据
-	// 			success:
-	// 			function(data){
-	// 				// alert(a);
-	// 				a = data[0];
-	// 				num = data[1];
-	// 				total = data[2];
-	// 				totals = data[3];
-	// 				for (var i = 0; i < list.length; i++) {
-	// 					li[i].value=a;
-	// 				};
-	// 				// alert(total);
-	// 				for (var i = 0; i < lista.length; i++) {
-	// 					lia[i].value=total;
-	// 				};
-	// 			},
-	// 			//Ajax响应失败
-	// 			error:
-	// 			function(){
-	// 				alert('Ajax响应失败');
-	// 			}
-	// 		});
-	// 		break; 
-
-	// 	}
-	// }
+	//购物数量加减操作
+	function func(b,c){
+		//switch
+		switch(b){
+			//减
+			case 1:
+			list=document.getElementsByName(c);
+			total=document.getElementById(c);
+			mtotal=document.getElementById(c*1000);
+			totals=document.getElementById('totals');
+			nums=document.getElementById('nums');
+			//Ajax
+			$.ajax({
+				url:  '/web/downcart',//url地址
+				type: 'get',//请求方式
+				data:{id:c},//参数
+				dataType:'json',//数据返回的类型格式
+				//接收响应数据
+				success:
+				function(data){
+					// alert(data['num']);
+					for (var i = 0; i < list.length; i++) {
+						list[i].value=data['num'];
+					};
+					total.value='￥'+data['total'];
+					mtotal.value='￥'+data['total'];
+					totals.value='￥'+data['totals'];
+					nums.value=data['nums'];
+				},
+				error:
+				function(){
+					alert('Ajax响应失败');
+				}
+			});
+			break; 
+			//加
+			case 2:
+			li=document.getElementsByName(c);
+			total=document.getElementById(c);
+			mtotal=document.getElementById(c*1000);
+			totals=document.getElementById('totals');
+			nums=document.getElementById('nums');
+			//Ajax
+			$.ajax({
+				url:  '/web/upcart',//url地址
+				type: 'get',//请求方式
+				data:{id:c},//参数
+				dataType:'json',//数据返回的类型格式	
+				//接收响应数据
+				success:
+				function(data){
+					// alert(a);
+					for (var i = 0; i < li.length; i++) {
+						li[i].value=data['num'];
+					};
+					// alert(total);
+					total.value='￥'+data['total'];
+					mtotal.value='￥'+data['total'];
+					totals.value='￥'+data['totals'];
+					nums.value=data['nums'];
+				},
+				//Ajax响应失败
+				error:
+				function(){
+					alert('Ajax响应失败');
+				}
+			});
+			break; 
+		}
+	}
 	
+	//删除选中
+	function delselect(){
+		a=[];
+		list = document.getElementsByName('check[]');
+		for (var i = 0; i < list.length; i++) {
+			if(list[i].checked){
+				id=list[i].value;
+				// alert(id);
+				a.push(id);
+				// alert(a)
+			}
+		};
+		if(a.length>0){
+			s = confirm('你确定删除吗?')
+			if(s){
+			//Ajax
+			$.ajax({
+					url:  '/web/dels',//url地址
+					type: 'get',//请求方式
+					data:{id:a},//参数
+					dataType:'json',//数据返回的类型格式	
+					//接收响应数据
+					success:
+					function(data){
+						// alert(data);
+						// alert('删除成功');
+						//删除选中行
+						for(var i=0;i<a.length;i++){
+							$("input[name="+a[i]+"]").parents('tr').remove();
+						}
+						//改变总数量,总金额
+						totals=document.getElementById('totals');
+						nums=document.getElementById('nums');
+						totals.value='￥'+data['totals'];
+						nums.value=data['nums'];
+						//判断购物车是否为空,是否删除最后一行
+						ch = document.getElementsByName('check[]');
+						lasttr = document.getElementById('lasttr');
+						// alert(ch.length);
+						if(!ch.length){
+							$('#lasttr').remove();
+						}
+					},
+					//Ajax响应失败
+					error:
+					function(){
+						alert('Ajax响应失败');
+					}
+				});
+			}
+		}else{
+			alert('请选择删除项')
+		}
+	}
+
+	//删除单个
+	function del(b){
+		s = confirm('你确定删除吗?')
+		if(s){
+		//Ajax
+		$.ajax({
+				url:  '/web/delcart',//url地址
+				type: 'get',//请求方式
+				data:{id:b},//参数
+				dataType:'json',//数据返回的类型格式	
+				//接收响应数据
+				success:
+				function(data){
+					// alert(data);
+					// alert('删除成功');
+					//删除对应行
+					$("input[name="+b+"]").parents('tr').remove();
+					//改变总数量,总金额
+					totals=document.getElementById('totals');
+					nums=document.getElementById('nums');
+					totals.value='￥'+data['totals'];
+					nums.value=data['nums'];
+					//判断
+					ch = document.getElementsByName('check[]');
+					lasttr = document.getElementById('lasttr');
+					// alert(ch.length);
+					if(!ch.length){
+						$('#lasttr').remove();
+					}
+				},
+				//Ajax响应失败
+				error:
+				function(){
+					alert('Ajax响应失败');
+				}
+			});
+		}
+	}
+
 
 </script>
 </body>
