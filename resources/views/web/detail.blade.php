@@ -1,24 +1,111 @@
 @extends('public.hindex')
 
+@section('fangdajing')
+	<style type="text/css">
+	*{
+		padding:0px;
+		margin:0px;
+	}
+	#small{
+		width:300px;
+		height:300px;
+		border:1px dashed #ccc;
+		position:absolute;
+		/*left:70px;
+		top:200px;*/
+	}
+	#simg{
+		position:absolute;
+	}
+	#move{
+		width:30px;
+		height:30px;
+		position:absolute;
+		left:0px;
+		top:0px;
+		background-image: url(/h/images/bg.png);
+		display:none;
+
+	}
+	#big{
+		width:300px;
+		height:300px;
+		position:absolute;
+		left:700px;
+		/*top:700px;*/
+		overflow:hidden;
+		display:none;
+		z-index:1;
+	}
+	#bimg{
+		position:absolute;
+	}
+	#imgs{
+		width:410px;
+		height:100px;
+		position:absolute;
+		top:1020px;
+		left:365px;
+		list-style-type:none;
+	}
+	.imgh{
+		width:100px;
+		height:100px;
+		float:left;
+		border:1px dashed #ccc;
+		margin-left:10px;
+    cursor: pointer;
+	}
+	</style>
+@endsection
 @section('main')
+	
 		<div class="w3l_banner_nav_right">
 			<div class="w3l_banner_nav_right_banner3">
 				<h3>最佳新品<span class="blink_me"></span></h3>
 			</div>
-			<form action="a"></form>
-			<div class="agileinfo_single">
+			<form action="/web/addcart" method="post">
+
+			<!-- <div class="agileinfo_single" style="height:600px; width:100%;">
 				<h5>{{$list['goods']}}</h5>
-				<div class="col-md-4 agileinfo_single_left">
-					<img id="example" src="{{$list['picname']}}" alt=" " class="img-responsive" />
+				<div class="col-md-4 agileinf_single_left">
+					<div id="small">
+						<img src="{{$list['picname']}}" id="simg" width="100%" height="300px">
+						<div id="move"></div>
+					</div>
+					<div id="big">
+						<img src="{{$list['picname']}}" id="bimg" width="800px" height="800px">
+					</div>
+					<ul id="imgs">
+						<li><img src="{{$list['picname']}}" width="100%" height="100px" class='imgh'></li>
+						<li><img src="/h/images/1.jpg" alt="测试图片" width="100%" height="100px" class='imgh'></li>
+					</ul>
+				</div> -->
+				<div class="agileinfo_single" style="height:600px; width:100%;">
+				<h5>{{$list['goods']}}</h5>
+				<div class="">
+					<div id="small">
+						<img src="{{$list['picname']}}" id="simg" width="100%" height="300px">
+						<div id="move"></div>
+					</div>
+					<div id="big">
+						<img src="{{$list['picname']}}" id="bimg" width="800px" height="800px">
+					</div>
+					<ul id="imgs">
+						<li><img src="{{$list['picname']}}" onmousemove=fun(0) width="100%" height="100px" class='imgh'></li>
+						<li><img src="/h/images/1.jpg"  onmousemove=fun(1) alt="测试图片" width="100%" height="100px" class='imgh'></li>
+						<li><img src="/h/images/2.jpg" onmousemove=fun(2) alt="测试图片" width="100%" height="100px" class='imgh'></li>
+						
+					</ul>
 				</div>
-				<div class="col-md-8 agileinfo_single_right">
+				<div class="col-sm-offset-4 col-md-8 agileinfo_single_right">
 					<div class="rating1">
 						<span class="starRating">
-							<input id="rating5" type="radio" name="rating" value="5">
+							<input id="rating5" type="radio" name="rating" value="5" checked>
 							<label for="rating5">5</label>
 							<input id="rating4" type="radio" name="rating" value="4">
 							<label for="rating4">4</label>
-							<input id="rating3" type="radio" name="rating" value="3" checked>
+							<input id="rating3" type="radio" name="rating" value="3">
 							<label for="rating3">3</label>
 							<input id="rating2" type="radio" name="rating" value="2">
 							<label for="rating2">2</label>
@@ -27,19 +114,23 @@
 						</span>
 					</div>
 					<div class="w3agile_description">
-						<h4>描述:</h4>
-						<p>{!!$list['descr']!!}</p>
+						<h4>库存量:{{$list['store']}}</h4>
+					</div>
+					<div class="w3agile_description">
+						<h4>销售量:{{$list['num']}}</h4>
+					</div>
+					<div class="w3agile_description">
+						<h4>点击量:{{$list['clicknum']}}</h4>
 					</div>
 					<div class="snipcart-item block">
 						<div class="snipcart-thumb agileinfo_single_right_snipcart">
-							<h4>优惠价:￥{{$list['price']}} <span>原价:￥{{$list['orginprice']}}</span></h4>
+							<h4>优惠价:￥{{$list['price']}} <span>原价:￥{{$list['price']*1.25}}</span></h4>
 						</div>
 						<div class="snipcart-details agileinfo_single_right_details">
 							{{csrf_field()}}
-							<input type="hidden" name="id" vlue="{{$list['id']}}">
-							<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" >加入购物车</button>
-
-							<!-- <input type="submit" value="加入购物车" class="btn btn-danger my-cart-btn hvr-sweep-to-right"> -->
+							<input type="hidden" name="id" value="{{$list['id']}}">
+							<!-- <button class="btn btn-danger my-cart-btn hvr-sweep-to-right">加入购物车</button> -->
+							<input type="submit" value="加入购物车" class="btn btn-danger my-cart-btn hvr-sweep-to-right">
 						</div>
 					</div>
 				</div>
@@ -106,6 +197,7 @@
 					<h6>手机</h6>
 					@foreach($data as $row)
 					<div class="col-md-3 w3ls_w3l_banner_left" style="margin-bottom:15px">
+					<form action="/web/addcart" method="post">
 						<div class="hover14 column">
 						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
 							<div class="agile_top_brand_left_grid_pos">
@@ -118,17 +210,21 @@
 											<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" alt=" " style="width:300px;height:120px" class="img-responsive" /></a>
 											<center>
 												<p>{{$row['goods']}}</p>
-												<h4>￥{{$row['price']}}<span>￥{{$row['orginprice']}}</span></h4>
+												<h4>￥{{$row['price']}}<span>￥{{$row['price']*1.25}}</span></h4>
 											</center>
 										</div>
 										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right">加入购物车</button>
+											{{csrf_field()}}
+											<input type="hidden" name="id" value="{{$row['id']}}">
+											<!-- <button class="btn btn-danger my-cart-btn hvr-sweep-to-right">加入购物车</button> -->
+											<input type="submit" value="加入购物车" class="btn btn-danger my-cart-btn hvr-sweep-to-right">
 										</div>
 									</div>
 								</figure>
 							</div>
 						</div>
 						</div>
+						</form>
 					</div>
 					@endforeach
 					<div class="clearfix"> </div>
@@ -137,6 +233,7 @@
 					<h6>笔记本电脑</h6>
 					@foreach($data1 as $row)				
 					<div class="col-md-3 w3ls_w3l_banner_left" style="margin-bottom:15px">
+					<form action="/web/addcart" method="post">
 						<div class="hover14 column">
 						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
 							<div class="agile_top_brand_left_grid_pos">
@@ -149,17 +246,21 @@
 											<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" alt=" " class="img-responsive" style="width:300px;height:120px"/></a>
 											<center>
 												<p>{{$row['goods']}}</p>
-												<h4>￥{{$row['price']}}<span>￥{{$row['orginprice']}}</span></h4>
+												<h4>￥{{$row['price']}}<span>￥{{$row['price']*1.25}}</span></h4>
 											</center>
 										</div>
 										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="9" data-name="Fresh spinach" data-summary="summary 9" data-price="2.00" data-quantity="1" data-image="/h/images/9.png">加入购物车</button>
+											{{csrf_field()}}
+											<input type="hidden" name="id" value="{{$row['id']}}">
+											<!-- <button class="btn btn-danger my-cart-btn hvr-sweep-to-right">加入购物车</button> -->
+											<input type="submit" value="加入购物车" class="btn btn-danger my-cart-btn hvr-sweep-to-right">
 										</div>
 									</div>
 								</figure>
 							</div>
 						</div>
 						</div>
+						</form>
 					</div>
 					@endforeach
 					<div class="clearfix"> </div>
@@ -256,6 +357,134 @@ $(document).ready(function(){
       });
     });
   </script>
-</body>
-</html>
+<script type="text/javascript">
+	//获取div元素对象
+	small=document.getElementById('small');
+	simg=document.getElementById('simg');
+	move=document.getElementById('move');
+	big=document.getElementById('big');
+	bimg=document.getElementById('bimg');
+	imgs=document.getElementById('imgs');
+	//给small去绑定一个鼠标的移动事件
+	small.onmousemove=function(e){
+		move.style.display="block";
+		big.style.display="block";
+		move.style.cursor="move";
+		//浏览器的兼容处理
+		ee=e||window.event;
+		//获取横坐标和纵坐标
+		//获取偏移文档 的坐标
+		x=ee.pageX;
+		y=ee.pageY;
+		// clientX
+		// clientY
+		//获取x1和y1
+		x1=small.offsetLeft;
+		y1=small.offsetTop;
+		//获取move的自身元素的高度和宽度一半
+		m_w=move.offsetWidth/2;
+		m_h=move.offsetHeight/2;
+		//获取left和top
+		l=x-x1-m_w;
+		t=y-y1-m_h;
+		//上
+		if(t<0){
+			t=0;
+		}
+		//下
+		if(t>small.offsetHeight-move.offsetHeight){
+			t=small.offsetHeight-move.offsetHeight;
+		}
+		//左
+		if(l<0){
+			l=0;
+		}
+		//右
+		if(l>small.offsetWidth-move.offsetWidth){
+			l=small.offsetWidth-move.offsetWidth;
+		}
+		//把l和t赋给move的left和top
+		move.style.left=l+"px";
+		move.style.top=t+"px";
+		// alert(l+':'+t);
+
+		//计算大图移动left和top值
+
+		//求比例
+		x=l/small.offsetWidth;
+		y=t/small.offsetHeight;
+		//求大图的height和width
+		B_w=bimg.offsetWidth;
+		B_h=bimg.offsetHeight;
+		ll=x*B_w;
+		tt=y*B_h;
+		//获取大图的left和top值
+		bimg.style.left=-ll+"px";
+		bimg.style.top=-tt+"px";
+		//求右边比例
+		xx=big.offsetWidth/bimg.offsetWidth;
+		yy=big.offsetHeight/bimg.offsetHeight;
+		//重新给move赋height和width
+		//获取small的width和height
+		s_w=small.offsetWidth;
+		s_h=small.offsetHeight;
+		m_w=s_w*xx;
+		m_h=s_h*yy;
+		move.style.width=m_w+"px";
+		move.style.height=m_h+"px";
+
+
+
+	}
+
+	//移出
+	small.onmouseout=function(){
+		move.style.display="none";
+		big.style.display="none";
+	}
+
+	//获取图片结合节点
+	// list=document.getElementsByTagName('img');
+	// //遍历
+	// for(var i=0;i<list.length;i++){
+	// 	list[i].onmousemove=function(){
+	// 		var src=this.getAttribute('src');
+	// 		// alert(src);
+	// 		simg.src=src;
+	// 		bimg.src=src;
+	// 		this.style="border:1px solid red";
+	// 		this.onmouseout=function(){
+	// 		this.style="1px dashed #ccc";
+	// 		 }
+	// 	}
+	// }
+	//获取图片集合节点
+	function fun(m){
+		list=imgs.getElementsByTagName('img');
+		
+			var src=list[m].getAttribute('src');
+			simg.src=src;
+			bimg.src=src;
+			// alert(m);
+			switch(m){
+				case 0:
+				list[0].style.border="1px solid red";
+				list[1].style.border="1px dashed #ccc";
+				list[2].style.border="1px dashed #ccc";
+				break;
+				case 1:
+				list[0].style.border="1px dashed #ccc";
+				list[1].style.border="1px solid red";
+				list[2].style.border="1px dashed #ccc";
+				break;
+				case 2:
+				list[0].style.border="1px dashed #ccc";
+				list[1].style.border="1px dashed #ccc";
+				list[2].style.border="1px solid red";
+				break;
+			}
+			
+		
+	}
+</script>
 @endsection

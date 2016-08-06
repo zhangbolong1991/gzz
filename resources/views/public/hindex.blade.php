@@ -30,6 +30,9 @@
 		});
 	});
 </script>
+<!-- 详情页放大镜站位 -->
+@section('fangdajing')
+@show
 <!-- start-smoth-scrolling -->
 </head>
 	
