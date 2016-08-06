@@ -124,7 +124,7 @@
 	<div class="products-breadcrumb">
 		<div class="container">
 			<ul>
-				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/home/index">首页</a><span>|</span></li>
+				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/home">首页</a><span>|</span></li>
 			</ul>
 		</div>
 	</div>
@@ -146,41 +146,23 @@
 			   <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav nav_1">
-						<li><a href="/web/list">华为</a></li>
-						<li><a href="household.html">三星</a></li>
-						<li class="dropdown mega-dropdown active">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">苹果<span class="caret"></span></a>				
-							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-								<div class="w3ls_vegetables">
-									<ul>	
-										<li><a href="vegetables.html">港版</a></li>
-										<li><a href="vegetables.html">国行</a></li>
-									</ul>
-								</div>                  
-							</div>				
-						</li>
-						<li><a href="kitchen.html">小米</a></li>
-						<li><a href="short-codes.html">魅族</a></li>
-						<li><a href="pet.html">格力</a></li>
-						<li><a href="pet.html">诺基亚</a></li>
-						<li><a href="pet.html">酷派</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">其他<span class="caret"></span></a>
-							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-								<div class="w3ls_vegetables">
-									<ul>
-										<li><a href="frozen.html">国产手机</a></li>
-										<li><a href="frozen.html">非国产手机</a></li>
-									</ul>
-								</div>                  
-							</div>	
-						</li>
+						<li><a href="/vita">个人信息</a></li>
+						<li><a href="household.html">我的订单</a></li>
+						
+						<li><a href="kitchen.html">我的购物车</a></li>
+						<li><a href="pet.html">我关注的</a></li>
+						<li><a href="pet.html">站内信</a></li>
+						<li><a href="short-codes.html">浏览历史</a></li>
+						
 					</ul>
 				 </div><!-- /.navbar-collapse -->
 			</nav>
 		</div>
-@section('main')
+
+<div style="width:100%;height:400px;border:1px">
+@section('right')
 @show
+</div>
 
 <!-- newsletter -->
 	<div class="newsletter">
@@ -277,5 +259,77 @@
 	</div>
 <!-- //footer -->
 
-@section('js')
-@show
+<!-- Bootstrap Core JavaScript -->
+<script src="/h/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->/h/
+<script type='text/javascript' src="/h/js/jquery.mycart.js"></script>
+<script type="text/javascript">
+  $(function () {
+
+    var goToCartIcon = function($addTocartBtn){
+      var $cartIcon = $(".my-cart-icon");
+      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+      $addTocartBtn.prepend($image);
+      var position = $cartIcon.position();
+      $image.animate({
+	  
+      }, 500 , "linear", function() {
+        $image.remove();
+      });
+    }
+
+    $('.my-cart-btn').myCart({
+      classCartIcon: 'my-cart-icon',
+      classCartBadge: 'my-cart-badge',
+      affixCartIcon: true,
+      checkoutCart: function(products) {
+        $.each(products, function(){
+          console.log(this);
+        });
+      },
+      clickOnAddToCart: function($addTocart){
+        goToCartIcon($addTocart);
+      },
+      getDiscountPrice: function(products) {
+        var total = 0;
+        $.each(products, function(){
+          total += this.quantity * this.price;
+        });
+        return total * 1;
+      }
+    });
+
+  });
+  </script>
+</body>
+</html>

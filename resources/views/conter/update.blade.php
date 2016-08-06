@@ -1,6 +1,5 @@
-@extends('public.hindex')
-@section('main')
-
+@extends('conter.conter')
+@section('right')
 		<div class="w3l_banner_nav_right">
 <!-- login -->
 		<div class="w3_login">
@@ -9,9 +8,6 @@
 				<div class="module form-module">
 				  
 				  <div class="form">
-				  <div class="toggle"><i class="fa fa-times fa-pencil"></i>
-					<div class="tooltip">点击我注册</div>
-				  </div>
 					<h2>请您登录</h2>
 					 @if(session('err'))
             		<div class="alert alert-warning alert-dismissable">             	        
@@ -19,21 +15,6 @@
             		{{session('err')}}
             		</div>
             		@endif
-					<form action="/register/login" method="post">
-					  <input type="text" name="username" placeholder="账号:" required=" " onblur="demo()" id="zhang">
-					  <div>
-					  	<span id="ss"></span>
-					  </div>
-					  <input type="password" name="password" placeholder="密码:" required=" " onblur="mima()" id="pa">
-						<div>
-							<span id="an"></span>
-						</div>
-					  {{csrf_field()}}
-
-					  <input type="submit" value="登录">
-					</form>
-				  <div class="cta" style="margin-top:30px"><a href="/forget">忘记密码?</a></div>
-				  
 				  </div>
 				  <div class="form">
 				  @if(session('error'))
@@ -61,51 +42,36 @@
 					<strong>{{session('ror')}}</strong> 
 				</div>
 					@endif
-					<h2>注册</h2>
-					<form action="/register" method="post">
-					<div class="toggle"><i class="fa fa-times fa-pencil"></i>
-					<div class="tooltip"><h5>点击登陆</h5></div>
-				  </div>
+					<h2>修改个人信息</h2>
+					<form action="/update" method="post">
+					
 					  <div class="form-group"> 
             		  <div class="col-md-12">
-					  <input type="text" name="username" placeholder="账户:" required=" " onblur="fun()" id="uid">
+					  <input type="text" value="{{$rows['username']}}" name="username" required=" " onblur="fun()" id="uid">
+					 <div>
+					  <span id="span"></span>
+					 </div>
+					  </div>	
+					  </div>
+					 
+					 <div class="form-group"> 
+            		  <div class="col-md-12">
+					  <input type="text" value="{{$rows['name']}}" name="name" placeholder="昵称:" required=" " onblur="fun()" id="uid">
 					 <div>
 					  <span id="span"></span>
 					 </div>
 					  </div>
 					  </div>
-					 
-					  <div class="form-group"> 
-            		  <div class="col-md-12">
-					  <input type="password" name="password" placeholder="密码：" required=" " onblur="func()" id="ui">
-					   <div>
-					  <span id="spa"></span>
-					 </div>
-					  </div>
-					  </div>
-					 
-					  <div class="form-group"> 
-            		  <div class="col-md-12">
-					  <input type="password" name="repassword" placeholder="确认密码" required=" ">
-					  </div>
-					  </div>
-					 
-					  <div class="form-group"> 
-            		  <div class="col-md-12">
-					  <input type="radio" name="sex" value="m" required=" ">男
-					  <input type="radio" name="sex" value="w" required=" ">女
-					  </div>
-					  </div>
 					
 					  <div class="form-group"> 
             		  <div class="col-md-12">
-					  <input type="text" name="address" placeholder="输入地址" required=" ">
+					  <input type="text" value="{{$rows['address']}}" name="address" placeholder="输入地址" required=" ">
 					  </div>
 					  </div>
 
 					  <div class="form-group"> 
             		  <div class="col-md-12">						
-					  <input type="text" name="phone" placeholder="输入电话" required=" " 
+					  <input type="text" value="{{$rows['phone']}}" name="phone" placeholder="输入电话" required=" " 
 					  onblur="funct()" id="phone">
 					  <div>
 					  	<span id="sp"></span>
@@ -115,19 +81,13 @@
 
 					  <div class="form-group"> 
             		  <div class="col-md-12">						
-					  <input type="email" name="email" placeholder="输入邮箱 如:123@qq.com" required=" ">
+					  <input type="email" value="{{$rows['email']}}"	name="email" placeholder="输入邮箱 如:123@qq.com" required=" ">
 					  </div>
 					  </div>
-
-           			  <div class="form-group">
-            		  <div class="col-md-6" style="margin-left:0px"> 
-					  <input type="text" name="vcode" placeholder="验证码" required=" " class="form-control input-lg">
-					  </div>
-					  <img src="{{url('/vcode')}}" style="margin-top:2px" onclick="this.src=this.src+'?a=1'">
-					  </div>
+						<input type="hidden" name="id" value="{{$rows['id']}}">
 					  {{csrf_field()}}
 					  <div  style="margin-top:30px">
-					  <input type="submit" value="注册">
+					  <input type="submit" value="确认修改">
 					  </div>
 					</form>
 				  </div>

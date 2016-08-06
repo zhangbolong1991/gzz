@@ -112,4 +112,12 @@ class MylinksController extends Controller
             }
         }
     }
+
+    // 前台加载链接
+    public function link(){
+       $list=DB::table('mylinks')->get();
+       // dd($list);
+       // die;
+       return view('public.hindex',['list'=>$list]);
+    }
 }

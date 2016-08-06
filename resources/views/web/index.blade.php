@@ -1,49 +1,78 @@
 @extends('public.hindex')
 @section('main')
+<style type="text/css">
+	
+	#left{
 
+		position:absolute;
+		left:500px;
+		top:420px;
+		cursor:pointer;
+
+	}
+	#right{
+		position:absolute;
+		left:1450px;
+		top:420px;
+		cursor:pointer;
+
+	}
+</style>
 		<div class="w3l_banner_nav_right">
 			<section class="slider">
-				<div class="flexslider">
-					<ul class="slides">
-						<li>
-							<div class="w3l_banner_nav_right_banner">
+				<div  style="border:1px solid red">
+					<!-- <ul class="slides"> -->
+						<!-- <li> -->
+							<!-- <div class="w3l_banner_nav_right_banner"> -->
 								<!-- <h3>Make your <span>food</span> with Spicy.</h3> -->
-								<div class="more">
+								<!-- <div class="more"> -->
 									<!-- <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a> -->
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="w3l_banner_nav_right_banner1">
+								<!-- </div> -->
+							<!-- </div> -->
+						<!-- </li> -->
+						<!-- <li> -->
+							<!-- <div class="w3l_banner_nav_right_banner1"> -->
 								<!-- <h3>Make your <span>food</span> with Spicy.</h3> -->
-								<div class="more">
+								<!-- <div class="more"> -->
 									<!-- <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a> -->
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="w3l_banner_nav_right_banner2">
+								<!-- </div> -->
+							<!-- </div> -->
+						<!-- </li> -->
+						<!-- <li> -->
+						
+						
+						<a  href="javascript:fun('-')" id="left"><img src="/h/images/left.png" style="width:50px;height:50px;filter:alpha(opacity=10);"></a>
+						<a href="javasrcipt:fun('+')" id="right"><img src="/h/images/right.png" style="width:50px;height:50px" ></a>
+						<div id="img">
+						<img src="/h/images/1.jpg" style="width:100%;height:100%;border:5px solid green">
+						<img src="/h/images/2.jpg" style="width:100%;display:none">
+						<img src="/h/images/3.jpg" style="width:100%;display:none">
+						</div>
+						
+							<!-- <div class="w3l_banner_nav_right_banner2"> -->
 								<!-- <h3>upto <i>50%</i> off.</h3> -->
-								<div class="more">
+								<!-- <div class="more"> -->
 									<!-- <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a> -->
-								</div>
-							</div>
-						</li>
-					</ul>
+								<!-- </div> -->
+							<!-- </div> -->
+						<!-- </li> -->
+					<!-- </ul> -->
 				</div>
 			</section>
 			<!-- flexSlider -->
 				<link rel="stylesheet" href="/h/css/flexslider.css" type="text/css" media="screen" property="" />
 				<script defer src="/h/js/jquery.flexslider.js"></script>
 				<script type="text/javascript">
-				$(window).load(function(){
-				  $('.flexslider').flexslider({
-					animation: "slide",
-					start: function(slider){
-					  $('body').removeClass('loading');
-					}
-				  });
-				});
+				m=0;
+				$list=document.getElementsByName('img')
+				// $(window).load(function(){
+				//   $('.flexslider').flexslider({
+				// 	animation: "slide",
+				// 	start: function(slider){
+				// 	  $('body').removeClass('loading');
+				// 	}
+				//   });
+				// });
 			  </script>
 			<!-- //flexSlider -->
 		</div>
