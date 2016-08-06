@@ -59,10 +59,11 @@ Route::get('/web/index','WebController@index');
 Route::get('/web/list/{id}','ListController@index');
 //购物车
 Route::get('/web/cart','CartController@index');
-//列表页添加购物车
+//添加购物车
 Route::post('/web/addcart','CartController@add');
 //购物车删除加减
 Route::get('/web/delcart','CartController@del');
+Route::get('/web/dels','CartController@dels');
 Route::get('/web/downcart','CartController@downcart');
 Route::get('/web/upcart','CartController@upcart');
 

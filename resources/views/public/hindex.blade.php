@@ -43,8 +43,9 @@
 			<a href="products.html">今日特价,high翻全场!</a>
 		</div>
 		<div class="w3l_search">
-			<form action="#" method="post">
-				<input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+			<form action="/web/list/2" method="get">
+				<!-- <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required=""> -->
+				<input type="text"  value="华为" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '华为';}" required="">
 				<input type="submit" value=" ">
 			</form>
 		</div>
@@ -71,8 +72,9 @@
 												<td align="center">{!!$row['goods']!!}</td>
 												<td align="center"><img src="{{$row['picname']}}" alt="" width="30px"></td>
 												<td align="center">￥{!!$row['price']!!}</td>
-												<td align="center"><input type="text" value="{{$row['num']}}" name="{{$row['id']}}" size="1px" disabled></td>
-												<td align="center">￥{!!$row['total']!!}</td>
+												<td align="center"><input type="text" value="{{$row['num']}}" name="{{$row['id']}}" size="1px" style="border:0;background:transparent;" disabled></td>
+												<td align="center">
+												<input type="text" value="￥{{$row['total']}}" id="{{$row['did']}}" size="7px" style="border:0;background:transparent;" disabled></td>
 											</tr>
 									@endforeach
 									</table>
