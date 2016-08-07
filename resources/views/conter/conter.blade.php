@@ -30,9 +30,6 @@
 		});
 	});
 </script>
-<!-- 头部为css样式站位 -->
-@section('header')
-@show
 <!-- start-smoth-scrolling -->
 </head>
 	
@@ -43,57 +40,14 @@
 			<a href="products.html">今日特价,high翻全场!</a>
 		</div>
 		<div class="w3l_search">
-			<form action="/web/seek" method="get">
-				<!-- <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required=""> -->
-				<input type="text"  value="华为" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '华为';}" name="name" required="">
-				<input type="submit" value="">
+			<form action="#" method="post">
+				<input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+				<input type="submit" value=" ">
 			</form>
 		</div>
 		<div class="product_list_header">  
 			<div style="cursor: pointer;">
-				<span class="glyphicon glyphicon-shopping-cart"  data-toggle="modal" data-target="#Mymodal"></span>
-						<!-- Modal -->
-						<div class="modal fade" id="Mymodal">
-							<div class="modal-dialog">
-
-							<!-- 内容区 -->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close"data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">最新添加的商品</h4>
-									</div>
-
-									<!-- body -->
-									@if(session('cart'))
-									<div class="modal-body">
-									<table class="table table-bordered table-hover table-striped table-condensed table-responsive">
-									@foreach(session('cart') as $row)
-											<tr>
-												<td align="center">{!!$row['goods']!!}</td>
-												<td align="center"><img src="{{$row['picname']}}" alt="" width="30px"></td>
-												<td align="center">￥{!!$row['price']!!}</td>
-												<td align="center"><input type="text" value="{{$row['num']}}" name="{{$row['id']}}" size="1px" style="border:0;background:transparent;" disabled></td>
-												<td align="center">
-												<input type="text" value="￥{{$row['total']}}" id="{{$row['did']}}" size="7px" style="border:0;background:transparent;" disabled></td>
-											</tr>
-									@endforeach
-									</table>
-									</div>
-									@else
-									<div class="modal-body">
-										<div class="alert alert-danger">
-											空空如也~
-										</div>
-									</div>
-									@endif
-									<!-- footer -->
-									<div class="modal-footer">
-										<button class="btn btn-danger" data-dismiss="modal">关闭</button>
-										<a href="/web/cart" class="btn btn-success">去购物车</a>
-									</div>
-								</div>
-							</div>
-						</div>
+				<span class="glyphicon glyphicon-shopping-cart my-cart-icon"><i class="badge badge-notify my-cart-badge"></i></span>
 			</div>
 		</div>
 		<div class="w3l_header_right">
@@ -149,27 +103,10 @@
 			</div>
 			<div class="w3ls_logo_products_left1">
 				<ul class="special_items">
-				@if(session('nav'))
-					@foreach(session('nav') as $row)
-			        <li class="dropdown"><a href="/web/list?id={{$row['id']}}">{{$row['name']}} <i class="fa fa-angle-down"></i> </a> 
-						@if($row['sub'])
-						<ul class="dropdown-menu drp-mnu"> 
-							@foreach($row['sub'] as $v)
-							<li class="dropdown-submenu"> <a href="/web/list?id={{$v['id']}}">{{$v['name']}}</a> 
-								<!-- @if($v['sub'])
-								<ul class="dropdown-menu"> 
-									@foreach($v['sub'] as $r)
-									<li><a href="/dd/{{$r['id']}}">{{$r['name']}}</a></li> 
-									@endforeach            
-								</ul>
-								@endif -->
-							</li> 
-							@endforeach
-						</ul>
-						@endif
-						</li>  
-			        @endforeach
-				@endif
+					<li><a href="">手机</a><i></i></li>
+					<li><a href="">其他商品</a><i></i></li>
+					<li><a href="about.html">关于我们</a><i></i></li>
+					<li><a href="services.html">服务</a></li>
 				</ul>
 			</div>
 			<!-- <div class="w3ls_logo_products_left1">
@@ -187,7 +124,7 @@
 	<div class="products-breadcrumb">
 		<div class="container">
 			<ul>
-				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/web/index">首页</a><span>|</span></li>
+				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/home">首页</a><span>|</span></li>
 			</ul>
 		</div>
 	</div>
@@ -208,18 +145,24 @@
 			   </div> 
 			   <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-					@if(session('company'))
 					<ul class="nav navbar-nav nav_1">
-						@foreach(session('company') as $com)
-						<li><a href="/web/lefts?company={{$com}}">{{$com}}</a></li>
-						@endforeach
+						<li><a href="/vita">个人信息</a></li>
+						<li><a href="household.html">我的订单</a></li>
+						
+						<li><a href="kitchen.html">我的购物车</a></li>
+						<li><a href="pet.html">我关注的</a></li>
+						<li><a href="pet.html">站内信</a></li>
+						<li><a href="short-codes.html">浏览历史</a></li>
+						
 					</ul>
-					@endif
 				 </div><!-- /.navbar-collapse -->
 			</nav>
 		</div>
-@section('main')
+
+<div style="width:100%;height:400px;border:1px">
+@section('right')
 @show
+</div>
 
 <!-- newsletter -->
 	<div class="newsletter">
@@ -316,5 +259,77 @@
 	</div>
 <!-- //footer -->
 
-@section('js')
-@show
+<!-- Bootstrap Core JavaScript -->
+<script src="/h/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->/h/
+<script type='text/javascript' src="/h/js/jquery.mycart.js"></script>
+<script type="text/javascript">
+  $(function () {
+
+    var goToCartIcon = function($addTocartBtn){
+      var $cartIcon = $(".my-cart-icon");
+      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+      $addTocartBtn.prepend($image);
+      var position = $cartIcon.position();
+      $image.animate({
+	  
+      }, 500 , "linear", function() {
+        $image.remove();
+      });
+    }
+
+    $('.my-cart-btn').myCart({
+      classCartIcon: 'my-cart-icon',
+      classCartBadge: 'my-cart-badge',
+      affixCartIcon: true,
+      checkoutCart: function(products) {
+        $.each(products, function(){
+          console.log(this);
+        });
+      },
+      clickOnAddToCart: function($addTocart){
+        goToCartIcon($addTocart);
+      },
+      getDiscountPrice: function(products) {
+        var total = 0;
+        $.each(products, function(){
+          total += this.quantity * this.price;
+        });
+        return total * 1;
+      }
+    });
+
+  });
+  </script>
+</body>
+</html>

@@ -10,59 +10,10 @@
 				  
 				  <div class="form">
 				  <div class="toggle"><i class="fa fa-times fa-pencil"></i>
-					<div class="tooltip">点击我注册</div>
+					
 				  </div>
-					<h2>请您登录</h2>
-					 @if(session('err'))
-            		<div class="alert alert-warning alert-dismissable">             	        
- 
-            		{{session('err')}}
-            		</div>
-            		@endif
-					<form action="/register/login" method="post">
-					  <input type="text" name="username" placeholder="账号:" required=" " onblur="demo()" id="zhang">
-					  <div>
-					  	<span id="ss"></span>
-					  </div>
-					  <input type="password" name="password" placeholder="密码:" required=" " onblur="mima()" id="pa">
-						<div>
-							<span id="an"></span>
-						</div>
-					  {{csrf_field()}}
-
-					  <input type="submit" value="登录">
-					</form>
-				  <div class="cta" style="margin-top:30px"><a href="/forget">忘记密码?</a></div>
-				  
-				  </div>
-				  <div class="form">
-				  @if(session('error'))
-            		<div class="alert alert-warning alert-dismissable">
-               	        
-                    
-            		{{session('error')}}
-            		</div>
-            		@endif
-            	   @if (count($errors) > 0)
-                    <div class="alert alert-warning alert-dismissable">
-
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                    </div>
-                    @endif
-
-                    @if(session('ror'))
-                    <div class="alert alert-info" role="alert">
-					<strong>{{session('ror')}}</strong> 
-				</div>
-					@endif
 					<h2>注册</h2>
-					<form action="/register" method="post">
+				<form action="/register" method="post">
 					<div class="toggle"><i class="fa fa-times fa-pencil"></i>
 					<div class="tooltip"><h5>点击登陆</h5></div>
 				  </div>
@@ -129,7 +80,61 @@
 					  <div  style="margin-top:30px">
 					  <input type="submit" value="注册">
 					  </div>
+					</form>					  
+				  </div>
+				  <div class="form">
+				  @if(session('error'))
+            		<div class="alert alert-warning alert-dismissable">
+               	        
+                    
+            		{{session('error')}}
+            		</div>
+            		@endif
+            	   @if (count($errors) > 0)
+                    <div class="alert alert-warning alert-dismissable">
+
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                    </div>
+                    @endif
+
+                    @if(session('ror'))
+                    <div class="alert alert-info" role="alert">
+					<strong>{{session('ror')}}</strong> 
+				</div>
+					@endif
+					
+
+					<h2>登陆</h2>
+ 					@if(session('err'))
+            		<div class="alert alert-warning alert-dismissable">             	        
+ 
+            		{{session('err')}}
+            		</div>
+            		@endif
+					<form action="/register/login" method="post">
+					<div class="toggle"><i class="fa fa-times fa-pencil"></i>
+					<div class="tooltip">点击我注册</div>
+				  </div>
+					  <input type="text" name="username" placeholder="账号:" required=" " onblur="demo()" id="zhang">
+					  <div>
+					  	<span id="ss"></span>
+					  </div>
+					  <input type="password" name="password" placeholder="密码:" required=" " onblur="mima()" id="pa">
+						<div>
+							<span id="an"></span>
+						</div>
+					  {{csrf_field()}}
+
+					  <input type="submit" value="登录">
 					</form>
+				  <div class="cta" style="margin-top:30px"><a href="/forget">忘记密码?</a></div>
+
 				  </div>
 				</div>
 			</div>

@@ -41,7 +41,17 @@ Route::get('/admin/logout','LoginController@logout');
 Route::post('/admin/login','LoginController@dologin');
 //验证码
 Route::get('/vcode','CommonController@code'); 
-
+// 个人中心路由组
+Route::group(['middleware'=>'log'],function(){
+	//加载个人中心模板
+	Route::get('/center','RegisterController@index');
+	// 个人信息
+	Route::get('/vita','RegisterController@vita');
+	// 点击修改个人信息
+	Route::get('/update','RegisterController@update');
+	// 执行修改个人信息
+	Route::post('/update','RegisterController@doupdate');
+});
 //前台注册
 Route::get('/register','RegisterController@register');
 // 执行注册
@@ -50,9 +60,24 @@ Route::post('/register','RegisterController@doregister');
 Route::get('/jihuo','RegisterController@jihuo');
 //测试邮件发送
 Route::get('/send','RegisterController@send');
-//=邮箱激活
+//邮箱激活
 Route::get('/jihuo','RegisterController@jihuo');
-
+// 加载会员登陆模板
+Route::get('/log','RegisterController@log');
+// 执行会员登录
+Route::post('/register/login','RegisterController@login');
+// 执行会员退出
+Route::get('logout','RegisterController@logout');
+// 加载发送密码找回模板
+Route::get('/forget','RegisterController@forget');
+// 发送邮件
+Route::post('/forget','RegisterController@doforget');
+// 加载密码重置模板
+Route::get('/reset','RegisterController@reset');
+// 执行密码重置
+Route::post('/reset','RegisterController@doreset');
+// 前台友情链接
+Route::get('/mylink','MylinksController@link');
 //前台
 Route::get('/web/index','WebController@index');
 //列表页
@@ -77,3 +102,8 @@ Route::get('/web/detail/{id}','DetailController@index');
 //城市级联
 Route::get('/csjl','CartController@csjl');
 Route::get('/s','CartController@s');
+
+//地址添加
+Route::any('/orderinsert','OrderController@insert')->middleware('log');
+Route::post('/addressinsert','AddressController@insert');
+Route::post('/order/create','OrderController@create');

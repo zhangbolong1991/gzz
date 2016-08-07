@@ -30,16 +30,22 @@ class LoginController extends Controller
   			]);
   		// 检测数据
   		$user=DB::table('users')->where('username',$request->input('username'))->first();
+      $data=$user['status'];
   		$password=$user['password'];
 
   		
       // 密码检测
-  		if(Hash::check($request->input('password'),$password)){
-    		session(['username'=>$user['username']]);
-  			return redirect('/admin')->with('success','登陆成功');
-  		}else{
-  			return back()->with('error','登录失败');
-  		}
+      if($data==2){
+          if(Hash::check($request->input('password'),$password)){
+          session(['username'=>$user['username']]);
+          return redirect('/admin')->with('success','登陆成功');
+        }else{
+          return back()->with('error','登录失败');
+        }
+      }else{
+        return back()->with('error','没有权限');
+      }
+  		
   	}
     // 销毁session
     public function logout(Request $request){

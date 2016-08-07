@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 class WebController extends Controller
 {
+
     //递归获取子级
     public static function getcatesbypid($pid){
         //获取数据
@@ -62,4 +63,5 @@ class WebController extends Controller
         //解析模板
         return view('web.index',['store'=>$store,'num'=>$num,'clicknum'=>$clicknum,'new'=>$new,'adver'=>$adver]);
     }
+
 }

@@ -1,49 +1,122 @@
 @extends('public.hindex')
 @section('main')
+<style type="text/css">
+	
+	#left{
 
+		position:absolute;
+		left:500px;
+		top:420px;
+		cursor:pointer;
+
+	}
+	#right{
+		position:absolute;
+		left:1450px;
+		top:420px;
+		cursor:pointer;
+
+	}
+</style>
 		<div class="w3l_banner_nav_right">
 			<section class="slider">
-				<div class="flexslider">
-					<ul class="slides">
-						<li>
-							<div class="w3l_banner_nav_right_banner">
+				<div>
+					<!-- <ul class="slides"> -->
+						<!-- <li> -->
+							<!-- <div class="w3l_banner_nav_right_banner"> -->
 								<!-- <h3>Make your <span>food</span> with Spicy.</h3> -->
-								<div class="more">
+								<!-- <div class="more"> -->
 									<!-- <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a> -->
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="w3l_banner_nav_right_banner1">
+								<!-- </div> -->
+							<!-- </div> -->
+						<!-- </li> -->
+						<!-- <li> -->
+							<!-- <div class="w3l_banner_nav_right_banner1"> -->
 								<!-- <h3>Make your <span>food</span> with Spicy.</h3> -->
-								<div class="more">
+								<!-- <div class="more"> -->
 									<!-- <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a> -->
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="w3l_banner_nav_right_banner2">
+								<!-- </div> -->
+							<!-- </div> -->
+						<!-- </li> -->
+						<!-- <li> -->
+						
+						
+						<a  href="javascript:fun('-')" id="left"><img src="/h/images/left.png" style="width:50px;height:50px;filter:alpha(opacity=10);"></a>
+						<a href="javascript:fun('+')" id="right"><img src="/h/images/right.png" style="width:50px;height:50px" ></a>
+						<div id="img" style="height:460px;">
+						<img src="/h/images/1.jpg" style="width:100%;height:100%;display:none" name="img">
+						<img src="/h/images/2.jpg" name="img" style="width:100%;height:100%;display:none">
+						<img src="/h/images/3.jpg" name="img" style="width:100%;height:100%;display:block">
+						</div>
+						
+							<!-- <div class="w3l_banner_nav_right_banner2"> -->
 								<!-- <h3>upto <i>50%</i> off.</h3> -->
-								<div class="more">
+								<!-- <div class="more"> -->
 									<!-- <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a> -->
-								</div>
-							</div>
-						</li>
-					</ul>
+								<!-- </div> -->
+							<!-- </div> -->
+						<!-- </li> -->
+					<!-- </ul> -->
 				</div>
 			</section>
 			<!-- flexSlider -->
 				<link rel="stylesheet" href="/h/css/flexslider.css" type="text/css" media="screen" property="" />
 				<script defer src="/h/js/jquery.flexslider.js"></script>
+				<script defer src="/h/js/jquery-1.8.3.min.js"></script>
 				<script type="text/javascript">
-				$(window).load(function(){
-				  $('.flexslider').flexslider({
-					animation: "slide",
-					start: function(slider){
-					  $('body').removeClass('loading');
+				m=0;
+				//获取图片集合对象(根据指定的名称获取图片元素集合)
+				list=document.getElementsByName('img');
+				// alert(list);
+				function fun(b){
+					//清除定时器
+					clearTimeout(mytime);
+					//switch
+					switch(b){
+						case "-": 
+						m=m-2;
+						if(m<-1){
+						m=1;
+						}
+						break;
+						case "+":
+						m=m;
+						if(m>2){
+							m=0;
+						}
+						break;
 					}
-				  });
-				});
+					running();
+
+				}
+				function show(m){
+					//遍历
+					for(var i=0;i<list.length;i++){
+						if(m==i){
+							list[i].style.display="block";
+						}else{
+							list[i].style.display="none";
+						}
+					}
+				}
+				function running(){
+					m++;
+					// alert(m);
+					if(m==3){
+						m=0;
+					}
+					show(m);
+					mytime=setTimeout(running,1500);
+				}
+				running();
+				// $(window).load(function(){
+				//   $('.flexslider').flexslider({
+				// 	animation: "slide",
+				// 	start: function(slider){
+				// 	  $('body').removeClass('loading');
+				// 	}
+				//   });
+				// });
 			  </script>
 			<!-- //flexSlider -->
 		</div>
@@ -98,7 +171,7 @@
 								<figure>
 									<div class="snipcart-item block">
 										<div class="snipcart-thumb">
-											<a href="/web/detail"><img src="{{$row['picname']}}" alt=" " class="img-responsive" /></a>
+											<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" alt=" " class="img-responsive" /></a>
 											<p style="text-align:center;">{{$row['goods']}}</p>
 											<h4 style="text-align:center;">￥{{$row['price']}}<span>￥{{floor($row['price']*1.2)}}</span></h4>
 										</div>
