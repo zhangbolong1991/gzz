@@ -2,294 +2,101 @@
 
 @section('main')
 		<div class="w3l_banner_nav_right">
-			<div class="w3l_banner_nav_right_banner8">
-				<h3>Best Deals For New Products<span class="blink_me"></span></h3>
-			</div>
+			<!-- 广告 -->
+			<!-- <div >
+				<img src="/uploads/advertisements/" width="100%" alt="">
+			</div> -->
+					<!-- 筛选条件 -->
+					<div id="main-rightone">
+						<span> 商品筛选</span>
+					</div>
+					<div class="clear"></div>
+					<div class="main-rightthree">
+						<ul>
+							<li><a href="#">华东区</a></li>
+							<li><a href="#">华南区</a></li>
+							<li><a href="#">华中区</a></li>
+							<li><a href="#">华北区</a></li>
+							<li><a href="#">东北区</a></li>
+							<li><a href="#">西北区</a></li>
+							<li><a href="#">西南区</a></li>
+						</ul>
+						<span>区域:</span>
+					</div>
+					<div class="main-rightthree">
+						<ul>
+							<li><a href="#">0-500</a></li>
+							<li><a href="#">500-1000</a></li>
+							<li><a href="#">1000-2000</a></li>
+							<li><a href="#">2000-3000</a></li>
+							<li><a href="#">3000-4000</a></li>
+							<li><a href="#">4000以上</a></li>
+						</ul>
+						<span>价格:</span>
+					</div>
+					
+					<div class="main-rightthree">
+						<ul>
+							<li><a href="#">按销量</a></li>
+							<li><a href="#">按库存</a></li>
+							<li><a href="#">按厂家</a></li>
+							<li><a href="#">按添加时间</a></li>
+						</ul>
+						<span>排序:</span>
+					</div>
+					<div class="main-rightthree">
+						<ul>
+							<li><a href="#">发货地点</a></li>
+							<li><a href="#">配送快递</a></li>
+							<li><a href="#">更多<<<</a></li>
+						</ul>
+						<span>其他条件:</span>
+					</div>
+			
 			<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
-				<h3 class="w3l_fruit">Bread & Bakery</h3>
+				<!-- <h3 class="w3l_fruit">列表页</h3> -->
 				<div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
+					@foreach($goods as $row)
+					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd" style="margin-top:20px;">
 						<div class="hover14 column">
 						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
 							<div class="agile_top_brand_left_grid_pos">
 								<img src="images/offer.png" alt=" " class="img-responsive" />
 							</div>
 							<div class="agile_top_brand_left_grid1">
+								<form action="/web/addcart" method="post">
 								<figure>
 									<div class="snipcart-item block">
 										<div class="snipcart-thumb">
-											<a href="/web/detail"><img src="/h/images/37.png" alt=" " class="img-responsive" /></a>
-											<p>raisin rolls  (2 in 1 pack)</p>
-											<h4>$4.00 <span>$5.00</span></h4>
+											<a href="/web/detail"><img src="{{$row['picname']}}" alt=" " class="img-responsive" /></a>
+											<p style="text-align:center;">{{$row['goods']}}</p>
+											<h4 style="text-align:center;">￥{{$row['price']}}</h4>
 										</div>
 										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="37" data-name="Cinnamon raisin rolls" data-summary="summary 37" data-price="4.00" data-quantity="1" data-image="/h/images/37.png">Add to Cart</button>
+											<button type="submit" class="btn my-cart-btn hvr-sweep-to-right" data-id="{{$row['id']}}" data-name="{{$row['goods']}}" data-summary="summary {{$row['id']}}" data-price="{{$row['price']}}" data-quantity="1" data-image="{{$row['picname']}}">加入购物车</button>
 										</div>
+										<input type="hidden" name="id" value="{{$row['id']}}">
+										{{csrf_field()}}
 									</div>
 								</figure>
+								</form>
 							</div>
 						</div>
 						</div>
 					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/38.png" alt=" " class="img-responsive" /></a>
-											<p>butter croissants (50 gm)</p>
-											<h4>$2.00 <span>$4.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="38" data-name="Butter croissants" data-summary="summary 38" data-price="2.00" data-quantity="1" data-image="/h/images/38.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/39.png" alt=" " class="img-responsive" /></a>
-											<p>bread wheat pita (250 gm)</p>
-											<h4>$3.00 <span>$5.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="39" data-name="Bread wheat pita" data-summary="summary 39" data-price="3.00" data-quantity="1" data-image="/h/images/39.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/40.png" alt=" " class="img-responsive" /></a>
-											<p>hot dog roll (150 gm)</p>
-											<h4>$4.00 <span>$5.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="40" data-name="Hot dog roll" data-summary="summary 40" data-price="4.00" data-quantity="1" data-image="/h/images/40.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
+					@endforeach
 					<div class="clearfix"> </div>
 				</div>
-				<div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/41.png" alt=" " class="img-responsive" /></a>
-											<p>masala bread (500 gm)</p>
-											<h4>$3.00 <span>$5.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="41" data-name="Masala bread" data-summary="summary 41" data-price="3.00" data-quantity="1" data-image="/h/images/41.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/42.png" alt=" " class="img-responsive" /></a>
-											<p>rolls chocolate (3 pcs)</p>
-											<h4>$5.00 <span>$8.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="42" data-name="Rolls chocolate" data-summary="summary 42" data-price="5.00" data-quantity="1" data-image="/h/images/42.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="tag"><img src="images/tag.png" alt=" " class="img-responsive" /></div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/43.png" alt=" " class="img-responsive" /></a>
-											<p>wheat masala pav (500 gm)</p>
-											<h4>$6.00 <span>$8.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="43" data-name="Whole wheat masala pav" data-summary="summary 43" data-price="6.00" data-quantity="1" data-image="/h/images/43.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/44.png" alt=" " class="img-responsive" /></a>
-											<p>baked - garlic bread (200 gm)</p>
-											<h4>$6.00 <span>$8.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="44" data-name="Baked - garlic bread" data-summary="summary 44" data-price="6.00" data-quantity="1" data-image="/h/images/44.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="clearfix"> </div>
+				<!-- 分页 -->
+				<div style="margin:100px 400px;">
+					<div class="dataTables_paginate paging_full_numbers" id="pages">
+				      {!!$goods->render()!!}
+				     </div>
 				</div>
-				<div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/45.png" alt=" " class="img-responsive" /></a>
-											<p>eggless walnut (250 gm)</p>
-											<h4>$6.00 <span>$8.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="45" data-name="Eggless banana walnut" data-summary="summary 45" data-price="6.00" data-quantity="1" data-image="/h/images/45.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/46.png" alt=" " class="img-responsive" /></a>
-											<p>assorted muffins (200 gm)</p>
-											<h4>$4.00 <span>$5.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="46" data-name="Assorted muffins" data-summary="summary 46" data-price="4.00" data-quantity="1" data-image="/h/images/46.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="tag"><img src="images/tag.png" alt=" " class="img-responsive" /></div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/47.png" alt=" " class="img-responsive" /></a>
-											<p>bagels - sesame (200 gm)</p>
-											<h4>$6.00 <span>$7.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="47" data-name="Bagels - sesame" data-summary="summary 47" data-price="6.00" data-quantity="1" data-image="/h/images/47.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="col-md-3 w3ls_w3l_banner_left">
-						<div class="hover14 column">
-						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/48.png" alt=" " class="img-responsive" /></a>
-											<p>flax & walnut loaf (400 gm)</p>
-											<h4>$7.00 <span>$9.00</span></h4>
-										</div>
-										<div class="snipcart-details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="48" data-name="Flax & walnut loaf" data-summary="summary 48" data-price="7.00" data-quantity="1" data-image="/h/images/48.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-						</div>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
+				
 			</div>
 		</div>
+
 		<div class="clearfix"></div>
 	</div>
 <!-- //banner -->

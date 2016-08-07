@@ -76,9 +76,26 @@ Route::post('/forget','RegisterController@doforget');
 Route::get('/reset','RegisterController@reset');
 // 执行密码重置
 Route::post('/reset','RegisterController@doreset');
-
 // 前台友情链接
 Route::get('/mylink','MylinksController@link');
 //前台
-Route::controller('/home','WebController');
+Route::get('/web/index','WebController@index');
+//列表页
+Route::get('/web/list/{id}','ListController@index');
+//购物车
+Route::get('/web/cart','CartController@index');
+//添加购物车
+Route::post('/web/addcart','CartController@add');
+//购物车删除加减
+Route::get('/web/delcart','CartController@del');
+Route::get('/web/dels','CartController@dels');
+Route::get('/web/downcart','CartController@downcart');
+Route::get('/web/upcart','CartController@upcart');
 
+//前台详情页
+// Route::controller('/web/detail','DetailController');
+Route::get('/web/detail/{id}','DetailController@index');
+
+//城市级联
+Route::get('/csjl','CartController@csjl');
+Route::get('/s','CartController@s');

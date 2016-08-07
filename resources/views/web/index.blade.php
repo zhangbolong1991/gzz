@@ -20,7 +20,7 @@
 </style>
 		<div class="w3l_banner_nav_right">
 			<section class="slider">
-				<div  style="border:1px solid red">
+				<div>
 					<!-- <ul class="slides"> -->
 						<!-- <li> -->
 							<!-- <div class="w3l_banner_nav_right_banner"> -->
@@ -42,11 +42,11 @@
 						
 						
 						<a  href="javascript:fun('-')" id="left"><img src="/h/images/left.png" style="width:50px;height:50px;filter:alpha(opacity=10);"></a>
-						<a href="javasrcipt:fun('+')" id="right"><img src="/h/images/right.png" style="width:50px;height:50px" ></a>
-						<div id="img">
-						<img src="/h/images/1.jpg" style="width:100%;height:100%;border:5px solid green">
-						<img src="/h/images/2.jpg" style="width:100%;display:none">
-						<img src="/h/images/3.jpg" style="width:100%;display:none">
+						<a href="javascript:fun('+')" id="right"><img src="/h/images/right.png" style="width:50px;height:50px" ></a>
+						<div id="img" style="height:460px;">
+						<img src="/h/images/1.jpg" style="width:100%;height:100%;display:none" name="img">
+						<img src="/h/images/2.jpg" name="img" style="width:100%;height:100%;display:none">
+						<img src="/h/images/3.jpg" name="img" style="width:100%;height:100%;display:block">
 						</div>
 						
 							<!-- <div class="w3l_banner_nav_right_banner2"> -->
@@ -62,9 +62,53 @@
 			<!-- flexSlider -->
 				<link rel="stylesheet" href="/h/css/flexslider.css" type="text/css" media="screen" property="" />
 				<script defer src="/h/js/jquery.flexslider.js"></script>
+				<script defer src="/h/js/jquery-1.8.3.min.js"></script>
 				<script type="text/javascript">
 				m=0;
-				$list=document.getElementsByName('img')
+				//获取图片集合对象(根据指定的名称获取图片元素集合)
+				list=document.getElementsByName('img');
+				// alert(list);
+				function fun(b){
+					//清除定时器
+					clearTimeout(mytime);
+					//switch
+					switch(b){
+						case "-": 
+						m=m-2;
+						if(m<-1){
+						m=1;
+						}
+						break;
+						case "+":
+						m=m;
+						if(m>2){
+							m=0;
+						}
+						break;
+					}
+					running();
+
+				}
+				function show(m){
+					//遍历
+					for(var i=0;i<list.length;i++){
+						if(m==i){
+							list[i].style.display="block";
+						}else{
+							list[i].style.display="none";
+						}
+					}
+				}
+				function running(){
+					m++;
+					// alert(m);
+					if(m==3){
+						m=0;
+					}
+					show(m);
+					mytime=setTimeout(running,1500);
+				}
+				running();
 				// $(window).load(function(){
 				//   $('.flexslider').flexslider({
 				// 	animation: "slide",
@@ -82,7 +126,7 @@
 	<div class="banner_bottom">
 			<div class="wthree_banner_bottom_left_grid_sub">
 			</div>
-			<div class="wthree_banner_bottom_left_grid_sub1">
+			<!-- <div class="wthree_banner_bottom_left_grid_sub1">
 				<div class="col-md-4 wthree_banner_bottom_left">
 					<div class="wthree_banner_bottom_left_grid">
 						<img src="/h/images/4.jpg" alt=" " class="img-responsive" />
@@ -108,161 +152,76 @@
 					</div>
 				</div>
 				<div class="clearfix"> </div>
-			</div>
+			</div> -->
 			<div class="clearfix"> </div>
 	</div>
 <!-- top-brands -->
 	<div class="top-brands">
 		<div class="container">
-			<h3>Hot Offers</h3>
-			<div class="agile_top_brands_grids">
-				<div class="col-md-3 top_brand_left">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="tag"><img src="/h/images/tag.png" alt=" " class="img-responsive" /></div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block" >
-										<div class="snipcart-thumb">
-											<a href="single.html"><img title=" " alt=" " src="/h/images/1.png" /></a>		
-											<p>fortune sunflower oil</p>
-											<h4>$7.99 <span>$10.00</span></h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="1" data-name="Fortune sunflower oil" data-summary="summary 1" data-price="7.99" data-quantity="1" data-image="/h/images/1.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 top_brand_left">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block" >
-										<div class="snipcart-thumb">
-											<a href="single.html"><img title=" " alt=" " src="/h/images/3.png" /></a>		
-											<p>basmati rise (5 Kg)</p>
-											<h4>$11.99 <span>$15.00</span></h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="2" data-name="Indian gate basmati rise" data-summary="summary 2" data-price="11.99" data-quantity="1" data-image="/h/images/3.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 top_brand_left">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
-							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="agile_top_brand_left_grid1">
-								<figure>
-									<div class="snipcart-item block">
-										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/2.png" alt=" " class="img-responsive" /></a>
-											<p>Pepsi soft drink (2 Ltr)</p>
-											<h4>$8.00 <span>$10.00</span></h4>
-										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="3" data-name="Pepsi soft drink bottles" data-summary="summary 3" data-price="8.00" data-quantity="1" data-image="/h/images/2.png">Add to Cart</button>
-										</div>
-									</div>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 top_brand_left">
-					<div class="hover14 column">
-						<div class="agile_top_brand_left_grid">
+			<h3>火爆优惠</h3>
+			@foreach($store as $row)
+					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd" style="margin-top:20px;">
+						<div class="hover14 column">
+						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
 							<div class="agile_top_brand_left_grid_pos">
 								<img src="/h/images/offer.png" alt=" " class="img-responsive" />
 							</div>
 							<div class="agile_top_brand_left_grid1">
+								<form action="/web/addcart" method="post">
 								<figure>
 									<div class="snipcart-item block">
 										<div class="snipcart-thumb">
-											<a href="single.html"><img src="/h/images/4.png" alt=" " class="img-responsive" /></a>
-											<p>dogs food (4 Kg)</p>
-											<h4>$9.00 <span>$11.00</span></h4>
+											<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" alt=" " class="img-responsive" /></a>
+											<p style="text-align:center;">{{$row['goods']}}</p>
+											<h4 style="text-align:center;">￥{{$row['price']}}</h4>
 										</div>
-										<div class="snipcart-details top_brand_home_details">
-											<button class="btn btn-danger my-cart-btn hvr-sweep-to-right" data-id="4" data-name="Dogs food" data-summary="summary 4" data-price="9.00" data-quantity="1" data-image="/h/images/4.png">Add to Cart</button>
+										<div class="snipcart-details">
+											<button type="submit" class="btn my-cart-btn hvr-sweep-to-right" data-id="{{$row['id']}}" data-name="{{$row['goods']}}" data-summary="summary {{$row['id']}}" data-price="{{$row['price']}}" data-quantity="1" data-image="{{$row['picname']}}">加入购物车</button>
 										</div>
+										<input type="hidden" name="id" value="{{$row['id']}}">
+										{{csrf_field()}}
 									</div>
 								</figure>
+								</form>
 							</div>
 						</div>
+						</div>
 					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
+					@endforeach
 		</div>
 	</div>
 <!-- //top-brands -->
 <!-- fresh-vegetables -->
 	<div class="fresh-vegetables">
 		<div class="container">
-			<h3>Top Products</h3>
+			<!-- 横框 -->
 			<div class="w3l_fresh_vegetables_grids">
+				<div style="width:100%;margin:5px 10px 15px;">
+					<h4>新品上市</h4>
+				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
 						<ul>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">All Brands</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">Vegetables</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">Fruits</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="drinks.html">Juices</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="pet.html">Pet Food</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="bread.html">Bread & Bakery</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="household.html">Cleaning</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">Spices</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">Dry Fruits</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">Dairy Products</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="drinks.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="pet.html">广告</a></li>						
 						</ul>
 					</div>
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
-					<div class="col-md-4 w3l_fresh_vegetables_grid">
-						<div class="w3l_fresh_vegetables_grid1">
-							<img src="/h/images/8.jpg" alt=" " class="img-responsive" />
+						@foreach($new as $row)
+						<div  style="border:1px dashed #ccc;float:left" class="col-md-2">
+							<a href="/detail/{{$row['id']}}">
+								<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" width="110px" height="120px"></a>
+								<span></span> 
+							</a>
 						</div>
-					</div>
-					<div class="col-md-4 w3l_fresh_vegetables_grid">
-						<div class="w3l_fresh_vegetables_grid1">
-							<div class="w3l_fresh_vegetables_grid1_rel">
-								<img src="/h/images/7.jpg" alt=" " class="img-responsive" />
-								<div class="w3l_fresh_vegetables_grid1_rel_pos">
-									<div class="more m1">
-										<a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="w3l_fresh_vegetables_grid1_bottom">
-							<img src="/h/images/10.jpg" alt=" " class="img-responsive" />
-							<div class="w3l_fresh_vegetables_grid1_bottom_pos">
-								<h5>Special Offers</h5>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 w3l_fresh_vegetables_grid">
-						<div class="w3l_fresh_vegetables_grid1">
-							<img src="/h/images/9.jpg" alt=" " class="img-responsive" />
-						</div>
-						<div class="w3l_fresh_vegetables_grid1_bottom">
-							<img src="/h/images/11.jpg" alt=" " class="img-responsive" />
-						</div>
-					</div>
+						@endforeach
 					<div class="clearfix"> </div>
-					<div class="agileinfo_move_text">
+					<!-- 右下角闪光提示语 -->
+					<!-- <div class="agileinfo_move_text">
 						<div class="agileinfo_marquee">
 							<h4>get <span class="blink_me">25% off</span> on first order and also get gift voucher</h4>
 						</div>
@@ -270,10 +229,91 @@
 							<span> </span>
 						</div>
 						<div class="clearfix"></div>
-					</div>
+					</div> -->
 				</div>
 				<div class="clearfix"> </div>
 			</div>
+			<!-- //横框 -->
+			<!-- 横框2-->
+			<div class="w3l_fresh_vegetables_grids">
+				<div style="width:100%;margin:5px 10px 15px;">
+					<h4>最高关注</h4>
+				</div>
+				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
+					<div class="w3l_fresh_vegetables_grid2">
+						<ul>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="drinks.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="pet.html">广告</a></li>						
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
+						@foreach($clicknum as $row)
+						<div  style="border:1px dashed #ccc;float:left" class="col-md-2">
+							<a href="/detail/{{$row['id']}}">
+								<img src="{{$row['picname']}}" width="110px" height="120px">
+								<span></span> 
+							</a>
+						</div>
+						@endforeach
+					<div class="clearfix"> </div>
+					<!-- 右下角闪光提示语 -->
+					<!-- <div class="agileinfo_move_text">
+						<div class="agileinfo_marquee">
+							<h4>get <span class="blink_me">25% off</span> on first order and also get gift voucher</h4>
+						</div>
+						<div class="agileinfo_breaking_news">
+							<span> </span>
+						</div>
+						<div class="clearfix"></div>
+					</div> -->
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<!-- //横框2-->
+			<!-- 横框3-->
+			<div class="w3l_fresh_vegetables_grids">
+				<div style="width:100%;margin:5px 10px 15px;">
+					<h4>热卖商品</h4>
+				</div>
+				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
+					<div class="w3l_fresh_vegetables_grid2">
+						<ul>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="drinks.html">广告</a></li>
+							<li><i class="fa fa-check" aria-hidden="true"></i><a href="pet.html">广告</a></li>						
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
+						@foreach($num as $row)
+						<div  style="border:1px dashed #ccc;float:left" class="col-md-2">
+							<a href="/detail/{{$row['id']}}">
+								<img src="{{$row['picname']}}" width="110px" height="120px">
+								<span></span> 
+							</a>
+						</div>
+						@endforeach
+					<div class="clearfix"> </div>
+					<!-- 右下角闪光提示语 -->
+					<!-- <div class="agileinfo_move_text">
+						<div class="agileinfo_marquee">
+							<h4>get <span class="blink_me">25% off</span> on first order and also get gift voucher</h4>
+						</div>
+						<div class="agileinfo_breaking_news">
+							<span> </span>
+						</div>
+						<div class="clearfix"></div>
+					</div> -->
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<!-- //横框3-->
 		</div>
 	</div>
 <!-- //fresh-vegetables -->
