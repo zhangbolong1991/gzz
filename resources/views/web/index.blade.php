@@ -100,7 +100,7 @@
 										<div class="snipcart-thumb">
 											<a href="/web/detail"><img src="{{$row['picname']}}" alt=" " class="img-responsive" /></a>
 											<p style="text-align:center;">{{$row['goods']}}</p>
-											<h4 style="text-align:center;">￥{{$row['price']}}</h4>
+											<h4 style="text-align:center;">￥{{$row['price']}}<span>￥{{floor($row['price']*1.2)}}</span></h4>
 										</div>
 										<div class="snipcart-details">
 											<button type="submit" class="btn my-cart-btn hvr-sweep-to-right" data-id="{{$row['id']}}" data-name="{{$row['goods']}}" data-summary="summary {{$row['id']}}" data-price="{{$row['price']}}" data-quantity="1" data-image="{{$row['picname']}}">加入购物车</button>
@@ -128,13 +128,7 @@
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
-						<ul>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="drinks.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="pet.html">广告</a></li>						
-						</ul>
+						<img src="/uploads/advertisements/{{$adver[0]['picname']}}" width="100%">
 					</div>
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
@@ -168,13 +162,7 @@
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
-						<ul>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="drinks.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="pet.html">广告</a></li>						
-						</ul>
+						<img src="/uploads/advertisements/{{$adver[1]['picname']}}" width="100%">
 					</div>
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
@@ -208,13 +196,7 @@
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
-						<ul>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="products.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="vegetables.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="drinks.html">广告</a></li>
-							<li><i class="fa fa-check" aria-hidden="true"></i><a href="pet.html">广告</a></li>						
-						</ul>
+						<img src="/uploads/advertisements/{{$adver[2]['picname']}}" width="100%">
 					</div>
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">

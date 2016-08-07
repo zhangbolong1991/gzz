@@ -40,10 +40,10 @@
 			<a href="products.html">今日特价,high翻全场!</a>
 		</div>
 		<div class="w3l_search">
-			<form action="/web/list/2" method="get">
+			<form action="/web/seek" method="get">
 				<!-- <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required=""> -->
-				<input type="text"  value="华为" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '华为';}" required="">
-				<input type="submit" value=" ">
+				<input type="text"  value="华为" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '华为';}" name="name" required="">
+				<input type="submit" value="">
 			</form>
 		</div>
 		<div class="product_list_header">  
@@ -139,11 +139,11 @@
 				<ul class="special_items">
 				@if(session('nav'))
 					@foreach(session('nav') as $row)
-			        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{{$row['name']}} <i class="fa fa-angle-down"></i> </a> 
+			        <li class="dropdown"><a href="/web/list?id={{$row['id']}}">{{$row['name']}} <i class="fa fa-angle-down"></i> </a> 
 						@if($row['sub'])
 						<ul class="dropdown-menu drp-mnu"> 
 							@foreach($row['sub'] as $v)
-							<li class="dropdown-submenu"> <a href="#">{{$v['name']}}</a> 
+							<li class="dropdown-submenu"> <a href="/web/list?id={{$v['id']}}">{{$v['name']}}</a> 
 								<!-- @if($v['sub'])
 								<ul class="dropdown-menu"> 
 									@foreach($v['sub'] as $r)
@@ -196,37 +196,13 @@
 			   </div> 
 			   <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+					@if(session('company'))
 					<ul class="nav navbar-nav nav_1">
-						<li><a href="/web/list/2">华为</a></li>
-						<li><a href="/web/list/2">三星</a></li>
-						<li class="dropdown mega-dropdown active">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">苹果<span class="caret"></span></a>				
-							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-								<div class="w3ls_vegetables">
-									<ul>	
-										<li><a href="/web/list/2">港版</a></li>
-										<li><a href="/web/list/2">国行</a></li>
-									</ul>
-								</div>                  
-							</div>				
-						</li>
-						<li><a href="/web/list/2">小米</a></li>
-						<li><a href="/web/list/2">魅族</a></li>
-						<li><a href="/web/list/2">格力</a></li>
-						<li><a href="/web/list/2">诺基亚</a></li>
-						<li><a href="/web/list/2">酷派</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">其他<span class="caret"></span></a>
-							<div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-								<div class="w3ls_vegetables">
-									<ul>
-										<li><a href="/web/list/2">国产手机</a></li>
-										<li><a href="/web/list/2">非国产手机</a></li>
-									</ul>
-								</div>                  
-							</div>	
-						</li>
+						@foreach(session('company') as $com)
+						<li><a href="/web/lefts?company={{$com}}">{{$com}}</a></li>
+						@endforeach
 					</ul>
+					@endif
 				 </div><!-- /.navbar-collapse -->
 			</nav>
 		</div>

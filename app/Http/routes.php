@@ -56,7 +56,10 @@ Route::get('/jihuo','RegisterController@jihuo');
 //前台
 Route::get('/web/index','WebController@index');
 //列表页
-Route::get('/web/list/{id}','ListController@index');
+Route::get('/web/list','ListController@index');
+Route::get('/web/seek','ListController@seek');
+Route::get('/web/lefts','ListController@lefts');
+Route::get('/web/price','ListController@price');
 //购物车
 Route::get('/web/cart','CartController@index');
 //添加购物车

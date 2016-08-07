@@ -7,30 +7,17 @@
 				<img src="/uploads/advertisements/" width="100%" alt="">
 			</div> -->
 					<!-- 筛选条件 -->
-					<div id="main-rightone">
+					<!-- <div id="main-rightone">
 						<span> 商品筛选</span>
 					</div>
 					<div class="clear"></div>
 					<div class="main-rightthree">
 						<ul>
-							<li><a href="#">华东区</a></li>
-							<li><a href="#">华南区</a></li>
-							<li><a href="#">华中区</a></li>
-							<li><a href="#">华北区</a></li>
-							<li><a href="#">东北区</a></li>
-							<li><a href="#">西北区</a></li>
-							<li><a href="#">西南区</a></li>
-						</ul>
-						<span>区域:</span>
-					</div>
-					<div class="main-rightthree">
-						<ul>
-							<li><a href="#">0-500</a></li>
-							<li><a href="#">500-1000</a></li>
-							<li><a href="#">1000-2000</a></li>
-							<li><a href="#">2000-3000</a></li>
-							<li><a href="#">3000-4000</a></li>
-							<li><a href="#">4000以上</a></li>
+							<li><a href="/web/price?l=0&h=1000">0-1000</a></li>
+							<li><a href="/web/price?l=1000&h=2000">1000-2000</a></li>
+							<li><a href="/web/price?l=2000&h=3000">2000-3000</a></li>
+							<li><a href="/web/price?l=3000&h=4000">3000-4000</a></li>
+							<li><a href="/web/price?l=4000&h=100000">4000以上</a></li>
 						</ul>
 						<span>价格:</span>
 					</div>
@@ -43,34 +30,27 @@
 							<li><a href="#">按添加时间</a></li>
 						</ul>
 						<span>排序:</span>
-					</div>
-					<div class="main-rightthree">
-						<ul>
-							<li><a href="#">发货地点</a></li>
-							<li><a href="#">配送快递</a></li>
-							<li><a href="#">更多<<<</a></li>
-						</ul>
-						<span>其他条件:</span>
-					</div>
+					</div> -->
 			
 			<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
 				<!-- <h3 class="w3l_fruit">列表页</h3> -->
 				<div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+					@if($goods)
 					@foreach($goods as $row)
 					<div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd" style="margin-top:20px;">
 						<div class="hover14 column">
 						<div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
 							<div class="agile_top_brand_left_grid_pos">
-								<img src="images/offer.png" alt=" " class="img-responsive" />
+								<img src="/h/images/offer.png" alt=" " class="img-responsive" />
 							</div>
 							<div class="agile_top_brand_left_grid1">
 								<form action="/web/addcart" method="post">
 								<figure>
 									<div class="snipcart-item block">
 										<div class="snipcart-thumb">
-											<a href="/web/detail"><img src="{{$row['picname']}}" alt=" " class="img-responsive" /></a>
+											<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" alt=" " class="img-responsive" /></a>
 											<p style="text-align:center;">{{$row['goods']}}</p>
-											<h4 style="text-align:center;">￥{{$row['price']}}</h4>
+											<h4 style="text-align:center;">￥{{$row['price']}}<span>￥{{floor($row['price']*1.2)}}</span></h4>
 										</div>
 										<div class="snipcart-details">
 											<button type="submit" class="btn my-cart-btn hvr-sweep-to-right" data-id="{{$row['id']}}" data-name="{{$row['goods']}}" data-summary="summary {{$row['id']}}" data-price="{{$row['price']}}" data-quantity="1" data-image="{{$row['picname']}}">加入购物车</button>
@@ -85,6 +65,7 @@
 						</div>
 					</div>
 					@endforeach
+					@endif
 					<div class="clearfix"> </div>
 				</div>
 				<!-- 分页 -->

@@ -46,7 +46,15 @@
         <td class=" ">{{$row['num']}}</td> 
         <td class=" ">{{$row['clicknum']}}</td> 
         <td class=" ">{{$row['addtime']}}</td> 
-        <td class=" ">{{$row['state']}}</td> 
+        <td class=" ">
+        @if($row['state']=='1')
+          新商品
+        @elseif($row['state']=='2')
+          在售
+        @elseif($row['state']=='3')
+          下架
+        @endif
+        </td>
         <td class=" "><a href="/admin/goods/del/{{$row['gid']}}" class="btn btn-success"><i class="icon-trash"></i></a> <a href="/admin/goods/edit/{{$row['gid']}}" class="btn btn-info"><i class="icon-pencil"></i></a></td> 
        </tr>
        	@endforeach
