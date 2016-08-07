@@ -1,6 +1,6 @@
 @extends('public.hindex')
 
-@section('fangdajing')
+@section('header')
 	<style type="text/css">
 	*{
 		padding:0px;

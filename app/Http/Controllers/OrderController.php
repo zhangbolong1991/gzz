@@ -7,7 +7,7 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InsertOrderRequest;
-
+use session;
 class OrderController extends Controller
 {
     // 加载添加模板
@@ -67,5 +67,64 @@ class OrderController extends Controller
     public function getDetail($id){
         $list=DB::table('detail')->where('orderid','=',$id)->paginate(2);
         return view('detail.index',['list'=>$list]);
+    }
+
+    //前台加载订单地址
+    public function insert(Request $request){
+         // dd($request->all());
+        $cart=session('cart');
+        $h=session('h');
+        dd(session());
+        // $address=AddressController::getAddress(session('id'));
+        $user=DB::table('users')->where('username','=',session('username'))->first();
+        $address=AddressController::getAddress($user['id']);
+        dd($address);
+        return view('/horder.index',['address'=>$address]);
+
+    }
+    //生成订单的方法
+    public function create(Request $request){
+        // dd($request->all());
+        $data=$request->only('address_id');//地址id
+        $data['order_num']=$this->getOrderNum();//订单号
+        // $data['user_id']=session('id');
+        $user=DB::table('users')->where('username','=',session('username'))->first();
+        $data['user_id']=$user['id']; //用户id
+        // dd(session());
+        $data['total']=session('h')['totals'];
+        // dd($data);
+        //插入数据库操作
+        $ss=DB::table('orders')->insertGetId($data);
+        if($ss){
+              // dd(session());
+            $d=[];
+            //遍历session数据
+            foreach($request->session()->get('cart') as $key=>$value){
+                // $tem['user_id']=session('id');
+                $tem['order_id']=$ss;
+                $tem['goods_id']=$value['id'];
+                $tem['name']=$value['goods'];
+                $tem['price']=$value['total'];
+                $tem['num']=$value['num'];
+                $d[]=$tem;
+            }
+            //插入数据库操作
+            // dd($d);
+            if($d){
+                $f=DB::table('detail')->insert($d);
+                if($f){
+                    echo "订单已产生";
+                }else{
+                    echo "111";
+                }
+            }
+        }else{
+            echo "000";
+        }
+    }
+
+    //生成订单号
+    public function getOrderNum(){
+        return time()+rand(1,99999);
     }
 }

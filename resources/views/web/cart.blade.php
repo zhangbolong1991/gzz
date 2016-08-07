@@ -21,7 +21,7 @@
 							<td align="center">总计</td>
 							<td align="center">操作</td>
 						</tr>
-						<form action="" method="post">
+						<form action="/orderinsert" method="post">
 						@foreach($cart as $row)
 						
 							<tr>

@@ -30,8 +30,8 @@
 		});
 	});
 </script>
-<!-- 详情页放大镜站位 -->
-@section('fangdajing')
+<!-- 头部为css样式站位 -->
+@section('header')
 @show
 <!-- start-smoth-scrolling -->
 </head>
