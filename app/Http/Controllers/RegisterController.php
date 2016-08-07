@@ -101,9 +101,9 @@ class RegisterController extends Controller
         if($user){
             if(Hash::check($request->input('password'),$user['password'])){
                 if($user['status']==1){
-                session(['user'=>$user['username']]);
+                session(['user'=>$user['username'],'userid'=>$user['id']]);
 
-                    return view('web.index');
+                    return redirect('/web/index');
                 }else{
                     return back()->with('err','账号未激活,请登陆邮箱进行激活');
                 }

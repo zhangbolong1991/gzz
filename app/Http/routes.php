@@ -101,7 +101,6 @@ Route::get('/csjl','CartController@csjl');
 Route::get('/s','CartController@s');
 
 //地址添加
-//Route::any('/orderinsert','OrderController@insert')->middleware('qlogin');
-Route::any('/orderinsert','OrderController@insert');
+Route::any('/orderinsert','OrderController@insert')->middleware('log');
 Route::post('/addressinsert','AddressController@insert');
 Route::post('/order/create','OrderController@create');

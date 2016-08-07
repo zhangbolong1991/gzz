@@ -10,28 +10,7 @@ use App\Http\Requests\InsertOrderRequest;
 use session;
 class OrderController extends Controller
 {
-    // 加载添加模板
-    public function getAdd(){
-    	return view('order.add');
-       
-    }
-    //执行添加
-    public function postInsert(InsertOrderRequest $request){
-        // 获取所有参数
-        $data=$request->except('_token');
-        // dd($data);
-        $data['uid']=5;
-        $data['addtime']=date('Y-m-d H:i:s');
-        $data['status']=0;
-        // dd($data);
-        // 执行数据库插入操作
-        if(DB::table('orders')->insert($data)){
-            return redirect('/admin/order/index')->with('success','添加订单成功');
-        }else{
-            return back()->with('error','添加失败')->withInput();
-        }
-
-    }
+   
     //订单列表
     public function getIndex(Request $request){
     	//查询所有的数据(并且分页)
@@ -72,13 +51,11 @@ class OrderController extends Controller
     //前台加载订单地址
     public function insert(Request $request){
          // dd($request->all());
-        $cart=session('cart');
-        $h=session('h');
-        dd(session());
-        // $address=AddressController::getAddress(session('id'));
-        $user=DB::table('users')->where('username','=',session('username'))->first();
-        $address=AddressController::getAddress($user['id']);
-        dd($address);
+        // $cart=session('cart');
+        // $h=session('h');
+        // dd(session());
+        $address=AddressController::getAddress(session('userid'));
+        // dd($address);
         return view('/horder.index',['address'=>$address]);
 
     }
@@ -87,9 +64,7 @@ class OrderController extends Controller
         // dd($request->all());
         $data=$request->only('address_id');//地址id
         $data['order_num']=$this->getOrderNum();//订单号
-        // $data['user_id']=session('id');
-        $user=DB::table('users')->where('username','=',session('username'))->first();
-        $data['user_id']=$user['id']; //用户id
+        $data['user_id']=session('userid');//用户id
         // dd(session());
         $data['total']=session('h')['totals'];
         // dd($data);
@@ -113,13 +88,16 @@ class OrderController extends Controller
             if($d){
                 $f=DB::table('detail')->insert($d);
                 if($f){
-                    echo "订单已产生";
+                    // echo "订单已产生,订单号:".$this->getOrderNum();
+                    return back()->with('success','添加订单成功,订单号:{{$this->getOrderNum()}}');
                 }else{
-                    echo "111";
+                    // echo "订单提交失败";
+                    return back()->with('error','订单提交失败');
                 }
             }
         }else{
-            echo "000";
+            // echo "订单生成失败";
+            return back()->with('error','订单生成失败');              
         }
     }
 
