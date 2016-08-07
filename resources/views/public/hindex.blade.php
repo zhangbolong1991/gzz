@@ -30,6 +30,9 @@
 		});
 	});
 </script>
+<!-- 头部为css样式站位 -->
+@section('header')
+@show
 <!-- start-smoth-scrolling -->
 </head>
 	

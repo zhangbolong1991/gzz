@@ -99,3 +99,9 @@ Route::get('/web/detail/{id}','DetailController@index');
 //城市级联
 Route::get('/csjl','CartController@csjl');
 Route::get('/s','CartController@s');
+
+//地址添加
+//Route::any('/orderinsert','OrderController@insert')->middleware('qlogin');
+Route::any('/orderinsert','OrderController@insert');
+Route::post('/addressinsert','AddressController@insert');
+Route::post('/order/create','OrderController@create');
