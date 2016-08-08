@@ -124,7 +124,7 @@
 	<div class="products-breadcrumb">
 		<div class="container">
 			<ul>
-				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/home">首页</a><span>|</span></li>
+				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/web/index">首页</a><span>|</span></li>
 			</ul>
 		</div>
 	</div>
@@ -149,7 +149,7 @@
 						<li><a href="/vita">个人信息</a></li>
 						<li><a href="household.html">我的订单</a></li>
 						
-						<li><a href="kitchen.html">我的购物车</a></li>
+						<li><a href="/web/cart">我的购物车</a></li>
 						<li><a href="pet.html">我关注的</a></li>
 						<li><a href="pet.html">站内信</a></li>
 						<li><a href="short-codes.html">浏览历史</a></li>

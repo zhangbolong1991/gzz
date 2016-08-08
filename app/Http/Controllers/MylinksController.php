@@ -117,7 +117,9 @@ class MylinksController extends Controller
     public function link(){
        $list=DB::table('mylinks')->get();
        // dd($list);
+       // dd(session());
        // die;
-       return view('public.hindex',['list'=>$list]);
+       session(['mylinks'=>$list]);
+       return view('public.hindex');
     }
 }

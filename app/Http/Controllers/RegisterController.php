@@ -101,9 +101,9 @@ class RegisterController extends Controller
         if($user){
             if(Hash::check($request->input('password'),$user['password'])){
                 if($user['status']==1){
-                session(['user'=>$user['username']]);
+                session(['user'=>$user['username'],'userid'=>$user['id']]);
 
-                    return view('web.index');
+                    return redirect('/web/index');
                 }else{
                     return back()->with('err','账号未激活,请登陆邮箱进行激活');
                 }
@@ -115,9 +115,50 @@ class RegisterController extends Controller
         }
     }
 
+    // 加载密保找回或者邮箱找回模板
+    public function select(){
+        return view('register.select');
+    }
+
+    // 加载密保找回模板
+    public function encrypted(){
+        // echo "AAAAA";
+        return view('register.encrypted');
+    }
     // 加载密码找回模板
     public function forget(){
         return view('register.forget');
+    }
+
+    // 对比密保问题
+    public function find(Request $request){
+        // dd($request->all());
+        $list=DB::table('users')->where('username','=',$request->input('username'))->get();
+        $a=array();
+        foreach ($list as $row) {
+            $a[]=$row['id'];
+            // return $a;
+        }
+        // dd($a);
+        $d=$request->input('issue');
+
+        $b=DB::table('find')->where('uid','=',$a)->where('issue','=',$d)->get();
+        // dd($b);
+        $c=array();
+        foreach ($b as $rows) {
+            $c=$rows['answer'];
+        }
+
+        // dd($c);
+        // dd($request->input('answer'));
+        
+        if($request->input('answer')==$c){
+            // echo "aaaa";
+            // session(['id'=>$a]);
+            return view('conter.reset',['list'=>$list]);
+        }else{
+            echo "VVV"; 
+        }
     }
 
    // 发送密码找回邮件
@@ -224,6 +265,28 @@ class RegisterController extends Controller
             }
         }
     }
+
+    // 加载密保设置模板
+    public function guarb(Request $request){
+        // echo "AAAAAA";
+        // dd($request->all());
+        // $id=$request->all();
+        $list=DB::table('users')->where('id','=',$request->input('id'))->get();
+        // dd($list);
+        return view('conter.find',['list'=>$list]);
+    }
+
+    //执行密保添加
+    public function doguarb(Request $request){
+        $a=$request->only(['uid','issue','answer']);
+        // dd($a);
+        if(DB::table('find')->insert($a)){
+            // echo "密保设置成功";
+            return back()->with('ror','设置成功');
+        }else{
+            echo "密保设置失败";
+        }
+    } 
 
     // 执行退出
     public function logout(Request $request){

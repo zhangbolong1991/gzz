@@ -74,11 +74,11 @@ class OrderController extends Controller
          // dd($request->all());
         $cart=session('cart');
         $h=session('h');
-        dd(session());
+        // dd(session());
         // $address=AddressController::getAddress(session('id'));
         $user=DB::table('users')->where('username','=',session('username'))->first();
         $address=AddressController::getAddress($user['id']);
-        dd($address);
+        // dd($address);
         return view('/horder.index',['address'=>$address]);
 
     }
