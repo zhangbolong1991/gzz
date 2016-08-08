@@ -40,7 +40,7 @@
 <!-- header -->
 	<div class="agileits_header">
 		<div class="w3l_offers">
-			<a href="products.html">今日特价,high翻全场!</a>
+			<a href="#">今日特价,high翻全场!</a>
 		</div>
 		<div class="w3l_search">
 			<form action="/web/seek" method="get">
@@ -122,7 +122,7 @@
 			</ul>
 		</div>
 		<div class="w3l_header_right1">
-			<h2><a href="mail.html">联系我们</a></h2>
+			<h2><a href="#">联系我们</a></h2>
 		</div>
 		<div class="clearfix"> </div>
 	</div>
@@ -243,8 +243,8 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif
@@ -255,8 +255,8 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif
@@ -267,8 +267,8 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif

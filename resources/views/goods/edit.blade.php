@@ -31,7 +31,7 @@
                                         <select class="small" name="typeid">
                                             <option value="0"></option>
                                             @foreach($type as $row)
-                                            <option value="{{$row['id']}}" @if($row['id']==$goods['typeid']) selected @endif >{{$row['name']}}</option>
+                                            <option value="{{$row['id']}}" @if($row['id']==$fgoods['typeid']) selected @endif >{{$row['name']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -39,47 +39,47 @@
                                 <div class="mws-form-row">
                     				<label class="mws-form-label">商品名称</label>
                     				<div class="mws-form-item">
-                    					<input type="text" class="small" value="{{$goods['goods']}}" name="goods">
+                    					<input type="text" class="small" value="{{$fgoods['goods']}}" name="goods">
                     				</div>
                     			</div>
 
                     			<div class="mws-form-row">
                                     <label class="mws-form-label">生产厂家</label>
                                     <div class="mws-form-item">
-                                        <input type="text" class="small" value="{{$goods['company']}}" name="company">
+                                        <input type="text" class="small" value="{{$fgoods['company']}}" name="company">
                                     </div>
                                 </div>          
                     			<div class="mws-form-row">
                     				<label class="mws-form-label">描述</label>
-                    				<script id="editor" type="text/plain" style="width:500px;height:500px;margin-left:150px" name="descr">{!!$goods['descr']!!}</script>
+                    				<script id="editor" type="text/plain" style="width:500px;height:500px;margin-left:150px" name="descr">{!!$fgoods['descr']!!}</script>
                     			</div>
                     			<div class="mws-form-row">
                                     <label class="mws-form-label">单价</label>
                                     <div class="mws-form-item">
-                                        <input type="text" class="small" value="{{$goods['price']}}" name="price">
+                                        <input type="text" class="small" value="{{$fgoods['price']}}" name="price">
                                     </div>
                                 </div>
                     			
                     			<div class="mws-form-row">
                     				<label class="mws-form-label">图片</label>
                     				<div class="mws-form-item">
-                    					<img src="{{$goods['picname']}}" width="100px">
+                    					<img src="{{$fgoods['picname']}}" width="100px">
                     					<input type="file" class="small" name="picname">
                     				</div>
                     			</div>
                                 <div class="mws-form-row">
                                     <label class="mws-form-label">库存量</label>
                                     <div class="mws-form-item">
-                                        <input type="text" class="small" value="{{$goods['store']}}" name="store">
+                                        <input type="text" class="small" value="{{$fgoods['store']}}" name="store">
                                     </div>
                                 </div>
                                 <div class="mws-form-row">
                                     <label class="mws-form-label">状态</label>
                                     <div class="mws-form-item">
                                         <select class="small" name="state">
-                                            <option value="1" @if($goods['state']==1) selected @endif>新商品</option>
-                                            <option value="2" @if($goods['state']==2) selected @endif>在售</option>
-                                            <option value="3" @if($goods['state']==3) selected @endif>下架</option>
+                                            <option value="1" @if($fgoods['state']==1) selected @endif>新商品</option>
+                                            <option value="2" @if($fgoods['state']==2) selected @endif>在售</option>
+                                            <option value="3" @if($fgoods['state']==3) selected @endif>下架</option>
                                         </select>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                     		</div>
                     		<div class="mws-button-row">
                     			{{csrf_field()}}
-                    			<input type="hidden" name="id" value="{{$goods['id']}}">
+                    			<input type="hidden" name="id" value="{{$fgoods['id']}}">
                     			<input type="submit" class="btn btn-danger" value="修改">
                     			<input type="reset" class="btn " value="重置">
                     		</div>

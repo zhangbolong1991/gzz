@@ -7,10 +7,10 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AdverController extends Controller
+class PlayController extends Controller
 {
     public function getAdd(){
-        return view('adver.add');
+        return view('play.add');
     }
 
     public function postInsert(Request $request){
@@ -32,15 +32,15 @@ class AdverController extends Controller
         $lastname=$name.'.'.$s;
         if($request->hasFile('picname')){
             //移动文件
-            $request->file('picname')->move('./uploads/advertisements',$lastname);
+            $request->file('picname')->move('./uploads/play/',$lastname);
         }
         //获取所有的参数
         $data=$request->only(['name','url']);
         $data['status']=1;
         $data['picname']=$lastname;
         //执行数据库插入操作
-        if(DB::table('advertisements')->insert($data)){
-            return redirect('/admin/adver/index')->with('success','添加成功');
+        if(DB::table('play')->insert($data)){
+            return redirect('/admin/play/index')->with('success','添加成功');
         }else{
             return back()->with('error','添加失败')->withInput();
         }
@@ -48,28 +48,28 @@ class AdverController extends Controller
 
     public function getIndex(Request $request){
         //查询所有数据
-        $list=DB::table('advertisements')->where('name','like','%'.$request->input('keyword').'%')->paginate(2);
+        $list=DB::table('play')->where('name','like','%'.$request->input('keyword').'%')->paginate(2);
         //加载模板
-        return view('adver.index',['adlist'=>$list,'request'=>$request->all()]);
+        return view('play.index',['list'=>$list,'request'=>$request->all()]);
     }
 
     public function getDel($id){
-        $picname=DB::table('advertisements')->where('id','=',$id)->value('picname');
-        $path='uploads/advertisements/'.$picname;
+        $picname=DB::table('play')->where('id','=',$id)->value('picname');
+        $path='uploads/play/'.$picname;
         // dd($picname);
-        if(DB::table('advertisements')->where('id','=',$id)->delete()){
+        if(DB::table('play')->where('id','=',$id)->delete()){
             @unlink($path);
-            return redirect('/admin/adver/index')->with('success','删除成功');
+            return redirect('/admin/play/index')->with('success','删除成功');
         }else{
-            return redirect('/admin/adver/index')->with('error','删除失败');
+            return redirect('/admin/play/index')->with('error','删除失败');
         }
     }
 
     public function getEdit($id){
         // 获取需要修改的单条数据
-        $adver=DB::table('advertisements')->where('id','=',$id)->first();
+        $play=DB::table('play')->where('id','=',$id)->first();
         //加载修改模板
-        return view('adver.edit',['adver'=>$adver]);
+        return view('play.edit',['play'=>$play]);
     }
 
     public function postUpdate(Request $request){
@@ -92,18 +92,18 @@ class AdverController extends Controller
             $name=time()+rand(1,999999999);
             $lastname=$name.'.'.$s;
             //移动文件
-            $request->file('picname')->move('./uploads/advertisements/',$lastname);
+            $request->file('picname')->move('./uploads/play/',$lastname);
             $data['picname']=$lastname;
             //获取原图片路径
-            $picname=DB::table('advertisements')->where('id','=',$request->input('id'))->value('picname');
-            $path='uploads/advertisements/'.$picname;
+            $picname=DB::table('play')->where('id','=',$request->input('id'))->value('picname');
+            $path='uploads/play/'.$picname;
         }
         //判断
-        if(Db::table('advertisements')->where('id','=',$request->input('id'))->update($data)){
+        if(Db::table('play')->where('id','=',$request->input('id'))->update($data)){
             @unlink($path);
-            return redirect('/admin/adver/index')->with('success','修改成功');
+            return redirect('/admin/play/index')->with('success','修改成功');
         }else{
-            return redirect('/admin/adver/index/')->with('error','修改失败');
+            return redirect('/admin/play/index/')->with('error','修改失败');
         }
     }
 }
