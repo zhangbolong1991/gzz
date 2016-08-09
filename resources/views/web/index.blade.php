@@ -3,19 +3,30 @@
 <style type="text/css">
 	
 	#left{
-
 		position:absolute;
-		left:500px;
+		left:400px;
 		top:420px;
 		cursor:pointer;
 
 	}
 	#right{
 		position:absolute;
-		left:1450px;
+		left:1350px;
 		top:420px;
 		cursor:pointer;
 
+	}
+	#dd1{
+		width:30px;
+		height:30px;
+		background-color: orange;
+		line-height:30px;
+		text-align:center;
+		position:absolute;
+		left:800px;
+		top:650px;
+		border-radius:30px;
+		cursor:pointer;
 	}
 </style>
 		<div class="w3l_banner_nav_right">
@@ -43,6 +54,9 @@
 						
 						<a  href="javascript:fun('-')" id="left"><img src="/h/images/left.png" style="width:50px;height:50px;filter:alpha(opacity=10);"></a>
 						<a href="javascript:fun('+')" id="right"><img src="/h/images/right.png" style="width:50px;height:50px" ></a>
+						@for($i=0;$i<$imgnu;$i++)
+						<div id="dd1" name="anniu"  onclick="fun({{$i}})"></div>
+						@endfor
 						
 						<div id="img" style="height:460px;">
 						@foreach($imgs as $val)
@@ -69,24 +83,38 @@
 				//获取图片集合对象(根据指定的名称获取图片元素集合)
 				list=document.getElementsByName('img');
 				// alert(list);
+				//获取按钮对象集合
+				list1=document.getElementsByName('anniu');
+				x=750;
+				//遍历
+				for(var i=0;i<list1.length;i++){
+					list1[i].style.left=x+"px";
+					list1[i].innerHTML=i+1;
+					x+=50;
+				}
 				function fun(b){
 					//清除定时器
 					clearTimeout(mytime);
-					//switch
-					switch(b){
-						case "-": 
-						m=m-2;
-						if(m<-1){
-						m={{$imgnu-2}};
+					if(isNaN(b)){
+						//switch
+						switch(b){
+							case "-": 
+							m=m-2;
+							if(m<-1){
+							m={{$imgnu-2}};
+							}
+							break;
+							case "+":
+							m=m;
+							if(m>{{$imgnu-1}}){
+								m=0;
+							}
+							break;
 						}
-						break;
-						case "+":
-						m=m;
-						if(m>{{$imgnu-1}}){
-							m=0;
-						}
-						break;
+					}else{
+						m=b-1;
 					}
+					
 					running();
 
 				}
@@ -195,10 +223,11 @@
 <!-- fresh-vegetables -->
 	<div class="fresh-vegetables">
 		<div class="container">
+		<!-- <div> -->
 			<!-- 横框 -->
 			<div class="w3l_fresh_vegetables_grids">
-				<div style="width:100%;margin:5px 10px 15px;">
-					<h4>新品上市</h4>
+				<div style="width:100%;margin:10px 10px 20px;">
+					<h1>新品上市</h1>
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
@@ -207,10 +236,10 @@
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
 						@foreach($new as $row)
-						<div  style="border:1px dashed #ccc;float:left" class="col-md-2">
-							<a href="/detail/{{$row['id']}}">
-								<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" width="110px" height="120px"></a>
-								<span></span> 
+						<div  style="border:1px solid #aaa;float:left;text-align:center;margin:12px;" class="col-md-2">
+							<a href="/web/detail/{{$row['id']}}">
+								<img src="{{$row['picname']}}" width="100px" height="110px">
+								<span>{{$row['goods']}}</span> 
 							</a>
 						</div>
 						@endforeach
@@ -231,8 +260,8 @@
 			<!-- //横框 -->
 			<!-- 横框2-->
 			<div class="w3l_fresh_vegetables_grids">
-				<div style="width:100%;margin:5px 10px 15px;">
-					<h4>最高关注</h4>
+				<div style="width:100%;margin:10px 10px 20px;">
+					<h1>最高关注</h1>
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
@@ -241,10 +270,10 @@
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
 						@foreach($clicknum as $row)
-						<div  style="border:1px dashed #ccc;float:left" class="col-md-2">
-							<a href="/detail/{{$row['id']}}">
-								<img src="{{$row['picname']}}" width="110px" height="120px">
-								<span></span> 
+						<div  style="border:1px solid #aaa;float:left;text-align:center;margin:12px;" class="col-md-2">
+							<a href="/web/detail/{{$row['id']}}">
+								<img src="{{$row['picname']}}" width="100px" height="110px">
+								<span>{{$row['goods']}}</span> 
 							</a>
 						</div>
 						@endforeach
@@ -265,8 +294,8 @@
 			<!-- //横框2-->
 			<!-- 横框3-->
 			<div class="w3l_fresh_vegetables_grids">
-				<div style="width:100%;margin:5px 10px 15px;">
-					<h4>热卖商品</h4>
+				<div style="width:100%;margin:10px 10px 20px;">
+					<h1>热卖商品</h1>
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
@@ -275,10 +304,10 @@
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
 						@foreach($num as $row)
-						<div  style="border:1px dashed #ccc;float:left" class="col-md-2">
-							<a href="/detail/{{$row['id']}}">
-								<img src="{{$row['picname']}}" width="110px" height="120px">
-								<span></span> 
+						<div  style="border:1px solid #aaa;float:left;text-align:center;margin:12px;" class="col-md-2">
+							<a href="/web/detail/{{$row['id']}}">
+								<img src="{{$row['picname']}}" width="100px" height="110px">
+								<span>{{$row['goods']}}</span> 
 							</a>
 						</div>
 						@endforeach

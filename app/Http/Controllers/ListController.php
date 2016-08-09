@@ -25,6 +25,13 @@ class ListController extends Controller
     	// dd($ids);
     	$goods=DB::table('goods')->whereIn('typeid',$ids)->paginate(8);
         // dd($goods);
+        //遍历
+        foreach($goods as $key=>$value){
+            if($value['state']==3){
+                unset($goods[$key]);
+            }
+        }
+        
         return view('web.list',['goods'=>$goods]);
     }
 
@@ -34,13 +41,35 @@ class ListController extends Controller
     	// dd($a);
     	$types=DB::table('type')->where('name','like','%'.$name.'%')->get();
     	$ids=array();
-    	foreach ($types as $key => $value) {
-    		$ids[]=$value['id'];
-    		
+    	foreach ($types as $k => $v) {
+    		$ids[]=$v['id'];
+            $s=DB::table('type')->where('path','like','%'.$v['id'].'%')->get();
+            if(!empty($s)){
+                foreach($s as $kk=>$vv){
+                    $ids[]=$vv['id'];
+                }
+            }
     	}
     	// dd($ids);
-    	$goods=DB::table('goods')->whereIn('typeid',$ids)->paginate(8);
-    	// dd($goods);
+        if(!empty($ids)){
+            $goods=DB::table('goods')->whereIn('typeid',$ids)->paginate(8);
+            // dd($goods);
+            //遍历
+            foreach($goods as $key=>$value){
+                if($value['state']==3){
+                    unset($goods[$key]);
+                }
+            }
+        }else{
+            $goods=DB::table('goods')->where('goods','like','%'.$name.'%')->paginate(8);
+            //遍历
+            foreach($goods as $ke=>$val){
+                if($val['state']==3){
+                    unset($goods[$ke]);
+                }
+            }
+        }
+    	
     	return view('web.list',['goods'=>$goods]);
     }
 
@@ -49,6 +78,12 @@ class ListController extends Controller
         //获取对应厂家的商品
         $goods=DB::table('goods')->where('company','like','%'.$request->company.'%')->paginate(8);
         // dd($goods);
+        //遍历
+        foreach($goods as $key=>$value){
+            if($value['state']==3){
+                unset($goods[$key]);
+            }
+        }
         return view('web.list',['goods'=>$goods]);
     }
 

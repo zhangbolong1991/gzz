@@ -56,11 +56,11 @@ class WebController extends Controller
         //优惠
         $store=DB::table('goods')->orderBy('store','DESC')->limit(4)->get();
         //销量
-        $num=DB::table('goods')->orderBy('num','DESC')->limit(12)->get();
+        $num=DB::table('goods')->orderBy('num','DESC')->limit(10)->get();
         //点击量
-        $clicknum=DB::table('goods')->orderBy('clicknum','DESC')->limit(12)->get();
+        $clicknum=DB::table('goods')->orderBy('clicknum','DESC')->limit(10)->get();
         //最新上市
-        $new=DB::table('goods')->orderBy('id','DESC')->limit(12)->get();
+        $new=DB::table('goods')->orderBy('id','DESC')->limit(10)->get();
         //轮播图
         $imgs=DB::table('play')->where('status','=',1)->get();
         // dd($imgs);
@@ -69,19 +69,24 @@ class WebController extends Controller
             $imgnu+=1;
         }
         //在数据库里获取广告
-        $g=DB::table('advertisements')->get();
-        foreach ($g as $key => $value) {
-            //判断是否禁用
-            if($value['status']==0){
-                unset($g[$key]);
-            }
-        }
+        $g=DB::table('advertisements')->where('status','=',1)->get();
         // dd($g);
         $adver=array();
-        $r=array_rand($g,3);
-        foreach ($r as $k => $v) {
-            $adver[]=$g[$v];
+        if(count($g)>2){
+            $r=array_rand($g,3);
+            foreach ($r as $k => $v) {
+                $adver[]=$g[$v];
+            }
+        }elseif(count($g)==2){
+            $adver[0]=$g[0];
+            $adver[1]=$g[1];
+            $adver[2]=$g[0];
+        }elseif(count($g)==1){
+            $adver[0]=$g[0];
+            $adver[1]=$g[0];
+            $adver[2]=$g[0];
         }
+        
         //解析模板
         return view('web.index',['imgs'=>$imgs,'imgnu'=>$imgnu,'store'=>$store,'num'=>$num,'clicknum'=>$clicknum,'new'=>$new,'adver'=>$adver]);
     }
