@@ -186,8 +186,8 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif
@@ -198,8 +198,8 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif
@@ -210,13 +210,14 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif
 				@endforeach
 				@endif
+				</ul>
 				</ul>
 			</div>
 			<div class="col-md-3 w3_footer_grid">

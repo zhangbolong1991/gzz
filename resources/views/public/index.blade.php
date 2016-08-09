@@ -260,7 +260,6 @@
                      <li>
                         <a href="#"><i class="icon-file"></i> 订单管理</a>
                         <ul class="closed">
-                            <li><a href="{{url('/admin/order/add')}}">订单添加</a></li>
                             <li><a href="{{url('/admin/order/index')}}">订单列表</a></li>
                         </ul>
                     </li>

@@ -132,18 +132,14 @@ class RegisterController extends Controller
 
     // 对比密保问题
     public function find(Request $request){
-        // dd($request->all());
         $list=DB::table('users')->where('username','=',$request->input('username'))->get();
         $a=array();
         foreach ($list as $row) {
             $a[]=$row['id'];
-            // return $a;
+ 
         }
-        // dd($a);
         $d=$request->input('issue');
-
         $b=DB::table('find')->where('uid','=',$a)->where('issue','=',$d)->get();
-        // dd($b);
         $c=array();
         foreach ($b as $rows) {
             $c=$rows['answer'];
@@ -153,11 +149,10 @@ class RegisterController extends Controller
         // dd($request->input('answer'));
         
         if($request->input('answer')==$c){
-            // echo "aaaa";
-            // session(['id'=>$a]);
+
             return view('conter.reset',['list'=>$list]);
         }else{
-            echo "VVV"; 
+            return back()->with('ror','密保验证错误!'); 
         }
     }
 

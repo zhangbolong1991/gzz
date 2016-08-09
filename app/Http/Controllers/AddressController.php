@@ -11,19 +11,17 @@ class AddressController extends Controller
 {
     // 地址插入操作
     public function insert(Request $request){
-    	// dd($request->all());
+    	 // dd($request->all());
     	//获取参数信息
     	$data=$request->except('_token');
-    	// $data['user_id']=session('id');
-    	$user=DB::table('users')->where('username','=',session('username'))->first();
-    	$data['user_id']=$user['id'];
+    	$data['user_id']=session('userid');
     	// dd(session());
     	// dd($data);
     	//插入数据库
     	if(DB::table('address')->insert($data)){
-    		return back();
+    		return back()->with('success','地址添加成功');
     	}else{
-    		echo "000";
+    		return back()->with('error','地址添加失败');
     	}
 
     }

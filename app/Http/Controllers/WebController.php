@@ -31,6 +31,9 @@ class WebController extends Controller
         //写入session
         session(['nav'=>$list]);
 
+        $com=DB::table('goods')->distinct()->lists('company');
+        // dd($com);
+        session(['company'=>$com]);
         //获取所有的类别
         // $t=DB::table('type')->get();
         // var_dump($t);
@@ -49,9 +52,16 @@ class WebController extends Controller
         $clicknum=DB::table('goods')->orderBy('clicknum','DESC')->limit(12)->get();
         //最新上市
         $new=DB::table('goods')->orderBy('id','DESC')->limit(12)->get();
-        // dd($a);
+        //在数据库里获取广告
+        $g=DB::table('advertisements')->get();
+        // dd($adver);
+        $adver=array();
+        $r=array_rand($g,3);
+        foreach ($r as $k => $v) {
+            $adver[]=$g[$v];
+        }
         //解析模板
-        return view('web.index',['store'=>$store,'num'=>$num,'clicknum'=>$clicknum,'new'=>$new]);
+        return view('web.index',['store'=>$store,'num'=>$num,'clicknum'=>$clicknum,'new'=>$new,'adver'=>$adver]);
     }
 
 }

@@ -91,7 +91,10 @@ Route::get('/mylink','MylinksController@link');
 //前台
 Route::get('/web/index','WebController@index');
 //列表页
-Route::get('/web/list/{id}','ListController@index');
+Route::get('/web/list','ListController@index');
+Route::get('/web/seek','ListController@seek');
+Route::get('/web/lefts','ListController@lefts');
+Route::get('/web/price','ListController@price');
 //购物车
 Route::get('/web/cart','CartController@index');
 //添加购物车
@@ -109,3 +112,8 @@ Route::get('/web/detail/{id}','DetailController@index');
 //城市级联
 Route::get('/csjl','CartController@csjl');
 Route::get('/s','CartController@s');
+
+//地址添加
+Route::any('/orderinsert','OrderController@insert')->middleware('log');
+Route::post('/addressinsert','AddressController@insert');
+Route::post('/order/create','OrderController@create');
