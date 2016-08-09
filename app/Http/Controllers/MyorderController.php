@@ -15,15 +15,21 @@ class MyorderController extends Controller
   	$list=DB::table('orders')
   		->join('address','orders.address_id','=','address.id')
   		->join('detail','orders.id','=','detail.order_id')
-  		->select('orders.*','address.*','detail.*')
+  		->select('address.*','detail.*','orders.*')
   		->get();
   	// dd($list);
   	return view('conter.myorder',['list'=>$list]);
   }
 
   public function del($id){
-  	// echo "AAAAAAa";
   	// dd($id);
+  	$order=DB::table('orders')
+  		->where('id','=',$id)->delete();
+  	// dd($order);
+  	$detail=DB::table('detail')
+  		->where('order_id','=',$id)->delete();
+  	// dd($detail);
+
   }
  }
 
