@@ -59,6 +59,8 @@ Route::group(['middleware'=>'log'],function(){
 	Route::post('/guarb','RegisterController@doguarb'); 
 	//我的订单
 	Route::get('/myorder','MyorderController@myorder');
+	// 删除我的历史订单
+	Route::get('/del/{id}','MyorderController@del');
 });
 //前台注册
 Route::get('/register','RegisterController@register');

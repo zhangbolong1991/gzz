@@ -148,7 +148,7 @@
 						<div class="clearfix"> </div>
 					</div>
 
-					<!-- <div class="add-review">
+					<div class="add-review">
 						<h5>添加评论</h5><br>
 						<form action='' method="post">
 							姓名：<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required=""><br><br>
@@ -156,7 +156,7 @@
 							评论：<textarea type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea><br><br>
 							<input type="submit" value="提交">
 						</form>
-					</div> -->
+					</div>
 				</div>
 			</div>
 			<div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown1" aria-labelledby="dropdown1-tab">
