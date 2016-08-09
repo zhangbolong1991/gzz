@@ -98,7 +98,7 @@ class OrderController extends Controller
                     $request->session()->pull('cart', 'default');
                     $request->session()->pull('h', 'default');
                     // dd(session());
-                    return view('/horder/info', ['info'=>'添加订单成功,订单号:'.$data['order_num']]);
+                    return view('/horder/info', ['info'=>'添加订单成功,订单号:'.$data['order_num']."如有需要，可到个人中心查看订单详情"]);
                 }else{
                     // echo "订单提交失败";
                     return view('/horder/info', ['info'=>'订单提交失败']);
