@@ -31,7 +31,7 @@
 				<td>{{$row['email']}}</td>
 						
 				<td><a href="/update?id={{$row['id']}}"><span class="label label-success">修改</span></a>
-				<a href="/guarb?id={{$row['id']}}"><span class="label label-success">设置</span></a>
+				<a href="/guarb?id={{$row['id']}}"><span class="label label-success">设置密保</span></a>
 				</td>
 				@endforeach	
 			</tr>

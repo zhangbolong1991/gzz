@@ -57,6 +57,8 @@ Route::group(['middleware'=>'log'],function(){
 	Route::get('/guarb','RegisterController@guarb');
 	//执行密保设置
 	Route::post('/guarb','RegisterController@doguarb'); 
+	//我的订单
+	Route::get('/myorder','MyorderController@myorder');
 });
 //前台注册
 Route::get('/register','RegisterController@register');
