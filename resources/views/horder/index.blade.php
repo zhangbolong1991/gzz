@@ -1,110 +1,119 @@
 @extends('public.hindex')
 @section('header')
-	<link rel="stylesheet" href="/bs/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="/bs/css/bootstrap.min.css"> -->
 	<script src="/bs/js/jquery.min.js"></script>
 	<script src="/bs/js/bootstrap.min.js"></script>
 	<script src="/bs/js/holder.min.js"></script>
 	<style type="text/css">
 		.did{
-			width:200px;height:200px;border:1px solid red;line-height:50px;float:left;margin-left:10px;
+			width:380px;height:190px;border:1px solid #ccc;line-height:30px;float:left;margin:10px;
 		}
 		.active{
-			background-color: orange;
+			background-color: #84c639;
 		}
 	</style>
+	<!-- 添加地址模态框开始 -->
+<div class="container">
+	<!-- <button class="btn btn-success" data-toggle="modal" data-target="#Addressmodal">添加地址</button> -->
+	<!-- Modal -->
+	<div class="modal fade" id="Addressmodal">
+		<div class="modal-dialog">
+
+		<!-- 内容区 -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" style="color:green;text-align:center;">添加地址</h4>
+				</div>
+
+				<!-- body -->
+				<div class="modal-body">
+					
+					<form role="form" action="/addressinsert" method="post" onsubmit="return demo()">
+					<table class="table table-bordered table-hover table-striped table-condensed table-responsive">
+						<tr class="warning"><div class="form-group">
+							<td><label>收件人:</label></td>
+							<!-- <input type="text" name="name" class=""> -->
+							<td><input type="text" name="name" id="name" onblur="fun()" value="" >
+							<span id='s'></span></td>
+						</div>
+						</tr>
+						<tr class="warning">
+							<div class="form-group">
+								<td><label>地址:</label></td>
+								<td><select id="cid">
+									<option value="">--请选择--</option>
+								</select></td>						
+							</div>
+						</tr>
+						<tr class="warning">
+							<div class="form-group">
+								<td><label>街道:</label></td>
+								<td><input type="text" name="address" id="address" >
+								<span id='ss'></span></td>
+							</div>
+						</tr>
+						<tr class="warning">
+							<div class="form-group">
+								<td><label>电话:</label></td>
+								<td><input type="text" name="phone" id="phone" onblur="funcc()" >
+								<span id='sss'></span></td>
+							</div>
+						</tr>
+					</table>
+
+				</div>
+
+				<!-- footer -->
+				<div class="modal-footer">
+					{{csrf_field()}}
+					<input type="hidden" name="adds" id="adds" value="">
+					<button type="submit" id="submit" class="btn btn-success">保存</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 添加地址模态框结束 -->
 @endsection
 @section('main')
+
+
 		<div class="w3l_banner_nav_right">
 			
 			
 			<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
 				<!-- <h3 class="w3l_fruit">购物车</h3> -->
 				<div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-					<div style="margin:40px auto;text-align:center;" >
+					<div style="margin:10px auto;text-align:center;" >
 						<h4>我的订单</h4>
 					</div>
-					<!-- 添加地址模态框开始 -->
-					<div class="container">
-						<button class="btn btn-success" data-toggle="modal" data-target="#Addressmodal">添加地址</button>
-						<!-- Modal -->
-						<div class="modal fade" id="Addressmodal">
-							<div class="modal-dialog">
-
-							<!-- 内容区 -->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close"data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">添加地址</h4>
-									</div>
-
-									<!-- body -->
-									<div class="modal-body">
-										<form role="form" action="/addressinsert" method="post">
-											<div class="form-group">
-												<label>收件人:</label>
-												<input type="text" name="name" class="form-control">
-											</div>
-											<div class="form-group">
-											
-												<label>地址:</label>
-												<select id="cid">
-													<option value="">--请选择---</option>
-												</select>
-												<input type="text" name="adds" class="form-control" value="">
-											</div>
-											<div class="form-group">
-												<label>电话:</label>
-												<input type="text" name="phone" class="form-control">
-											</div>
-										
-
-									</div>
-
-									<!-- footer -->
-									<div class="modal-footer">
-										{{csrf_field()}}
-										<button type="submit" id="submit" class="btn btn-success">提交</button>
-										<button type="reset" class="btn btn-danger">重置</button>
-									</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- 添加地址模态框结束 -->
-					 @if(session('error'))
-                    <div class="mws-form-message error">
-                  		{{session('error')}}
-                      
-                    </div>
-                    @endif 
-                    <!-- 显示验证错误 -->
-                    @if (count($errors) > 0)
-                    <div class="mws-form-message error">
-
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                    </div>
-                    @endif
-					<h4>收货地址:</h4>
-					<form action="/order/create" method="post">
+					<button class="btn btn-success" data-toggle="modal" data-target="#Addressmodal">添加地址</button>
+					<br><br>
+					<h4>收货地址:</h4><br>
+					<form action="/order/create" method="post" onsubmit="return ordersub();">
 					<div id="did1">
 						@foreach($address as $row)
 						<div class="did" name="cid" value="{{$row['id']}}">
-							<h4>收件人:{{$row['name']}}</h4>
-							<h4>地址:{{$row['adds']}}</h4>
-							<h4>电话:{{$row['phone']}}</h4>
+						<table width="340px">
+							<tr><td width="80px">收件人:</td><td>{{$row['name']}}</td></tr>
+							<tr line-height="100px"><td width="80px">地址:</td><td>{{$row['adds']}}</td></tr>
+							<tr><td width="80px">电话:</td><td>{{$row['phone']}}</td></tr>
+							<tr><td align="right" colspan="2"><a href="/addressdel/{{$row['id']}}" class="btn btn-success">删除</a></td></tr>
+						</table>
 							<input type="hidden" name="address_id" value="">
 						</div>
 						@endforeach
 						</div>
 						<div class="clearfix"> </div><br>
 							{{csrf_field()}}
+							@if(session('cart'))
+							<input type="hidden" name="cartcheck" value="1">
+							@else
+							<input type="hidden" name="cartcheck" value="">	
+							@endif
 							<input type="submit" value="生成订单">		
 						</form>
 					<div class="clearfix"> </div>
@@ -281,12 +290,85 @@ $(document).ready(function(){
 	$("select option:selected").each(function(){
 		//alert($(this).html());
 		a=$(this).html();
+		if(a=='--请选择--'){
+			a='';
+		}
 		b+=a;
 	})
 	 // alert(b);
-	 b+=$('input[name="adds"]').val();
+	 b+=$('input[name="address"]').val();
 	 $('input[name="adds"]').val(b);
 })
+ 	//验证
+ 	s=document.getElementById('s');
+	ss=document.getElementById('ss');
+	sss=document.getElementById('sss');
 
+	//收件人
+	function fun(){
+		//获取id值u节点
+		uu=document.getElementById('name');
+		//获取value值
+		users=uu.value;
+		if(users.match(/^\D{2,12}$/)==null){
+			s.innerHTML="x 收件人不能为空或输入格式非法";
+			s.style.color="red";
+			return false;
+		}else{
+			s.innerHTML="√";
+			s.style.color="green";
+			return true;
+		}
+
+	}
+	// //地址
+	//  $('#address').live('blur',function(){
+
+	// 	address=$('#address').val();
+	// 	if(address.match(/[\w+?]|[\D+?]/)==null){
+	// 		ss.innerHTML="x 地址不能为空";
+	// 		ss.style.color="red";
+	// 		return false;
+	// 	}else{
+	// 		ss.innerHTML="√";
+	// 		ss.style.color="green";
+	// 		return true;
+	// 	}
+
+	// })
+	//手机
+	function funcc(){
+		//获取id值u节点
+		pp=document.getElementById('phone');
+		//获取value值
+		ps=pp.value;
+		if(ps.match(/^\d{11}$/)==null){
+			sss.innerHTML="x 请输入11位有效电话号码";
+			sss.style.color="red";
+			return false;
+		}else{
+			sss.innerHTML="√";
+			sss.style.color="green";
+			return true;
+		}
+
+	}
+	//异常时阻止表单提交
+	function demo(){
+		return fun()&&funcc();
+	}
+	//购物车为空或地址未选择的情况下阻止表单提交	
+	function ordersub(){
+		// var a=$('input[name="address_id"]').attr('value');
+		var a=$('input[name="address_id"]').val();
+		var b=$('input[name="cartcheck"]').val();
+		if(a&&b){
+			// alert('111');
+			return true;
+		}else{
+			// alert('000');
+			return false;
+		}		
+	}
 </script>
 @endsection

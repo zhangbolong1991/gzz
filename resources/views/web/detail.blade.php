@@ -66,21 +66,6 @@
 			</div>
 			<form action="/web/addcart" method="post">
 
-			<!-- <div class="agileinfo_single" style="height:600px; width:100%;">
-				<h5>{{$list['goods']}}</h5>
-				<div class="col-md-4 agileinf_single_left">
-					<div id="small">
-						<img src="{{$list['picname']}}" id="simg" width="100%" height="300px">
-						<div id="move"></div>
-					</div>
-					<div id="big">
-						<img src="{{$list['picname']}}" id="bimg" width="800px" height="800px">
-					</div>
-					<ul id="imgs">
-						<li><img src="{{$list['picname']}}" width="100%" height="100px" class='imgh'></li>
-						<li><img src="/h/images/1.jpg" alt="测试图片" width="100%" height="100px" class='imgh'></li>
-					</ul>
-				</div> -->
 				<div class="agileinfo_single" style="height:600px; width:100%;">
 				<h5>{{$list['goods']}}</h5>
 				<div class="">

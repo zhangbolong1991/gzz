@@ -108,4 +108,8 @@ Route::get('/s','CartController@s');
 //地址添加
 Route::any('/orderinsert','OrderController@insert')->middleware('log');
 Route::post('/addressinsert','AddressController@insert');
+//地址删除
+Route::get('/addressdel/{id}','AddressController@del');
+//订单生成
 Route::post('/order/create','OrderController@create');
+

@@ -12,8 +12,9 @@ class AddressController extends Controller
     // 地址插入操作
     public function insert(Request $request){
     	 // dd($request->all());
+   
     	//获取参数信息
-    	$data=$request->except('_token');
+    	$data=$request->except(['_token','address']);
     	$data['user_id']=session('userid');
     	// dd(session());
     	// dd($data);
@@ -28,5 +29,14 @@ class AddressController extends Controller
 
     public static function getAddress($id){
     	return DB::table('address')->where('user_id','=',$id)->get();
+    }
+
+    //地址删除操作
+    public function del($id){
+        if(DB::table('address')->where('id','=',$id)->delete()){
+             return back()->with('success','删除成功');
+        }else{
+            return back()->with('error','删除失败');
+        }
     }
 }

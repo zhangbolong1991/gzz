@@ -6,6 +6,7 @@
           </div>
           <div class="mws-panel-body no-padding">
                <form action="/admin/order/update" method="post" class="mws-form">
+               
                   <!--   @if(session('error'))
                     <div class="mws-form-message error">
                   {{session('error')}}
