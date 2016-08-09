@@ -15,10 +15,10 @@ class OrderController extends Controller
     public function getIndex(Request $request){
     	//查询所有的数据(并且分页)
         $list=DB::table('orders')
-        ->select(DB::raw('*,users.username as uersname,orders.status as ostatus,orders.id as oid'))
-        ->join('users','orders.uid','=','users.id')
+        ->select(DB::raw('*,users.username as username,orders.status as ostatus,orders.id as oid'))
+        ->join('users','orders.user_id','=','users.id')
         ->where('username','like', '%'.$request->input('keywords').'%')
-        ->paginate(1);
+        ->paginate(5);
         // dd($list);
     	 return view('order.index',['list'=>$list,'request'=>$request->all()]);
     }
@@ -26,14 +26,18 @@ class OrderController extends Controller
     //修改状态
     public function getEdit($id){
         // 获取需要修改信息
-        $list=DB::table('orders')->where('id','=',$id)->first();
+        $list=DB::table('orders')
+        ->join('address','orders.address_id','=','address.id')
+        ->select(DB::raw('orders.*,address.adds as address,address.name as linkman,address.phone as phone'))
+        ->where('orders.id','=',$id)->first();
+        // dd($list);
         // 加载修改模板
         return view('order.edit',['list'=>$list]);
     }
     //执行修改
     public function postUpdate(Request $request){
         // dd($request->all());
-        $data=$request->except(['_token','id']);
+        $data=$request->only('status');//仅修改订单状态:0:新订单；1：已发货；2：已收货，3 无效订单
         //判断是否有数据修改
         if(DB::table('orders')->where('id','=',$request->input('id'))->update($data)){
             // 如果有修改,让其跳转
@@ -44,7 +48,8 @@ class OrderController extends Controller
     }
     //查看订单详情
     public function getDetail($id){
-        $list=DB::table('detail')->where('orderid','=',$id)->paginate(2);
+        $list=DB::table('detail')->where('order_id','=',$id)->paginate(2);
+        // dd($list);
         return view('detail.index',['list'=>$list]);
     }
 
@@ -61,11 +66,11 @@ class OrderController extends Controller
     }
     //生成订单的方法
     public function create(Request $request){
-        // dd($request->all());
+         // dd($request->all());
         $data=$request->only('address_id');//地址id
         $data['order_num']=$this->getOrderNum();//订单号
         $data['user_id']=session('userid');//用户id
-        // dd(session());
+         // dd(session());
         $data['total']=session('h')['totals'];
         // dd($data);
         //插入数据库操作
@@ -79,7 +84,7 @@ class OrderController extends Controller
                 $tem['order_id']=$ss;
                 $tem['goods_id']=$value['id'];
                 $tem['name']=$value['goods'];
-                $tem['price']=$value['total'];
+                $tem['price']=$value['price'];//单价
                 $tem['num']=$value['num'];
                 $d[]=$tem;
             }
@@ -88,16 +93,20 @@ class OrderController extends Controller
             if($d){
                 $f=DB::table('detail')->insert($d);
                 if($f){
-                    // echo "订单已产生,订单号:".$this->getOrderNum();
-                    return back()->with('success','添加订单成功,订单号:{{$this->getOrderNum()}}');
+                    $order_num=$data['order_num'];
+                    //清空购物车，清除session中购物车数据
+                    $request->session()->pull('cart', 'default');
+                    $request->session()->pull('h', 'default');
+                    // dd(session());
+                    return view('/horder/info', ['info'=>'添加订单成功,订单号:'.$data['order_num']]);
                 }else{
                     // echo "订单提交失败";
-                    return back()->with('error','订单提交失败');
+                    return view('/horder/info', ['info'=>'订单提交失败']);
                 }
             }
         }else{
             // echo "订单生成失败";
-            return back()->with('error','订单生成失败');              
+            return view('/horder/info', ['info'=>'订单生成失败']);              
         }
     }
 

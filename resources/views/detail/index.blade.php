@@ -30,8 +30,8 @@
       	@foreach($list as $row)
        <tr class="odd"> 
         <td class="  sorting_1">{{$row['id']}}</td> 
-        <td class=" ">{{$row['orderid']}}</td> 
-        <td class=" ">{{$row['goodsid']}}</td> 
+        <td class=" ">{{$row['order_id']}}</td> 
+        <td class=" ">{{$row['goods_id']}}</td> 
         <td class=" ">{{$row['name']}}</td> 
         <td class=" ">{{$row['price']}}</td> 
         <td class=" ">{{$row['num']}}</td>       

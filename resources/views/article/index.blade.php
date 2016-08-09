@@ -9,7 +9,11 @@
    </div> 
    <div class="mws-panel-body no-padding"> 
     <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
-      
+       <form action="/admin/article/index" method="get">
+       <div class="dataTables_filter" id="DataTables_Table_1_filter">
+        <label><button class="btn btn-success">搜索</button> <input type="text" name="keywords" aria-controls="DataTables_Table_1" /></label>
+       </div>
+       </form>
      <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info"> 
       <thead> 
        <tr role="row">
@@ -42,7 +46,7 @@
       Showing 1 to 10 of 57 entries
      </div>
      <div class="dataTables_paginate paging_full_numbers" id="pages">
-     {!!$article->render()!!}
+     {!!$article->appends($request)->render()!!}
      </div>
     </div> 
    </div> 
