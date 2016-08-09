@@ -58,8 +58,8 @@ class GoodsController extends Controller
     public function getEdit($id){
     	$type=TypeController::getType();
     	//获取需要修改的单条数据
-    	$goods=DB::table('goods')->where('id','=',$id)->first();
-    	return view('goods.edit',['goods'=>$goods,'type'=>$type]);
+    	$fgoods=DB::table('goods')->where('id','=',$id)->first();
+    	return view('goods.edit',['fgoods'=>$fgoods,'type'=>$type]);
     }
 
     public function postUpdate(Request $request){

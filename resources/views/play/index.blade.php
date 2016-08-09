@@ -5,7 +5,7 @@
  <body>
   <div class="mws-panel grid_8"> 
    <div class="mws-panel-header"> 
-    <span><i class="icon-table"></i> 广告列表</span> 
+    <span><i class="icon-table"></i> 轮播列表</span> 
    </div> 
    <div class="mws-panel-body no-padding"> 
     <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
@@ -26,11 +26,11 @@
        </tr> 
       </thead> 
       <tbody role="alert" aria-live="polite" aria-relevant="all">
-      	@foreach($adlist as $row)
+      	@foreach($list as $row)
        <tr class="odd"> 
         <td class="  sorting_1">{{$row['id']}}</td> 
         <td class=" ">{{$row['name']}}</td>
-        <td class=" "><img src="/uploads/advertisements/{{$row['picname']}}" width="100px"></td> 
+        <td class=" "><img src="/uploads/play/{{$row['picname']}}" width="100px"></td> 
         <td class=" ">{{$row['url']}}</td> 
         <td class=" ">
         @if($row['status']=='1')
@@ -39,14 +39,14 @@
         	禁用
         @endif
         </td> 
-        <td class=" "><a href="/admin/adver/del/{{$row['id']}}" class="btn btn-success"><i class="icon-trash"></i></a> <a href="/admin/adver/edit/{{$row['id']}}" class="btn btn-info"><i class="icon-pencil"></i></a></td> 
+        <td class=" "><a href="/admin/play/del/{{$row['id']}}" class="btn btn-success"><i class="icon-trash"></i></a> <a href="/admin/play/edit/{{$row['id']}}" class="btn btn-info"><i class="icon-pencil"></i></a></td> 
        </tr>
        	@endforeach
       </tbody>
      </table>
 
      <div class="dataTables_paginate paging_full_numbers" id="pages">
-      {!!$adlist->appends($request)->render()!!}
+      {!!$list->appends($request)->render()!!}
      </div>
     </div> 
    </div> 

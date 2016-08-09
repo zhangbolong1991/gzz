@@ -32,6 +32,8 @@ Route::group(['middleware'=>'login'],function(){
 	Route::controller('/admin/article','ArticleController');
 	//商品模块
 	Route::controller('/admin/goods','GoodsController');
+	//轮播图管理
+	Route::controller('/admin/play','PlayController');
 });
 
 
@@ -81,7 +83,10 @@ Route::get('/mylink','MylinksController@link');
 //前台
 Route::get('/web/index','WebController@index');
 //列表页
-Route::get('/web/list/{id}','ListController@index');
+Route::get('/web/list','ListController@index');
+Route::get('/web/seek','ListController@seek');
+Route::get('/web/lefts','ListController@lefts');
+// Route::get('/web/price','ListController@price');
 //购物车
 Route::get('/web/cart','CartController@index');
 //添加购物车

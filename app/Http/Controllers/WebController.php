@@ -30,7 +30,19 @@ class WebController extends Controller
         $list=self::getcatesbypid(0);
         //写入session
         session(['nav'=>$list]);
-
+        //获取厂家信息
+        $com=DB::table('goods')->distinct()->lists('company');
+        // dd($com);
+        session(['company'=>$com]);
+        //获取友情链接
+        $mylinks=DB::table('mylinks')->get();
+        foreach ($mylinks as $key => $value) {
+            if($value['status']==0){
+                unset($mylinks[$key]);
+            }
+        }
+        // dd($mylinks);
+        session(['mylinks'=>$mylinks]);
         //获取所有的类别
         // $t=DB::table('type')->get();
         // var_dump($t);
@@ -49,9 +61,29 @@ class WebController extends Controller
         $clicknum=DB::table('goods')->orderBy('clicknum','DESC')->limit(12)->get();
         //最新上市
         $new=DB::table('goods')->orderBy('id','DESC')->limit(12)->get();
-        // dd($a);
+        //轮播图
+        $imgs=DB::table('play')->where('status','=',1)->get();
+        // dd($imgs);
+        $imgnu=0;
+        foreach ($imgs as $key => $value) {
+            $imgnu+=1;
+        }
+        //在数据库里获取广告
+        $g=DB::table('advertisements')->get();
+        foreach ($g as $key => $value) {
+            //判断是否禁用
+            if($value['status']==0){
+                unset($g[$key]);
+            }
+        }
+        // dd($g);
+        $adver=array();
+        $r=array_rand($g,3);
+        foreach ($r as $k => $v) {
+            $adver[]=$g[$v];
+        }
         //解析模板
-        return view('web.index',['store'=>$store,'num'=>$num,'clicknum'=>$clicknum,'new'=>$new]);
+        return view('web.index',['imgs'=>$imgs,'imgnu'=>$imgnu,'store'=>$store,'num'=>$num,'clicknum'=>$clicknum,'new'=>$new,'adver'=>$adver]);
     }
 
 }
