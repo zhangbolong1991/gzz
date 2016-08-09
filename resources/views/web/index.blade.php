@@ -43,10 +43,11 @@
 						
 						<a  href="javascript:fun('-')" id="left"><img src="/h/images/left.png" style="width:50px;height:50px;filter:alpha(opacity=10);"></a>
 						<a href="javascript:fun('+')" id="right"><img src="/h/images/right.png" style="width:50px;height:50px" ></a>
+						
 						<div id="img" style="height:460px;">
-						<img src="/h/images/1.jpg" style="width:100%;height:100%;display:none" name="img">
-						<img src="/h/images/2.jpg" name="img" style="width:100%;height:100%;display:none">
-						<img src="/h/images/3.jpg" name="img" style="width:100%;height:100%;display:block">
+						@foreach($imgs as $val)
+						<img src="/uploads/play/{{$val['picname']}}" style="width:100%;height:100%;" name="img">
+						@endforeach
 						</div>
 						
 							<!-- <div class="w3l_banner_nav_right_banner2"> -->
@@ -76,12 +77,12 @@
 						case "-": 
 						m=m-2;
 						if(m<-1){
-						m=1;
+						m={{$imgnu-2}};
 						}
 						break;
 						case "+":
 						m=m;
-						if(m>2){
+						if(m>{{$imgnu-1}}){
 							m=0;
 						}
 						break;
@@ -102,11 +103,11 @@
 				function running(){
 					m++;
 					// alert(m);
-					if(m==3){
+					if(m=={{$imgnu}}){
 						m=0;
 					}
 					show(m);
-					mytime=setTimeout(running,1500);
+					mytime=setTimeout(running,2000);
 				}
 				running();
 				// $(window).load(function(){
@@ -201,7 +202,7 @@
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
-						<img src="/uploads/advertisements/{{$adver[0]['picname']}}" width="100%">
+						<a href="{{$adver[0]['url']}}"><img src="/uploads/advertisements/{{$adver[0]['picname']}}" width="100%"></a>
 					</div>
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
@@ -235,7 +236,7 @@
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
-						<img src="/uploads/advertisements/{{$adver[1]['picname']}}" width="100%">
+						<a href="{{$adver[1]['url']}}"><img src="/uploads/advertisements/{{$adver[1]['picname']}}" width="100%"></a>
 					</div>
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
@@ -269,7 +270,7 @@
 				</div>
 				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
 					<div class="w3l_fresh_vegetables_grid2">
-						<img src="/uploads/advertisements/{{$adver[2]['picname']}}" width="100%">
+						<a href="{{$adver[2]['url']}}"><img src="/uploads/advertisements/{{$adver[2]['picname']}}" width="100%"></a>
 					</div>
 				</div>
 				<div class="col-md-9 w3l_fresh_vegetables_grid_right">

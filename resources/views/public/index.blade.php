@@ -278,6 +278,13 @@
                             <li><a href="{{url('/admin/adver/index')}}">广告列表</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="icon-file"></i>轮播管理</a>
+                        <ul class="closed">
+                            <li><a href="{{url('/admin/play/add')}}">轮播添加</a></li>
+                            <li><a href="{{url('/admin/play/index')}}">轮播列表</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>         
         </div>
