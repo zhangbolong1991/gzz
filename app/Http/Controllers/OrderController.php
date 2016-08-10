@@ -56,10 +56,13 @@ class OrderController extends Controller
     //前台加载订单地址
     public function insert(Request $request){
          // dd($request->all());
+
+
         // $cart=session('cart');
         // $h=session('h');
         // dd(session());
         $address=AddressController::getAddress(session('userid'));
+
         // dd($address);
         return view('/horder.index',['address'=>$address]);
 
