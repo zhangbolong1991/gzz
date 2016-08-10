@@ -61,6 +61,10 @@ Route::group(['middleware'=>'log'],function(){
 	Route::get('/myorder','MyorderController@myorder');
 	// 删除我的历史订单
 	Route::get('/del/{id}','MyorderController@del');
+	// 订单详情
+	Route::get('/mydetail/{id}','MyorderController@mydetail');
+	// 确认收货
+	Route::get('/queren/{id}','MyorderController@queren');
 });
 //前台注册
 Route::get('/register','RegisterController@register');

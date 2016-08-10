@@ -78,8 +78,8 @@
 					</div>
 					<ul id="imgs">
 						<li><img src="{{$list['picname']}}" onmousemove=fun(0) width="100%" height="100px" class='imgh'></li>
-						<li><img src="/h/images/1.jpg"  onmousemove=fun(1) alt="测试图片" width="100%" height="100px" class='imgh'></li>
-						<li><img src="/h/images/2.jpg" onmousemove=fun(2) alt="测试图片" width="100%" height="100px" class='imgh'></li>
+						<li><img src="{{$list['picname']}}"  onmousemove=fun(1) alt="测试图片" width="100%" height="100px" class='imgh'></li>
+						<li><img src="{{$list['picname']}}" onmousemove=fun(2) alt="测试图片" width="100%" height="100px" class='imgh'></li>
 						
 					</ul>
 				</div>

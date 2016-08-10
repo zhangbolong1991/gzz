@@ -15,11 +15,12 @@ class OrderController extends Controller
     public function getIndex(Request $request){
     	//查询所有的数据(并且分页)
         $list=DB::table('orders')
-        ->select(DB::raw('*,users.username as username,orders.status as ostatus,orders.id as oid'))
-        ->join('users','orders.user_id','=','users.id')
-        ->where('username','like', '%'.$request->input('keywords').'%')
+        ->join('address','orders.address_id','=','address.id')
+        ->select(DB::raw('orders.*,address.adds as address,address.name,address.phone'))
+        ->where('name','like', '%'.$request->input('keywords').'%')
         ->paginate(5);
-        // dd($list);
+        
+          // dd($list);
     	 return view('order.index',['list'=>$list,'request'=>$request->all()]);
     }
 
@@ -28,7 +29,7 @@ class OrderController extends Controller
         // 获取需要修改信息
         $list=DB::table('orders')
         ->join('address','orders.address_id','=','address.id')
-        ->select(DB::raw('orders.*,address.adds as address,address.name as linkman,address.phone as phone'))
+        ->select(DB::raw('orders.*,address.adds as address,address.name as linkman,address.phone'))
         ->where('orders.id','=',$id)->first();
         // dd($list);
         // 加载修改模板
@@ -73,6 +74,7 @@ class OrderController extends Controller
         $data=$request->only('address_id');//地址id
         $data['order_num']=$this->getOrderNum();//订单号
         $data['user_id']=session('userid');//用户id
+        $data['status']=0;
          // dd(session());
         $data['total']=session('h')['totals'];
         // dd($data);
@@ -86,7 +88,7 @@ class OrderController extends Controller
                 // $tem['user_id']=session('id');
                 $tem['order_id']=$ss;
                 $tem['goods_id']=$value['id'];
-                $tem['name']=$value['goods'];
+                $tem['shopname']=$value['goods'];
                 $tem['price']=$value['price'];//单价
                 $tem['num']=$value['num'];
                 $d[]=$tem;

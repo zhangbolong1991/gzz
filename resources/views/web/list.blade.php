@@ -71,7 +71,7 @@
 				<!-- 分页 -->
 				<div>
 					<div class="dataTables_paginate paging_full_numbers" id="pages" style="text-align:center;margin:100px;">
-				      {!!$goods->render()!!}
+				      {!!$goods->appends($request)->render()!!}
 				     </div>
 				</div>
 				

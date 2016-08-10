@@ -214,9 +214,9 @@
 						<li><a href="/myorder">我的订单</a></li>
 						
 						<li><a href="/web/cart">我的购物车</a></li>
-						<li><a href="pet.html">我关注的</a></li>
-						<li><a href="pet.html">站内信</a></li>
-						<li><a href="short-codes.html">浏览历史</a></li>
+						<li><a href="#">我关注的</a></li>
+						<li><a href="#">站内信</a></li>
+						<li><a href="#">浏览历史</a></li>
 						
 					</ul>
 				 </div><!-- /.navbar-collapse -->

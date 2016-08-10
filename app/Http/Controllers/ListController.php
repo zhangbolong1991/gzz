@@ -32,7 +32,7 @@ class ListController extends Controller
             }
         }
         
-        return view('web.list',['goods'=>$goods]);
+        return view('web.list',['goods'=>$goods,'request'=>$request->all()]);
     }
 
     //搜索商品
@@ -70,7 +70,7 @@ class ListController extends Controller
             }
         }
     	
-    	return view('web.list',['goods'=>$goods]);
+    	return view('web.list',['goods'=>$goods,'request'=>$request->all()]);
     }
 
     //左侧栏
@@ -84,7 +84,7 @@ class ListController extends Controller
                 unset($goods[$key]);
             }
         }
-        return view('web.list',['goods'=>$goods]);
+        return view('web.list',['goods'=>$goods,'request'=>$request->all()]);
     }
 
     //价格筛选

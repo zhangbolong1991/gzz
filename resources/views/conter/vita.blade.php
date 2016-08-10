@@ -1,6 +1,6 @@
 @extends('conter.conter')
 @section('right')
-<div class="container" style="position:absolute; top:300px; left:400px;">
+<div class="container" style="position:absolute; top:300px; left:330px;">
 		@if(session('error')>0)
 		<div class="alert alert-success">
   			{{session('error')}}
