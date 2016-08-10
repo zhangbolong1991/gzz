@@ -109,7 +109,7 @@
 					</div>
 					<div class="snipcart-item block">
 						<div class="snipcart-thumb agileinfo_single_right_snipcart">
-							<h4>优惠价:￥{{$list['price']}} <span>原价:￥{{$list['price']*1.25}}</span></h4>
+							<h4>优惠价:￥{{$list['price']}} <span>原价:￥{{floor($list['price']*1.25)}}</span></h4>
 						</div>
 						<div class="snipcart-details agileinfo_single_right_details">
 							{{csrf_field()}}
@@ -129,13 +129,14 @@
 	    <ul role="tablist" class="nav nav-tabs" id="myTab">
 			<li class="active" role="presentation"><a aria-expanded="true" aria-controls="home" data-toggle="tab" role="tab" id="home-tab" href="#home">商品介绍</a></li>
 			<li role="presentation"><a aria-controls="profile" data-toggle="tab" id="profile-tab" role="tab" href="#profile">添加评论</a></li>
-			<li class="dropdown" role="presentation">
+			<li role="presentation"><a aria-controls="comment" data-toggle="tab" id="comment-tab" role="tab" href="#comment">商品评价</a></li>
+			<!-- <li class="dropdown" role="presentation">
 				<a aria-controls="myTabDrop1-contents" data-toggle="dropdown" class="dropdown-toggle" id="myTabDrop1" href="#">商品评价<span class="caret"></span></a>
 				<ul id="myTabDrop1-contents" aria-labelledby="myTabDrop1" role="menu" class="dropdown-menu">
 					<li><a aria-controls="dropdown1" data-toggle="tab" id="dropdown1-tab" role="tab" tabindex="-1" href="#dropdown1">好评</a></li>
 					<li><a aria-controls="dropdown2" data-toggle="tab" id="dropdown2-tab" role="tab" tabindex="-1" href="#dropdown2">差评</a></li>
 				</ul>
-			</li>
+			</li> -->
 		</ul>
 		<div id="myTabContent" class="tab-content">
 			<div role="tabpanel" class="tab-pane fade in active bootstrap-tab-text" id="home" aria-labelledby="home-tab">
@@ -148,23 +149,41 @@
 						<div class="clearfix"> </div>
 					</div>
 
-					<!-- <div class="add-review">
+					<div class="add-review">
 						<h5>添加评论</h5><br>
-						<form action='' method="post">
-							姓名：<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required=""><br><br>
-							邮箱：<input type="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required=""><br><br>
-							评论：<textarea type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea><br><br>
+						<form action='/comment/add' method="post" enctype="multipart/form-data">
+							<table style="border-collapse:separate;border-spacing:5px;">
+							<tr><td>昵称:</td><td><input type="text" name="username" value="匿名..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '匿名...';}" required=""></td>
+			
+							<tr><td>评论:</td><td><textarea type="text"  name="content" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '说说你的看法...';}" required="">说说你的看法...</textarea></td>
+							<tr><td>图片:</td><td><input  type="file" name="picname"></td>
+							</table>
+
+							<input type="hidden" name="goods_id" value="{{$list['id']}}">
+							<input type="hidden" name="goods" value="{{$list['goods']}}">
+							{{csrf_field()}}
 							<input type="submit" value="提交">
 						</form>
-					</div> -->
+					</div>
 				</div>
 			</div>
-			<div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown1" aria-labelledby="dropdown1-tab">
+			<div role="tabpanel" class="tab-pane fade  bootstrap-tab-text" id="comment" aria-labelledby="comment-tab">
+				@foreach($data2 as $row)
+				<div>
+					<span>用户:{{$row['username']}}</span>
+					<span><strong>评论:{{$row['content']}}</strong></span>
+					@if($row['picname'])
+					<span>上传图片:<img src="{{$row['picname']}}" width="80px" height="80px"></span>
+					@endif
+				</div>
+				@endforeach
+			</div>
+			<!-- <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown1" aria-labelledby="dropdown1-tab">
 				<p>对应好评</p>
 			</div>
 			<div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown2" aria-labelledby="dropdown2-tab">
 				<p>对应差评</p>
-			</div>
+			</div> -->
 				
 		</div>		
 	</div>
@@ -195,7 +214,7 @@
 											<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" alt=" " style="width:300px;height:120px" class="img-responsive" /></a>
 											<center>
 												<p>{{$row['goods']}}</p>
-												<h4>￥{{$row['price']}}<span>￥{{$row['price']*1.25}}</span></h4>
+												<h4>￥{{$row['price']}}<span>￥{{floor($row['price']*1.25)}}</span></h4>
 											</center>
 										</div>
 										<div class="snipcart-details">
@@ -231,7 +250,7 @@
 											<a href="/web/detail/{{$row['id']}}"><img src="{{$row['picname']}}" alt=" " class="img-responsive" style="width:300px;height:120px"/></a>
 											<center>
 												<p>{{$row['goods']}}</p>
-												<h4>￥{{$row['price']}}<span>￥{{$row['price']*1.25}}</span></h4>
+												<h4>￥{{$row['price']}}<span>￥{{floor($row['price']*1.25)}}</span></h4>
 											</center>
 										</div>
 										<div class="snipcart-details">

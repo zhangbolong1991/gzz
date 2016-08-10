@@ -113,3 +113,5 @@ Route::get('/addressdel/{id}','AddressController@del');
 //订单生成
 Route::post('/order/create','OrderController@create');
 
+//添加评论
+Route::post('/comment/add','CommentController@add');

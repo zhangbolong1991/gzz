@@ -28,7 +28,7 @@ class ArticleController extends Controller
 			$request->file('pic')->move(Config::get('app.app_upload'),$s.".".$extension);
 			$data['pic']=trim(Config::get('app.app_upload')."/".$s.".".$extension,'.');	
 		}else{
-			$data[pic]='';
+			$data['pic']='';
 		}	
 		// dd($data['pic']);
 		$data['user_id']=1;
