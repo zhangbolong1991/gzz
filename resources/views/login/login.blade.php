@@ -25,7 +25,7 @@
 });
 </script>
  <!--SIGN UP-->
- <h1>GZZ商城后台登陆</h1>
+ <h1>GZZ商城后台登录</h1>
 <div class="login-form">
 	<div class="close"> </div>
 		<div class="head-info">
@@ -61,7 +61,7 @@
 						</div>
 				<div class="signin">
 					 {{csrf_field()}}
-					<input type="submit" value="登陆" >
+					<input type="submit" value="登录" >
 				</div>
 			</form>
 	

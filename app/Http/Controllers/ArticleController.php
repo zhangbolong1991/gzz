@@ -28,7 +28,7 @@ class ArticleController extends Controller
 			$request->file('pic')->move(Config::get('app.app_upload'),$s.".".$extension);
 			$data['pic']=trim(Config::get('app.app_upload')."/".$s.".".$extension,'.');	
 		}else{
-			$data[pic]='';
+			$data['pic']='';
 		}	
 		// dd($data['pic']);
 		$data['user_id']=1;
@@ -43,9 +43,9 @@ class ArticleController extends Controller
 
 	}
 	//文章列表
-	public function getIndex(){
-		$article=DB::table('articles')->paginate(2);
-		return view('article.index',['article'=>$article]);
+	public function getIndex(Request $request){
+		$article=DB::table('articles')->where('title','like','%'.$request->input('keywords').'%')->paginate(2);
+		return view('article.index',['article'=>$article,'request'=>$request->all()]);
 	}
 	//加载修改页面 同时获取需要修改的数据
 	public function getEdit($id){

@@ -17,31 +17,37 @@
      <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info"> 
       <thead> 
        <tr role="row">
-        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
-        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Browser: activate to sort column ascending">用户名</th>
-        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 245px;" aria-label="Platform(s): activate to sort column ascending">联系人</th>
+        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">用户id</th>
+        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 245px;" aria-label="Platform(s): activate to sort column ascending">收件人</th>
         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Platform(s): activate to sort column ascending">地址</th>
-        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Platform(s): activate to sort column ascending">邮编</th>
         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Platform(s): activate to sort column ascending">电话</th>
-        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Platform(s): activate to sort column ascending">购买时间</th>
-        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Platform(s): activate to sort column ascending">总金额</th>
+        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Platform(s): activate to sort column ascending">总金额</th> 
+        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Platform(s): activate to sort column ascending">订单号</th>
         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="Engine version: activate to sort column ascending">状态</th>
-        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 172px;" aria-label="CSS grade: activate to sort column ascending">操作</th>
+        <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 200px;" aria-label="CSS grade: activate to sort column ascending">操作</th>
        </tr> 
       </thead> 
       <tbody role="alert" aria-live="polite" aria-relevant="all">
       	@foreach($list as $row)
        <tr class="odd"> 
-        <td class="  sorting_1">{{$row['oid']}}</td> 
-        <td class=" ">{{$row['username']}}</td> 
-        <td class=" ">{{$row['linkman']}}</td> 
+        <td class="  sorting_1">{{$row['user_id']}}</td> 
+        <td class=" ">{{$row['name']}}</td> 
         <td class=" ">{{$row['address']}}</td> 
-        <td class=" ">{{$row['code']}}</td> 
         <td class=" ">{{$row['phone']}}</td> 
-        <td class=" ">{{$row['addtime']}}</td> 
-        <td class=" ">{{$row['total']}}</td> 
-        <td class=" ">{{$row['ostatus']}}</td> 
-        <td class=" "><a href="/admin/order/edit/{{$row['oid']}}" class="btn btn-success small">修改状态</a> <a href="/admin/order/detail/{{$row['oid']}}" class="btn btn-info">查看详情</a></td> 
+        <td class=" ">{{$row['total']}}</td>  
+        <td class=" ">{{$row['order_num']}}</td>        
+        <td class=" ">
+          @if($row['status']==0)
+          新订单
+          @elseif($row['status']==1)
+          已发货
+          @elseif($row['status']==2)
+          已收货
+          @elseif($row['stuatus']==3)
+          无效订单
+          @endif
+        </td> 
+        <td class=" "><a href="/admin/order/detail/{{$row['id']}}" class="btn btn-success small"><i class='icon-eye-open'></i></a><a href="/admin/order/edit/{{$row['id']}}" class="btn btn-info small"><i class="icon-pencil"></i></a> </td> 
        </tr>
        	@endforeach
       </tbody>

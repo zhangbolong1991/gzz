@@ -9,11 +9,11 @@
    </div> 
    <div class="mws-panel-body no-padding"> 
     <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
-      <form action="/admin/order/index"  method="get" >
+      <!-- <form action="/admin/order/index"  method="get" >
      <div class="dataTables_filter" id="DataTables_Table_1_filter">
       <label><input type="text" aria-controls="DataTables_Table_1" name="keywords" /></label><button class="btn btn-success">搜索</button>
      </div>
-     </form>
+     </form> -->
      <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info"> 
       <thead> 
        <tr role="row">
@@ -30,9 +30,9 @@
       	@foreach($list as $row)
        <tr class="odd"> 
         <td class="  sorting_1">{{$row['id']}}</td> 
-        <td class=" ">{{$row['orderid']}}</td> 
-        <td class=" ">{{$row['goodsid']}}</td> 
-        <td class=" ">{{$row['name']}}</td> 
+        <td class=" ">{{$row['order_id']}}</td> 
+        <td class=" ">{{$row['goods_id']}}</td> 
+        <td class=" ">{{$row['shopname']}}</td> 
         <td class=" ">{{$row['price']}}</td> 
         <td class=" ">{{$row['num']}}</td>       
        </tr>

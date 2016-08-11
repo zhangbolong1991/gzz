@@ -30,6 +30,9 @@
 		});
 	});
 </script>
+<!-- 头部为css样式站位 -->
+@section('header')
+@show
 <!-- start-smoth-scrolling -->
 </head>
 	
@@ -37,17 +40,60 @@
 <!-- header -->
 	<div class="agileits_header">
 		<div class="w3l_offers">
-			<a href="products.html">今日特价,high翻全场!</a>
+			<a href="#">今日特价,high翻全场!</a>
 		</div>
 		<div class="w3l_search">
-			<form action="#" method="post">
-				<input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
-				<input type="submit" value=" ">
+			<form action="/web/seek" method="get">
+				<!-- <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required=""> -->
+				<input type="text"  value="华为" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '华为';}" name="name" required="">
+				<input type="submit" value="">
 			</form>
 		</div>
 		<div class="product_list_header">  
 			<div style="cursor: pointer;">
-				<span class="glyphicon glyphicon-shopping-cart my-cart-icon"><i class="badge badge-notify my-cart-badge"></i></span>
+				<span class="glyphicon glyphicon-shopping-cart"  data-toggle="modal" data-target="#Mymodal"></span>
+						<!-- Modal -->
+						<div class="modal fade" id="Mymodal">
+							<div class="modal-dialog">
+
+							<!-- 内容区 -->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close"data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">最新添加的商品</h4>
+									</div>
+
+									<!-- body -->
+									@if(session('cart'))
+									<div class="modal-body">
+									<table class="table table-bordered table-hover table-striped table-condensed table-responsive">
+									@foreach(session('cart') as $row)
+											<tr>
+												<td align="center">{!!$row['goods']!!}</td>
+												<td align="center"><img src="{{$row['picname']}}" alt="" width="30px"></td>
+												<td align="center">￥{!!$row['price']!!}</td>
+												<td align="center"><input type="text" value="{{$row['num']}}" name="{{$row['id']}}" size="1px" style="border:0;background:transparent;" disabled></td>
+												<td align="center">
+												<input type="text" value="￥{{$row['total']}}" id="{{$row['did']}}" size="7px" style="border:0;background:transparent;" disabled></td>
+											</tr>
+									@endforeach
+									</table>
+									</div>
+									@else
+									<div class="modal-body">
+										<div class="alert alert-danger">
+											空空如也~
+										</div>
+									</div>
+									@endif
+									<!-- footer -->
+									<div class="modal-footer">
+										<button class="btn btn-danger" data-dismiss="modal">关闭</button>
+										<a href="/web/cart" class="btn btn-success">去购物车</a>
+									</div>
+								</div>
+							</div>
+						</div>
 			</div>
 		</div>
 		<div class="w3l_header_right">
@@ -76,7 +122,7 @@
 			</ul>
 		</div>
 		<div class="w3l_header_right1">
-			<h2><a href="mail.html">联系我们</a></h2>
+			<h2><a href="#">联系我们</a></h2>
 		</div>
 		<div class="clearfix"> </div>
 	</div>
@@ -103,10 +149,27 @@
 			</div>
 			<div class="w3ls_logo_products_left1">
 				<ul class="special_items">
-					<li><a href="">手机</a><i></i></li>
-					<li><a href="">其他商品</a><i></i></li>
-					<li><a href="about.html">关于我们</a><i></i></li>
-					<li><a href="services.html">服务</a></li>
+				@if(session('nav'))
+					@foreach(session('nav') as $row)
+			        <li class="dropdown"><a href="/web/list?id={{$row['id']}}">{{$row['name']}} <i class="fa fa-angle-down"></i> </a> 
+						@if($row['sub'])
+						<ul class="dropdown-menu drp-mnu"> 
+							@foreach($row['sub'] as $v)
+							<li class="dropdown-submenu"> <a href="/web/list?id={{$v['id']}}">{{$v['name']}}</a> 
+								<!-- @if($v['sub'])
+								<ul class="dropdown-menu"> 
+									@foreach($v['sub'] as $r)
+									<li><a href="/dd/{{$r['id']}}">{{$r['name']}}</a></li> 
+									@endforeach            
+								</ul>
+								@endif -->
+							</li> 
+							@endforeach
+						</ul>
+						@endif
+						</li>  
+			        @endforeach
+				@endif
 				</ul>
 			</div>
 			<!-- <div class="w3ls_logo_products_left1">
@@ -124,11 +187,12 @@
 	<div class="products-breadcrumb">
 		<div class="container">
 			<ul>
-				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/home">首页</a><span>|</span></li>
+				<li><i class="fa fa-home" aria-hidden="true"></i><a href="/web/index">首页</a><span>|</span></li>
 			</ul>
 		</div>
 	</div>
 <!-- //products-breadcrumb -->
+
 
 <!-- banner -->
 	<div class="banner">
@@ -147,19 +211,19 @@
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav nav_1">
 						<li><a href="/vita">个人信息</a></li>
-						<li><a href="household.html">我的订单</a></li>
+						<li><a href="/myorder">我的订单</a></li>
 						
-						<li><a href="kitchen.html">我的购物车</a></li>
-						<li><a href="pet.html">我关注的</a></li>
-						<li><a href="pet.html">站内信</a></li>
-						<li><a href="short-codes.html">浏览历史</a></li>
+						<li><a href="/web/cart">我的购物车</a></li>
+						<li><a href="#">我关注的</a></li>
+						<li><a href="#">站内信</a></li>
+						<li><a href="#">浏览历史</a></li>
 						
 					</ul>
 				 </div><!-- /.navbar-collapse -->
 			</nav>
 		</div>
 
-<div style="width:100%;height:400px;border:1px">
+<div style="width:100%;height:600px;border:1px">
 @section('right')
 @show
 </div>
@@ -186,8 +250,8 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif
@@ -198,8 +262,8 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif
@@ -210,13 +274,14 @@
 			<div class="col-md-3 w3_footer_grid">
 				<h3>本站合作网站</h3>
 				<ul class="w3_footer_grid_list">
-				@if(session('list'))
-				@foreach(session('list') as $row)
+				@if(session('mylinks'))
+				@foreach(session('mylinks') as $row)
 				@if($row['status']==1)
 					<li><a href="{{$row['url']}}">{{$row['name']}}</a></li>
 				@endif
 				@endforeach
 				@endif
+				</ul>
 				</ul>
 			</div>
 			<div class="col-md-3 w3_footer_grid">

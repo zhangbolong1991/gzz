@@ -4,17 +4,17 @@
 	
 	#left{
 		position:absolute;
-		left:400px;
-		top:420px;
+		left:320px;
+		top:435px;
+		border-radius:30px;
 		cursor:pointer;
-
 	}
 	#right{
 		position:absolute;
-		left:1350px;
-		top:420px;
+		left:1440px;
+		top:435px;
+		border-radius:30px;
 		cursor:pointer;
-
 	}
 	#dd1{
 		width:30px;
@@ -52,7 +52,7 @@
 						<!-- <li> -->
 						
 						
-						<a  href="javascript:fun('-')" id="left"><img src="/h/images/left.png" style="width:50px;height:50px;filter:alpha(opacity=10);"></a>
+						<a  href="javascript:fun('-')" id="left"><img src="/h/images/left.png" style="width:50px;height:50px"></a>
 						<a href="javascript:fun('+')" id="right"><img src="/h/images/right.png" style="width:50px;height:50px" ></a>
 						@for($i=0;$i<$imgnu;$i++)
 						<div id="dd1" name="anniu"  onclick="fun({{$i}})"></div>

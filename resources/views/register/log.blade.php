@@ -133,7 +133,7 @@
 
 					  <input type="submit" value="登录">
 					</form>
-				  <div class="cta" style="margin-top:30px"><a href="/forget">忘记密码?</a></div>
+				  <div class="cta" style="margin-top:30px"><a href="/select">忘记密码?</a></div>
 
 				  </div>
 				</div>

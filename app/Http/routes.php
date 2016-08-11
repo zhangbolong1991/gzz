@@ -53,6 +53,18 @@ Route::group(['middleware'=>'log'],function(){
 	Route::get('/update','RegisterController@update');
 	// 执行修改个人信息
 	Route::post('/update','RegisterController@doupdate');
+	// 加载密保设置模板
+	Route::get('/guarb','RegisterController@guarb');
+	//执行密保设置
+	Route::post('/guarb','RegisterController@doguarb'); 
+	//我的订单
+	Route::get('/myorder','MyorderController@myorder');
+	// 删除我的历史订单
+	Route::get('/del/{id}','MyorderController@del');
+	// 订单详情
+	Route::get('/mydetail/{id}','MyorderController@mydetail');
+	// 确认收货
+	Route::get('/queren/{id}','MyorderController@queren');
 });
 //前台注册
 Route::get('/register','RegisterController@register');
@@ -70,6 +82,12 @@ Route::get('/log','RegisterController@log');
 Route::post('/register/login','RegisterController@login');
 // 执行会员退出
 Route::get('logout','RegisterController@logout');
+// 选择密保找回或者邮件找回
+Route::get('/select','RegisterController@select');
+// 加载密保找回模板
+Route::get('/encrypted','RegisterController@encrypted');
+// 对比密保问题
+Route::post('find','RegisterController@find');
 // 加载发送密码找回模板
 Route::get('/forget','RegisterController@forget');
 // 发送邮件
@@ -108,4 +126,10 @@ Route::get('/s','CartController@s');
 //地址添加
 Route::any('/orderinsert','OrderController@insert')->middleware('log');
 Route::post('/addressinsert','AddressController@insert');
+//地址删除
+Route::get('/addressdel/{id}','AddressController@del');
+//订单生成
 Route::post('/order/create','OrderController@create');
+
+//添加评论
+Route::post('/comment/add','CommentController@add');

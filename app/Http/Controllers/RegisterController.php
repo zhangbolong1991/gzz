@@ -115,9 +115,45 @@ class RegisterController extends Controller
         }
     }
 
+    // 加载密保找回或者邮箱找回模板
+    public function select(){
+        return view('register.select');
+    }
+
+    // 加载密保找回模板
+    public function encrypted(){
+        // echo "AAAAA";
+        return view('register.encrypted');
+    }
     // 加载密码找回模板
     public function forget(){
         return view('register.forget');
+    }
+
+    // 对比密保问题
+    public function find(Request $request){
+        $list=DB::table('users')->where('username','=',$request->input('username'))->get();
+        $a=array();
+        foreach ($list as $row) {
+            $a[]=$row['id'];
+ 
+        }
+        $d=$request->input('issue');
+        $b=DB::table('find')->where('uid','=',$a)->where('issue','=',$d)->get();
+        $c=array();
+        foreach ($b as $rows) {
+            $c=$rows['answer'];
+        }
+
+        // dd($c);
+        // dd($request->input('answer'));
+        
+        if($request->input('answer')==$c){
+
+            return view('conter.reset',['list'=>$list]);
+        }else{
+            return back()->with('ror','密保验证错误!'); 
+        }
     }
 
    // 发送密码找回邮件
@@ -224,6 +260,28 @@ class RegisterController extends Controller
             }
         }
     }
+
+    // 加载密保设置模板
+    public function guarb(Request $request){
+        // echo "AAAAAA";
+        // dd($request->all());
+        // $id=$request->all();
+        $list=DB::table('users')->where('id','=',$request->input('id'))->get();
+        // dd($list);
+        return view('conter.find',['list'=>$list]);
+    }
+
+    //执行密保添加
+    public function doguarb(Request $request){
+        $a=$request->only(['uid','issue','answer']);
+        // dd($a);
+        if(DB::table('find')->insert($a)){
+            // echo "密保设置成功";
+            return back()->with('ror','设置成功');
+        }else{
+            echo "密保设置失败";
+        }
+    } 
 
     // 执行退出
     public function logout(Request $request){

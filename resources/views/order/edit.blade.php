@@ -6,6 +6,7 @@
           </div>
           <div class="mws-panel-body no-padding">
                <form action="/admin/order/update" method="post" class="mws-form">
+               
                   <!--   @if(session('error'))
                     <div class="mws-form-message error">
                   {{session('error')}}
@@ -40,12 +41,7 @@
                                    <input value="{{$list['address']}}" readonly type="text" name="address" class="small">
                               </div>
                          </div>
-                         <div class="mws-form-row">
-                              <label class="mws-form-label">邮编:</label>
-                              <div class="mws-form-item">
-                                   <input value="{{$list['code']}}" readonly type="text" name="code" class="small">
-                              </div>
-                         </div>
+
                          <div class="mws-form-row">
                               <label class="mws-form-label">电话:</label>
                               <div class="mws-form-item">

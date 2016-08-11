@@ -198,4 +198,5 @@ return [
     
     'uploadpath'=>'./uploads/'.date('Y-m-d'),
     'app_upload'=>'./articles/'.date('Y-m-d'),
+    'app_upload1'=>'./comments/'.date('Y-m-d'),
 ];
