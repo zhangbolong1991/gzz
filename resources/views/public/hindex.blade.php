@@ -45,7 +45,7 @@
 		<div class="w3l_search">
 			<form action="/web/seek" method="get">
 				<!-- <input type="text" name="Product" value="Search a product..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required=""> -->
-				<input type="text"  value="华为" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '华为';}" name="name" required="">
+				<input type="text"  value="手机" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '手机';}" name="name" required="">
 				<input type="submit" value="">
 			</form>
 		</div>

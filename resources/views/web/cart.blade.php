@@ -1,16 +1,16 @@
 @extends('public.hindex')
 
 @section('main')
-		<div class="w3l_banner_nav_right">
-			
-			
+		<div class="w3l_banner_nav_right" style="background-color:#fef;">
+			<div>
+				<img src="/h/images/Redocn_2013072317071489.jpg" width="100%" height="200px">
+			</div>
 			<div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_sub">
-				<!-- <h3 class="w3l_fruit">购物车</h3> -->
 				<div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
 					<div style="margin:40px auto;text-align:center;" >
-						<h4>我的购物车</h4>
+						<h3>我的购物车</h3>
 					</div>
-					<table width="1000px" class="table-bordered table-hover table-striped table-condensed table-responsive" style="margin:0px auto 200px;" id="tablecart">
+					<table width="1000px" class="table-bordered table-hover table-striped table-condensed table-responsive" style="margin:0px auto 150px;background-color:#fff;" id="tablecart">
 						@if(session('cart'))
 						<tr height="50px">
 							<td align="center"><a  href="javascript:fun(1)" class="btn btn-default btn-sm">全选</a>&nbsp;&nbsp;<a href="javascript:fun(3)" class="btn btn-default btn-sm">反选</a></td>

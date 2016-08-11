@@ -69,8 +69,8 @@
 					<div class="clearfix"> </div>
 				</div>
 				<!-- 分页 -->
-				<div style="margin:100px 400px;">
-					<div class="dataTables_paginate paging_full_numbers" id="pages">
+				<div>
+					<div class="dataTables_paginate paging_full_numbers" id="pages" style="text-align:center;margin:100px;">
 				      {!!$goods->render()!!}
 				     </div>
 				</div>
